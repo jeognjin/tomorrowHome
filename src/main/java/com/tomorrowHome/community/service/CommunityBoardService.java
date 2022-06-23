@@ -1,5 +1,5 @@
 package com.tomorrowHome.community.service;
 
-public class a {
+public interface CommunityBoardService {
 
 }

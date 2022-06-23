@@ -1,5 +1,5 @@
 package com.tomorrowHome.mapper;
 
-public class a {
+public class CommunityBoardMapper {
 
 }

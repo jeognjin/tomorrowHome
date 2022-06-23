@@ -1,5 +1,5 @@
 package com.tomorrowHome.store.service;
 
-public class a {
+public interface ProductService {
 
 }
