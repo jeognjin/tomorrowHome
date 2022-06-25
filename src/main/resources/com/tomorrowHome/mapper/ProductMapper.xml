@@ -2,18 +2,37 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tomorrowHome.mapper.a">
+<mapper namespace="com.tomorrowHome.mapper.ProductMapper">
 
 <!-- 리절트 맵 정의 -->	
-<resultMap id="imageResult" type="ImageFileVO">
-   <result property="goods_id" column="goods_id" />
-   <result property="fileName" column="fileName" />
-   <result property="reg_id" column="reg_id" />
-   <result property="image_id" column="image_id" />
-   <result property="fileType" column="fileType" />
+<resultMap id="goodsResult"  type="ProductDTO">
+   <result property="goodsId" column="goods_id" />
+   <result property="goodsName" column="goods_name" />
+   <result property="goodsBrand" column="goods_brand" />
+   <result property="goodsPrice" column="goods_price" />
+   <result property="discountRate" column="discount_rate" />
+   <result property="pointRate" column="point_rate" />
+   <result property="registGoodsDate" column="regist_goods_date" />
+   <result property="productThumbnail" column="product_thumbnail" />
+   <result property="goodsStatus" column="goods_status" />
+   <result property="goodsCategoryId" column="goods_category_id" />
 </resultMap>
 
-<select id=""></select>
+<resultMap id="goodsImageResult" type="ProductImageDTO">
+   <result property="imageId" column="image_id" />
+   <result property="goodsId" column="goods_id" />
+   <result property="fileName" column="file_name" />
+   <result property="fileType" column="file_type" />
+</resultMap>
+
+
+<select id="selectAllGoods" resultMap="goodsResult" >
+	select * from product
+</select>
+
+<select id="selectAllGoodsImages" resultMap="goodsImageResult" >
+	select * from product_image where goods_id = #{goods_id}
+</select>
 
 
 </mapper>

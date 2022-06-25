@@ -16,8 +16,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- 헤더 css -->
-<link rel="stylesheet" href="${contextPath }/resources/common/css/header.css">
-<link rel="stylesheet"href="${contextPath }/resources/common/css/body.css">
+<link rel="stylesheet" href="${contextPath }/resources/css/style.css">
 
  <!-- jQuery 스크립트 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -147,6 +146,24 @@ $(document).ready(function(){
 		  });
 	  
 	  $("#header_nav_apartment").mouseover(function(){
+		    $("#header_store_nav_bar").hide();
+		    $("#header_community_nav_bar").hide();
+		    $("#header_apartment_nav_bar").show();
+		  });
+	  
+	  $("#header_nav_store").click(function(){
+		    $("#header_community_nav_bar").hide();
+		    $("#header_apartment_nav_bar").hide();
+		    $("#header_store_nav_bar").show();
+		  });
+	  
+	  $("#header_nav_community").click(function(){
+		    $("#header_store_nav_bar").hide();
+		    $("#header_apartment_nav_bar").hide();
+		    $("#header_community_nav_bar").show();
+		  });
+	  
+	  $("#header_nav_apartment").click(function(){
 		    $("#header_store_nav_bar").hide();
 		    $("#header_community_nav_bar").hide();
 		    $("#header_apartment_nav_bar").show();
