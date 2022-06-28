@@ -35,7 +35,9 @@
 <script src="jquery-3.6.0.min.js"></script>
 
 <style>
-
+#password_check_text {
+	display: none;
+}
 </style>
 <body>
 	<div class="click_to_main_wrap">
@@ -69,27 +71,35 @@
 							<tbody>
 								<tr class="email">
 									<th><span>이메일</span></th>
-									<td><input type="text" class="email" placeholder="이메일" name="email1">
-									<span class="mar10">@</span> 
-									<input type="text" class="email email2" name="email2">
-									<a href="javascript:;" class="btn_confirm">인증번호 발송</a></td>
+									<td><input type="text" class="email" placeholder="이메일"
+										name="email1"> <span class="mar10">@</span> <input
+										type="text" class="email email2" name="email2"> <a
+										href="javascript:;" class="btn_confirm">인증번호 발송</a></td>
 								</tr>
 								<tr>
 									<th><span>인증번호 확인</span></th>
-									<td><input type="text" class="send_number" placeholder="10:00"> 
-									<a href="javascript:;" class="btn_confirm">인증번호 확인</a></td>
+									<td><input type="text" class="send_number"
+										placeholder="10:00" id="time_check"> <a href="javascript:;"
+										class="btn_confirm" >인증번호 확인</a></td>
 								</tr>
 								<tr>
 									<th><span>비밀번호</span></th>
-									<td><input type="password" placeholder="비밀번호를 입력해주세요." name="password"></td>
+									<td><input type="password" id="password"
+										placeholder="비밀번호를 입력해주세요." name="password"></td>
 								</tr>
 								<tr>
 									<th><span>비밀번호 확인</span></th>
-									<td><input type="password" placeholder="비밀번호를 확인하세요"></td>
+									<td><input type="password" id="passwordConfirm"
+										placeholder="비밀번호를 확인하세요" onkeyup='check_password();'></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align: center; color: red;"
+										id="password_check_text">동일한 비밀번호를 입력해주세요</td>
 								</tr>
 								<tr>
 									<th><span>닉네임</span></th>
-									<td><input type="text" placeholder="닉네임을 입력해주세요" name="nickname"></td>
+									<td><input type="text" placeholder="닉네임을 입력해주세요"
+										name="nickname" id="nickname" onkeyup='check_nickname();'></td>
 								</tr>
 
 							</tbody>
@@ -119,14 +129,15 @@
 						</div>
 					</div>
 					<div id="btn_wrap">
-						<button type="submit"><a>회원가입하기</a></button>
+						<button type="submit">
+							<a>회원가입하기</a>
+						</button>
 					</div>
 					<div class="moveTologinForm">
 						<p>
 							이미 아이디가 있으신가요? <a href="/member/login">로그인</a>
 						</p>
-						<br>
-						<br>
+						<br> <br>
 					</div>
 				</div>
 				<!-- form_txtInput E -->
@@ -136,20 +147,51 @@
 		<!-- container E -->
 	</form>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
-$(document).ready(function(e){
-	
+	//입력한 비밀번호와 비밀번호 확인이 같은지 체크
+	function check_password() {  
+	if (document.getElementById('password').value == document.getElementById('passwordConfirm').value) {   
+		document.getElementById('password_check_text').style.display = 'none';  
+		} else {    
+			document.getElementById('password_check_text').style.display = 'block';  
+			}
+		
+		}
 
+	function check_nickname() {
 	
+	}
 	
+	var auth_minutes = 60 * 10,
+    display = document.querySelector('#time_check').attr("placeholder");
 	
+	('#time_check').on(click, function () {
+		startTimer(auth_minutes, display)
+	});
 	
-	
-	
-}
+	function startTimer(auth_minutes, display) {
+	    var timer = auth_minutes, minutes, seconds;
+	    setInterval(function () {
+	        minutes = parseInt(timer / 60, 10);
+	        seconds = parseInt(timer % 60, 10);
 
+	        minutes = minutes < 10 ? "0" + minutes : minutes;
+	        seconds = seconds < 10 ? "0" + seconds : seconds;
 
+	        display.textContent = minutes + ":" + seconds;
+	        display.style.color = 'red';
+
+	        if (--timer == 0) {
+	        	document.getElementById('time_check').readOnly = true;
+	        }
+	    }, 1000);
+	}
+	
+	
+	
+		
+	
 
 </script>
 </body>

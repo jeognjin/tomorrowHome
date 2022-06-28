@@ -12,6 +12,8 @@ public interface ProductMapper {
 
 	List<ProductImageDTO> selectAllGoodsImages(int goodsId);
 
+	List<ProductDTO> selectGoodsByPopurarity(Map<String, Integer> map);
+
 
 
 	

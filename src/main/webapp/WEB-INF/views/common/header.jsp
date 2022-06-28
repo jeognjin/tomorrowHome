@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내일의 집</title>
+<title>내일의집</title>
   <!-- 구글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 <!-- 아이콘 용 폰트 어썸 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!-- 헤더 css -->
+<!-- css -->
 <link rel="stylesheet" href="${contextPath }/resources/css/style.css">
 
  <!-- jQuery 스크립트 -->
@@ -34,11 +34,11 @@
         <div class="inner">
           <i class="fas fa-bars searchMenu"></i>
           <div class="header-upper__inner">
-            <div class="header-upper__logo"><a href="/">내일의 집</a></div>
+            <div class="header-upper__logo"><a href="">내일의집</a></div>
             <div class="header-upper__nav">
               <ul>
                 <li class="header-upper__item upper__active" id="header_nav_community"><a href="">커뮤니티</a></li>
-                <li class="header-upper__item" id="header_nav_store"><a href="">스토어</a></li>
+                <li class="header-upper__item" id="header_nav_store"><a href="${contextPath }/store">스토어</a></li>
                 <li class="header-upper__item" id="header_nav_apartment"><a href="">인테리어시공</a></li>
               </ul>
             </div>
@@ -49,10 +49,10 @@
             <i class="fas fa-search search_icon"></i>
               <input class="header-upper__searchBar_input" type="text" placeholder="오늘의집 통합검색">
             </div>
-            <a href=""><i class="fas fa-shopping-cart"></i></a>
+            <a href="${contextPath }/cart"><i class="fas fa-shopping-cart"></i></a>
             <ul>
               <li><a href="">로그인</a></li>
-              <li><a href="/member/registForm">회원가입</a></li>
+              <li><a href="">회원가입</a></li>
               <li><a href="">고객센터</a></li>
               <button class="header-upper__writeBt" id="header_writeBt">
                	글쓰기

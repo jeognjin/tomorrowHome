@@ -4,35 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tomorrowHome.mapper.ProductMapper">
 
-<!-- 리절트 맵 정의 -->	
-<resultMap id="goodsResult"  type="ProductDTO">
-   <result property="goodsId" column="goods_id" />
-   <result property="goodsName" column="goods_name" />
-   <result property="goodsBrand" column="goods_brand" />
-   <result property="goodsPrice" column="goods_price" />
-   <result property="discountRate" column="discount_rate" />
-   <result property="pointRate" column="point_rate" />
-   <result property="registGoodsDate" column="regist_goods_date" />
-   <result property="productThumbnail" column="product_thumbnail" />
-   <result property="goodsStatus" column="goods_status" />
-   <result property="goodsCategoryId" column="goods_category_id" />
-</resultMap>
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="goodsResult" type="ProductDTO">
+		<result property="goodsId" column="goods_id" />
+		<result property="goodsName" column="goods_name" />
+		<result property="goodsBrand" column="goods_brand" />
+		<result property="goodsPrice" column="goods_price" />
+		<result property="discountRate" column="discount_rate" />
+		<result property="pointRate" column="point_rate" />
+		<result property="registGoodsDate" column="regist_goods_date" />
+		<result property="productThumbnail" column="product_thumbnail" />
+		<result property="goodsStatus" column="goods_status" />
+		<result property="goodsCategoryId" column="goods_category_id" />
+	</resultMap>
 
-<resultMap id="goodsImageResult" type="ProductImageDTO">
-   <result property="imageId" column="image_id" />
-   <result property="goodsId" column="goods_id" />
-   <result property="fileName" column="file_name" />
-   <result property="fileType" column="file_type" />
-</resultMap>
+	<resultMap id="goodsImageResult" type="ProductImageDTO">
+		<result property="imageId" column="image_id" />
+		<result property="goodsId" column="goods_id" />
+		<result property="fileName" column="file_name" />
+		<result property="fileType" column="file_type" />
+	</resultMap>
 
 
-<select id="selectAllGoods" resultMap="goodsResult" >
-	select * from product
-</select>
+	<select id="selectAllGoods" resultMap="goodsResult">
+		select * from product
+	</select>
 
-<select id="selectAllGoodsImages" resultMap="goodsImageResult" >
-	select * from product_image where goods_id = #{goods_id}
-</select>
+	<select id="selectAllGoodsImages" resultMap="goodsImageResult">
+		select * from product_image where goods_id = #{goods_id}
+	</select>
 
+
+	<select id="selectGoodsByPopurarity" resultMap="goodsResult">
+	<![CDATA[  
+		select rownum, rm, b.* from
+		(select rownum rm, a.* from
+		(select * from product order by discount_rate desc) a ) b
+		where rm >= #{begin} and rm <= #{end}
+	]]>
+	</select>
 
 </mapper>

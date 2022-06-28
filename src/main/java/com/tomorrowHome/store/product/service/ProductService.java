@@ -9,5 +9,7 @@ public interface ProductService {
 
 	List<ProductDTO> listGoods();
 
+	List<ProductDTO> storeListGoods(Map<String, Integer> map);
+
 	
 }

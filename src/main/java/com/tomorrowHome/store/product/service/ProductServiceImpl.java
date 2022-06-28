@@ -27,5 +27,11 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.selectAllGoods();
 		
 	}
+
+	@Override
+	public List<ProductDTO> storeListGoods(Map<String, Integer> map) {
+		
+		return productMapper.selectGoodsByPopurarity(map);
+	}
 	
 }
