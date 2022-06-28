@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tomorrowHome.mapper.MainCategoryMapper">
+
+<!-- 리절트 맵 정의 -->	
+<resultMap id="mainCategoryResult" type="MainCategoryDTO">
+   <result property="mainCategoryId" column="category_id" />
+   <result property="categoryImage" column="category_image" />
+   <result property="categoryTitle" column="category_title" />
+</resultMap>
+
+
+<select id="selectAllCategory" resultMap="mainCategoryResult" >
+	select * from main_category_images
+</select>
+
+
+
+</mapper>

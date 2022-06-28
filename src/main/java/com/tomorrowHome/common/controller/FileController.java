@@ -59,6 +59,14 @@ public class FileController {
 		Download(fileName, memberId, response, CURR_IMAGE_REPO_PATH);
 	}
 	
+	@GetMapping("/mainCategoryDownload")
+	protected void mainCategoryDownload(String fileName, String mainCategoryId,
+			                 HttpServletResponse response) throws Exception {		
+		String CURR_IMAGE_REPO_PATH = "C:\\tomorrowHome_images\\main_category";
+		
+		Download(fileName, mainCategoryId, response, CURR_IMAGE_REPO_PATH);
+	}
+	
 
 	protected void Download(String fileName, String boardId,
             HttpServletResponse response, String CURR_IMAGE_REPO_PATH) throws IOException {

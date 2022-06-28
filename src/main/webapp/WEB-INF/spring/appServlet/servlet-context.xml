@@ -35,7 +35,7 @@
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>		
 	
-	<!-- <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />   -->
+	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />  
 
-
+	
 </beans:beans>

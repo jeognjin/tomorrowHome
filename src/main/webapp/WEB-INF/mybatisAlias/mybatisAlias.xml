@@ -8,6 +8,8 @@
     <typeAlias type="com.tomorrowHome.community.dto.CommunityBoardImageDTO" alias="CommunityBoardImageDTO" />
     <typeAlias type="com.tomorrowHome.store.product.dto.ProductDTO" alias="ProductDTO" />
     <typeAlias type="com.tomorrowHome.store.product.dto.ProductImageDTO" alias="ProductImageDTO" />
+    <typeAlias type="com.tomorrowHome.common.dto.MainCategoryDTO" alias="MainCategoryDTO" />
+    <typeAlias type="com.tomorrowHome.member.dto.MemberDTO" alias="MemberDTO" />
   </typeAliases>
 </configuration>
 

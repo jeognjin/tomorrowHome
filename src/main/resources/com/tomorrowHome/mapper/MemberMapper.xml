@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tomorrowHome.mapper.MemberMapper">
+
+<!-- 리절트 맵 정의 -->	
+<resultMap id="boardResult" type="MemberDTO">
+   <result property="memberId" column="member_id" />
+   <result property="email1" column="email1" />
+   <result property="email2" column="email2" />
+   <result property="password" column="password" />
+   <result property="nickname" column="nickname" />
+   <result property="homepage" column="homepage" />
+   <result property="gender" column="gender" />
+   <result property="birthday" column="birthday" />
+   <result property="profileImage" column="profile_image" />
+   <result property="lineIntroduction" column="line_introduction" />
+</resultMap>
+
+<insert id="insertMember">
+insert into member(member_id, email1, email2, password, nickname) values(member_id_seq.nextval, '${email1}', '${email2}', '${password}', '${nickname}')
+</insert>
+
+
+</mapper>
