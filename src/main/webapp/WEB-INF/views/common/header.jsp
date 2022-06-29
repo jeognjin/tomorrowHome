@@ -34,7 +34,7 @@
         <div class="inner">
           <i class="fas fa-bars searchMenu"></i>
           <div class="header-upper__inner">
-            <div class="header-upper__logo"><a href="">내일의집</a></div>
+            <div class="header-upper__logo"><a href="/">내일의집</a></div>
             <div class="header-upper__nav">
               <ul>
                 <li class="header-upper__item upper__active" id="header_nav_community"><a href="">커뮤니티</a></li>
@@ -52,7 +52,7 @@
             <a href="${contextPath }/cart"><i class="fas fa-shopping-cart"></i></a>
             <ul>
               <li><a href="">로그인</a></li>
-              <li><a href="">회원가입</a></li>
+              <li><a href="/member/registForm">회원가입</a></li>
               <li><a href="">고객센터</a></li>
               <button class="header-upper__writeBt" id="header_writeBt">
                	글쓰기

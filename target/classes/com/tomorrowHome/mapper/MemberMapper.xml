@@ -19,8 +19,11 @@
 </resultMap>
 
 <insert id="insertMember">
-insert into member(member_id, email1, email2, password, nickname) values(member_id_seq.nextval, '${email1}', '${email2}', '${password}', '${nickname}')
+insert into member(member_id, email1, email2, password, nickname) values(member_id_seq.nextval, ${email1}, ${email2}, ${password}, ${nickname})
 </insert>
 
+<select id="selectOneOfNickname" resultType="int">
+select * from member where nickname = #{nickname}
+</select>
 
 </mapper>

@@ -17,4 +17,9 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.insertMember(memberDTO);
 	}
 
+	@Override
+	public int findNickname(String nickname) {
+		return memberMapper.selectOneOfNickname(nickname);
+	}
+
 }

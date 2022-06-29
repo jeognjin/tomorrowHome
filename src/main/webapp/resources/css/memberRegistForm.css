@@ -12,6 +12,7 @@ html {
 body {
 	height: 100%;
 	font-family: 'Noto Sans KR';
+	text-align: center;
 }
 
 table, tr, td, th, div, p, em, ol, ul, li, dl, dt, dd, a, address, img,
@@ -495,6 +496,87 @@ ul {
 	display: block;
 }
 
+	.click_to_main_wrap {
+	vertical-align: middle;
+	margin: 30px 0 20px 10px;
+	max-width: 800px;
+}
+
+.click_to_main {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#click_to_main_title {
+	font-family: "Gowun Dodum";
+	display: inline-block;
+	position: relative;
+	top: -5px;
+	font-size: 20px;
+}
+
+.click_to_main_img {
+	width: 35px;
+	height: 35px;
+	border-radius: 10%;
+}
+
+.social_register_icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 20%;
+	margin: 0 10px;
+}
+
+.regist_form_wrap {
+	width: 100%;
+	text-align: center;
+	max-width: 600px;
+}
+
+.social_login p {
+	font-size: 12px;
+	color: rgb(117, 117, 117);
+	margin: 15px 0px;
+}
+
+.social_login {
+	border-bottom: 1px solid rgb(237, 237, 237);
+	margin: 30px 0px;
+	padding-bottom: 30px;
+}
+
+
+#btn_wrap {
+	background-color: #35c5f0;
+	border-color: #35c5f0;
+	height: 50px;
+	border-radius: 10px;
+	text-align: center;
+}
+
+#btn_wrap a {
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	position: relative;
+	top: 10px;
+}
+
+.moveTologinForm {
+	text-align: center;
+	margin: 20px 0;
+}
+
+.moveTologinForm a {
+	font-weight: bold;
+	text-decoration: underline;
+}
+#timer{
+	position: relative;
+	top: 10px;
+	color: #9a9a9a;
+}
 @media ( max-width : 1023px ) {
 	.wrap {
 		margin: 30px auto;
@@ -672,5 +754,10 @@ ul {
 .moveTologinForm a {
 	font-weight: bold;
 	text-decoration: underline;
+}
+
+#timer{
+	position: relative;
+	top: 10px;
 }
 }

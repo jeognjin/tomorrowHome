@@ -72,15 +72,14 @@
 								<tr class="email">
 									<th><span>이메일</span></th>
 									<td><input type="text" class="email" placeholder="이메일"
-										name="email1"> <span class="mar10">@</span> <input
-										type="text" class="email email2" name="email2"> <a
-										href="javascript:;" class="btn_confirm">인증번호 발송</a></td>
+										name="email1" id="email1"> <span class="mar10">@</span> <input
+										type="text" class="email email2" name="email2" id="email2"> 
+										<a class="btn_confirm" onclick="startTimer();">인증번호 발송</a></td>
 								</tr>
 								<tr>
 									<th><span>인증번호 확인</span></th>
-									<td><input type="text" class="send_number"
-										placeholder="10:00" id="time_check"> <a href="javascript:;"
-										class="btn_confirm" >인증번호 확인</a></td>
+									<td><input type="text" class="send_number" id="time_check"> 
+										<a class="btn_confirm" >인증번호 확인</a><span id="timer">10:00</span></td>
 								</tr>
 								<tr>
 									<th><span>비밀번호</span></th>
@@ -90,16 +89,12 @@
 								<tr>
 									<th><span>비밀번호 확인</span></th>
 									<td><input type="password" id="passwordConfirm"
-										placeholder="비밀번호를 확인하세요" onkeyup='check_password();'></td>
-								</tr>
-								<tr>
-									<td colspan="2" style="text-align: center; color: red;"
-										id="password_check_text">동일한 비밀번호를 입력해주세요</td>
+										placeholder="비밀번호를 확인하세요" ></td>
 								</tr>
 								<tr>
 									<th><span>닉네임</span></th>
 									<td><input type="text" placeholder="닉네임을 입력해주세요"
-										name="nickname" id="nickname" onkeyup='check_nickname();'></td>
+										name="nickname" id="nickname"></td>
 								</tr>
 
 							</tbody>
@@ -129,7 +124,7 @@
 						</div>
 					</div>
 					<div id="btn_wrap">
-						<button type="submit">
+						<button type="button" id="submit_button" onclick="submit_click();">
 							<a>회원가입하기</a>
 						</button>
 					</div>
@@ -149,28 +144,57 @@
 
 	<script type="text/javascript">
 
-	//입력한 비밀번호와 비밀번호 확인이 같은지 체크
-	function check_password() {  
-	if (document.getElementById('password').value == document.getElementById('passwordConfirm').value) {   
-		document.getElementById('password_check_text').style.display = 'none';  
-		} else {    
-			document.getElementById('password_check_text').style.display = 'block';  
+	function submit_click() {
+		
+		//입력한 비밀번호와 비밀번호 체크가 동일한지 확인
+		if (document.getElementById('password').value != document.getElementById('passwordConfirm').value) {   
+			alert("동일한 비밀번호를 입력해주세요.");
+			document.getElementById('password').focus();
+			document.getElementById('password').value = "";
+			document.getElementById('passwordConfirm').value = "";
+			return;
 			}
 		
-		}
+		/* var email01 = /^([0-9a-zA-Z_\.-]+);
+		var email02 = ([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
-	function check_nickname() {
+		var email = document.getElementById('email1').value;
+		var emai2 = document.getElementById('email2').value;
+		
+		if (email == '' || !email01.test(email)) {
+		alert("올바른 이메일 주소를 입력하세요");
+		document.getElementById('email1').focus();
+		document.getElementById('email1').value = "";
+		return;
+		} */
+		
+		
+		//중복된 닉네임 있는지 ajax로 값 넘겨서 확인 후 데이터 받아오기
+		var nickname = document.getElementById('nickname').value;  
+		$.ajax({
+			type : "post",
+			async : false,
+			url : "${contextPath }/member/nicknameSearch",
+			data : {
+				nickname: nickname
+			},
+			success : function(data) {
+				if(data.trim()=='overlap'){
+					alert("중복된 닉네임 입니다. 다른 닉네임을 입력해주세요.");
+					document.getElementById('nickname').focus();
+					document.getElementById('nickname').value = "";
+				}
+			}
+		}); //end ajax
+	}//submit_click()
 	
-	}
+
+
 	
-	var auth_minutes = 60 * 10,
-    display = document.querySelector('#time_check').attr("placeholder");
-	
-	('#time_check').on(click, function () {
-		startTimer(auth_minutes, display)
-	});
-	
-	function startTimer(auth_minutes, display) {
+	var auth_minutes = 60 * 10; //10분
+    display = document.getElementById('timer'); 
+	//인증번호 발송 누르면 타이머 시작
+	function startTimer() {
 	    var timer = auth_minutes, minutes, seconds;
 	    setInterval(function () {
 	        minutes = parseInt(timer / 60, 10);
@@ -183,10 +207,12 @@
 	        display.style.color = 'red';
 
 	        if (--timer == 0) {
-	        	document.getElementById('time_check').readOnly = true;
+	        	document.getElementById('time_check').style.color = '#9a9a9a';
+	        	alert("인증 유효시간이 경과되었습니다. 다시 시도해주세요.");
+	        	return;
 	        }
 	    }, 1000);
-	}
+	}//startTimer()
 	
 	
 	

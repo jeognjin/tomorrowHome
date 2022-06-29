@@ -6,4 +6,6 @@ public interface MemberMapper {
 
 	boolean insertMember(MemberDTO memberDTO);
 
+	int selectOneOfNickname(String nickname);
+
 }

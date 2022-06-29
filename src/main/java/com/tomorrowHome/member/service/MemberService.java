@@ -6,6 +6,8 @@ public interface MemberService {
 
 	boolean registMember(MemberDTO memberDTO);
 
+	int findNickname(String nickname);
+
 	
 
 }
