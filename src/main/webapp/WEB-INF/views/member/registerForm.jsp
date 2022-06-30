@@ -27,19 +27,14 @@
 <link rel="stylesheet"
 	href="${contextPath }/resources/css/memberRegistForm.css">
 
-
-
 <!-- jQuery 스크립트 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="jquery-3.6.0.min.js"></script>
+</head>
 
-<style>
-#password_check_text {
-	display: none;
-}
-</style>
 <body>
+
 	<div class="click_to_main_wrap">
 		<div class="click_to_main">
 			<a href="/"> <img class="click_to_main_img" alt="home"
@@ -47,7 +42,7 @@
 				<h2 id="click_to_main_title">내일의집</h2></a>
 		</div>
 	</div>
-	<form action="/member/registForm" method="post">
+	<form method="post" id="regist_form">
 		<div class="wrap wd668">
 			<div class="container">
 				<div class="form_txtInput">
@@ -74,12 +69,12 @@
 									<td><input type="text" class="email" placeholder="이메일"
 										name="email1" id="email1"> <span class="mar10">@</span> <input
 										type="text" class="email email2" name="email2" id="email2"> 
-										<a class="btn_confirm" onclick="startTimer();">인증번호 발송</a></td>
+										<a class="btn_confirm" onclick="sendMailAndStartTimer();">인증번호 발송</a></td>
 								</tr>
 								<tr>
 									<th><span>인증번호 확인</span></th>
-									<td><input type="text" class="send_number" id="time_check"> 
-										<a class="btn_confirm" >인증번호 확인</a><span id="timer">10:00</span></td>
+									<td><input type="text" class="send_number" id="auth_input"> 
+										<a class="btn_confirm" onclick="matchAuthNumber();">인증번호 확인</a><span id="timer">10:00</span></td>
 								</tr>
 								<tr>
 									<th><span>비밀번호</span></th>
@@ -130,7 +125,7 @@
 					</div>
 					<div class="moveTologinForm">
 						<p>
-							이미 아이디가 있으신가요? <a href="/member/login">로그인</a>
+							이미 아이디가 있으신가요? <a href="/member/loginForm">로그인</a>
 						</p>
 						<br> <br>
 					</div>
@@ -154,21 +149,7 @@
 			document.getElementById('passwordConfirm').value = "";
 			return;
 			}
-		
-		/* var email01 = /^([0-9a-zA-Z_\.-]+);
-		var email02 = ([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-
-		var email = document.getElementById('email1').value;
-		var emai2 = document.getElementById('email2').value;
-		
-		if (email == '' || !email01.test(email)) {
-		alert("올바른 이메일 주소를 입력하세요");
-		document.getElementById('email1').focus();
-		document.getElementById('email1').value = "";
-		return;
-		} */
-		
-		
+	
 		//중복된 닉네임 있는지 ajax로 값 넘겨서 확인 후 데이터 받아오기
 		var nickname = document.getElementById('nickname').value;  
 		$.ajax({
@@ -186,17 +167,45 @@
 				}
 			}
 		}); //end ajax
+		
+		document.getElementById('regist_form').action = "/member/registForm";
+		document.getElementById('regist_form').submit();
+		
 	}//submit_click()
 	
-
-
 	
-	var auth_minutes = 60 * 10; //10분
     display = document.getElementById('timer'); 
+    let interval;
 	//인증번호 발송 누르면 타이머 시작
-	function startTimer() {
-	    var timer = auth_minutes, minutes, seconds;
-	    setInterval(function () {
+	function sendMailAndStartTimer() {
+		let auth_minutes = 60 * 10; //10분
+		var regist_form = document.getElementById('regist_form');
+		var email1 = document.getElementById('email1').value;
+		var email2 = document.getElementById('email2').value;
+		//ajax로 이메일 인증 보내기
+		$.ajax({
+			type : "post",
+			async : false,
+			url : "/email/auth",
+			data : {
+				email1: email1,
+				email2: email2
+			},
+			success : function(data) {
+				if(data.trim()=='success'){
+					alert("인증번호가 발송되었습니다.");
+					document.getElementById('auth_input').focus();
+					document.getElementById('email1').readOnly = true;
+					document.getElementById('email2').readOnly = true;
+				}
+			}
+		}); //end ajax
+		
+
+
+		//10분 타이머 
+	    let timer = auth_minutes, minutes, seconds;
+	    interval = setInterval(function () {
 	        minutes = parseInt(timer / 60, 10);
 	        seconds = parseInt(timer % 60, 10);
 
@@ -207,15 +216,46 @@
 	        display.style.color = 'red';
 
 	        if (--timer == 0) {
-	        	document.getElementById('time_check').style.color = '#9a9a9a';
+	        	display.style.color = '#9a9a9a';
 	        	alert("인증 유효시간이 경과되었습니다. 다시 시도해주세요.");
+	        	clearInterval(interval);
 	        	return;
 	        }
 	    }, 1000);
 	}//startTimer()
 	
-	
-	
+	//인증번호 확인 누르면 서버에서 번호 확인후 값 리턴 받음
+	function matchAuthNumber(){
+		
+		var auth_input = document.getElementById('auth_input');
+		var authNumber = document.getElementById('auth_input').value;
+		
+		//ajax로 인증번호 보내기
+		$.ajax({
+			type : "post",
+			async : false,
+			url : "/email/authMatch",
+			data : {
+				authNumber: authNumber,
+			},
+			success : function(data) {
+				if(data.trim()=='success'){
+					alert("인증완료");
+					auth_input.disabled = true;
+					clearInterval(interval);
+					document.getElementById('password').focus();
+				}
+				if(data.trim()=='fail'){
+					alert("인증실패. 인증번호를 다시 입력해주세요");
+					auth_input.focus();
+					authNumber = "";
+				}
+				
+			}
+		}); //end ajax
+			
+			
+	}
 		
 	
 

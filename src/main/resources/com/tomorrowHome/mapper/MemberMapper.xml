@@ -18,12 +18,22 @@
    <result property="lineIntroduction" column="line_introduction" />
 </resultMap>
 
+<resultMap id="AuthResult" type="AuthUserDTO">
+   <result property="memberId" column="member_id" />
+   <result property="nickname" column="nickname" />
+   <result property="profileImage" column="profile_image" />
+</resultMap>
+
 <insert id="insertMember">
-insert into member(member_id, email1, email2, password, nickname) values(member_id_seq.nextval, ${email1}, ${email2}, ${password}, ${nickname})
+insert into member(member_id, email1, email2, password, nickname) values(member_id_seq.nextval, '${email1}', '${email2}', '${password}', '${nickname}')
 </insert>
 
 <select id="selectOneOfNickname" resultType="int">
 select * from member where nickname = #{nickname}
+</select>
+
+<select id="selectOneOfEmail" resultMap="AuthResult">
+select * from member where email1 = '${email1}' and email2 = '${email2}'
 </select>
 
 </mapper>

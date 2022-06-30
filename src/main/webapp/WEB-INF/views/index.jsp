@@ -9,6 +9,12 @@
 <c:set var="boardList" value="${boardList }"/>
 <c:set var="goodsList" value="${goodsList }"/>
 <c:set var="mainCategoryList" value="${mainCategoryList }"/>
+<c:if test="${regist eq 'success'}">
+<script type="text/javascript">
+alert("회원가입 성공");
+</script>
+</c:if>
+
 <!-- 홈 페이지 전체 영역------------------------------------------------------------- -->
     <div class="home-page">
       <!-- 홈 페이지 상단 이미지 ------------------------------------------------------->

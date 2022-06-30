@@ -21,7 +21,40 @@
  <!-- jQuery 스크립트 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="jquery-3.6.0.min.js"></script>
- 
+<style>
+#profile_icon{
+	width: 25px;
+	height: 25px;
+}
+.click_profile_iamge_parent{
+	position: relative;
+}
+.click_profile_image_wrap{
+	position: absolute;
+	width: 200px;
+	z-index: 1000;
+	left: -100px;
+	padding: 8px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(218, 221, 224);
+    border-radius: 6px;
+    box-shadow: rgb(63 71 77 / 20%) 0px 4px 10px 0px;
+    display: none;
+}
+.click_profile_image_text{
+	padding: 10px 5px;
+	font-size: 14px;
+}
+.click_profile_image_text_box:hover {
+	background-color: rgba(197, 199, 219, 0.2);
+}
+</style>
+<!--  <style>
+.header{
+	position: sticky;
+	top: 0;
+}
+</style> -->
 </head>
 <body>
   <!-- 전체 레이아웃--------------------------------------------------------------->
@@ -34,10 +67,10 @@
         <div class="inner">
           <i class="fas fa-bars searchMenu"></i>
           <div class="header-upper__inner">
-            <div class="header-upper__logo"><a href="/">내일의집</a></div>
+            <div class="header-upper__logo"><a href="${contextPath }/">내일의집</a></div>
             <div class="header-upper__nav">
               <ul>
-                <li class="header-upper__item upper__active" id="header_nav_community"><a href="">커뮤니티</a></li>
+                <li class="header-upper__item upper__active" id="header_nav_community"><a href="${contextPath }/">커뮤니티</a></li>
                 <li class="header-upper__item" id="header_nav_store"><a href="${contextPath }/store">스토어</a></li>
                 <li class="header-upper__item" id="header_nav_apartment"><a href="">인테리어시공</a></li>
               </ul>
@@ -51,9 +84,50 @@
             </div>
             <a href="${contextPath }/cart"><i class="fas fa-shopping-cart"></i></a>
             <ul>
-              <li><a href="">로그인</a></li>
-              <li><a href="/member/registForm">회원가입</a></li>
-              <li><a href="">고객센터</a></li>
+             <%-- <c:set var="authUser" value="${authUser }"> --%>
+            <c:choose>
+            	<c:when test="${!empty authUser }">
+            	<li><a href="/member/mypage/scrapbook"><i class="fa-regular fa-bookmark"></i></a></li>
+            	 	<c:when test="${!empty authUser.profileImage}">
+            	 		<li><a href="/member/mypage/main"><img alt="profile" src="${contextPath}/profileDownload?memberId=${authUser.memberId}&fileName=${authUser.profileImage}"></a></li>
+            	 	</c:when>
+            	 	<%-- <c:otherwise>
+            	 		<li><a onclick="click_to_show_profile_image_text();" ><i id="profile_icon" class="fa-regular fa-face-smile"></i></a></li>
+            	 	</c:otherwise> --%>
+            	</c:when>
+            	<c:otherwise>
+            	 <li><a href="/member/loginForm">로그인</a></li>
+             	 <li><a href="/member/registForm">회원가입</a></li>
+             	 <li class="click_profile_iamge_parent"><a id="click_profile_iamge_parent"><img alt="profile_image" src="https://ifh.cc/g/BVmFxg.jpg" id="profile_icon"></a>
+	             	 <div class="click_profile_image_wrap" id="click_profile_image_wrap">
+	              	<div class="click_profile_image_text_box">
+	              		<a class="click_profile_image_text" href="/member/mypage/main">마이페이지</a>
+	              	</div>
+	              	<div class="click_profile_image_text_box">
+	              		<a class="click_profile_image_text" href="/member/mypage/shopping">나의쇼핑</a>
+	              	</div>
+	              	<div class="click_profile_image_text_box">
+	              		<a class="click_profile_image_text" href="#">이벤트</a>
+	              	</div>
+	              	<div class="click_profile_image_text_box">
+	              		<a class="click_profile_image_text" href="#">전문가 신청</a>
+	              	</div>
+	              	<div class="click_profile_image_text_box">
+	              		<a class="click_profile_image_text" href="#">판매자 신청</a>
+	              	</div>
+	              	<div class="click_profile_image_text_box">
+	              		<a class="click_profile_image_text" href="#">고객센터</a>
+	              	</div>
+	              	<div class="click_profile_image_text_box">
+	              		<a class="click_profile_image_text" href="/member/logout">로그아웃</a>
+	              	</div>
+	              </div>
+             	 </li>
+            	</c:otherwise>
+            </c:choose>
+            <%-- </c:set> --%>
+              
+             <!--  <li><a href="">고객센터</a></li> -->
               <button class="header-upper__writeBt" id="header_writeBt">
                	글쓰기
                 <div class="header-upper__lists" id="header_lists">
@@ -92,6 +166,7 @@
       <!-- 네비게이션 하단----------------------------------------------------------- -->
       <div class="header-lower">
         <div class="inner">
+        
           <nav id="header_community_nav_bar">
             <a class="header-lower__item active" href="">홈</a>
             <a class="header-lower__item" href="">팔로잉</a>
@@ -104,10 +179,10 @@
             <a class="header-lower__item" href="">이벤트</a>
           </nav>
           <nav id="header_store_nav_bar">
-            <a class="header-lower__item active" href="">스토어홈</a>
+            <a class="header-lower__item active" href="${contextPath }/store">스토어홈</a>
             <a class="header-lower__item" href="">카테고리</a>
             <a class="header-lower__item" href="">베스트</a>
-            <a class="header-lower__item" href="">오늘의딜</a>
+            <a class="header-lower__item" href="${contextPath }/todayDeals">오늘의딜</a>
             <a class="header-lower__item" href="">인기가구특가</a>
             <a class="header-lower__item" href="">리퍼마켓</a>
             <a class="header-lower__item" href="">오!굿즈</a>
@@ -117,41 +192,51 @@
           </nav>
           <nav id="header_apartment_nav_bar">
             <a class="header-lower__item active" href="">우리동네 아파트</a>
+            <a class="header-lower__item " href="">니네동네 아파트</a>
+            <a class="header-lower__item " href="">뒷동네 아파트</a>
+            <a class="header-lower__item " href="">앞동네 아파트</a>
           </nav>
           <div>3D인테리어</div>
         </div>
       </div>
     </header>
+<script type="text/javascript">
+
+</script>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	
-	$("#header_store_nav_bar").hide();
-	$("#header_apartment_nav_bar").hide();
-	
-	  $("#header_writeBt").click(function(){
-	    $("#header_lists").toggle();
+
+
+	let currPage = "${currPage}";
+	$(document).ready(function(){
+		menu();
+		
+		 $('nav').not("#header_community_nav_bar").hide();
+		 
+	  $("#click_profile_iamge_parent").click(function(){
+	    $("#click_profile_image_wrap").toggle();
 	  });
 	  
-	  $("#header_nav_store").mouseover(function(){
-		    $("#header_community_nav_bar").hide();
-		    $("#header_apartment_nav_bar").hide();
+	  $("#header_writeBt").click(function(){
+		    $("#header_lists").toggle();
+		  });
+	  
+	  $("#header_nav_store").hover(function(){
+		    $('nav').not("#header_store_nav_bar").hide();
 		    $("#header_store_nav_bar").show();
-		  });
+		  }, menu);
 	  
-	  $("#header_nav_community").mouseover(function(){
-		    $("#header_store_nav_bar").hide();
-		    $("#header_apartment_nav_bar").hide();
+	  $("#header_nav_community").hover(function(){
+		  $('nav').not("#header_community_nav_bar").hide();
 		    $("#header_community_nav_bar").show();
-		  });
+		  }, menu);
 	  
-	  $("#header_nav_apartment").mouseover(function(){
-		    $("#header_store_nav_bar").hide();
-		    $("#header_community_nav_bar").hide();
+	  $("#header_nav_apartment").hover(function(){
+		  $('nav').not("#header_apartment_nav_bar").hide();
 		    $("#header_apartment_nav_bar").show();
-		  });
+		  }, menu);
 	  
-	  $("#header_nav_store").click(function(){
+	/*   $("#header_nav_store").click(function(){
 		    $("#header_community_nav_bar").hide();
 		    $("#header_apartment_nav_bar").hide();
 		    $("#header_store_nav_bar").show();
@@ -167,7 +252,43 @@ $(document).ready(function(){
 		    $("#header_store_nav_bar").hide();
 		    $("#header_community_nav_bar").hide();
 		    $("#header_apartment_nav_bar").show();
-		  });
+		  }); */
 	  
 	});
+
+	function menu() {
+		if(currPage == 'community'){
+			$('.header-upper__item').removeClass("upper__active");
+			$('#header_nav_community').addClass("upper__active");
+			$('nav').not("#header_community_nav_bar").hide();
+		    $("#header_community_nav_bar").show();
+		}else if(currPage == 'store'){
+			$('.header-upper__item').removeClass("upper__active");
+			$('#header_nav_store').addClass("upper__active");
+			$('nav').not("#header_store_nav_bar").hide();
+			$("#header_store_nav_bar").show();
+		}else if(currPage == 'apartment'){
+			$('.header-upper__item').removeClass("upper__active");
+			$('#header_nav_apartment').addClass("upper__active");
+			$('nav').not("#header_apartment_nav_bar").hide();
+		    $("#header_apartment_nav_bar").show();
+			
+		}
+	}	
+
+/* 	$(function(){
+		var lastScrollTop =0,
+		delta = 15;
+		$(window).scroll(function(event){
+			var st = $(this).scrollTop();
+			if(Math.abs(lastScrollTop - st) <= delta)return;
+			if((st > lastScrollTop) && (lastScrollTop > 0)){
+				$("header_community_nav_bar").css("top", "-68");
+			}else{
+				$("header_community_nav_bar").css("top", "0px");
+			}
+			lastScrollTop = st;
+		});
+		
+	}); */
 </script>
