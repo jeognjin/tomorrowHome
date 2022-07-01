@@ -63,27 +63,22 @@
 
 </style>
 
-
+<c:set var="memberInfo" value="${memberInfo }" />
 
 <div class="header-lower mypage_top_navbar">
 	<div class="inner">
 		<div id="header_community_nav_bar">
 			<a class="header-lower__item " href="/member/mypage/main">프로필</a> <a
 				class="header-lower__item" href="">나의쇼핑</a> <a
-				class="header-lower__item" href="">나의리뷰</a> <a
 				class="header-lower__item active_" href="/member/mypage/setting">설정</a>
 		</div>
 	</div>
 </div>
 <div class="header-lower mypage_top_navbar">
 	<div class="inner">
-		<div id="header_community_nav_bar">
+		<div id="header_community_nav_bar mypage_setting_subbar">
 			<a class="header-lower__item" onclick="change_info();">회원정보수정</a> <a
-				class="header-lower__item" >알림설정</a> <a
-				class="header-lower__item" >사용자숨기기설정</a> <a
-				class="header-lower__item">전문가신청</a> <a
-				class="header-lower__item" onclick="change_password();">비밀번호변경</a> <a
-				class="header-lower__item" >추천코드</a>
+				class="header-lower__item" onclick="change_password();">비밀번호변경</a> 
 		</div>
 	</div>
 </div>
@@ -103,19 +98,19 @@
 								<tr class="email">
 									<th><span>이메일</span></th>
 									<td><input type="text" class="email" placeholder="이메일"
-										name="email1" id="email1"> <span class="mar10">@</span>
+										name="email1" id="email1" value="${memberInfo.email1 }"> <span class="mar10">@</span>
 										<input type="text" class="email email2" name="email2"
-										id="email2"></td>
+										id="email2" value="${memberInfo.email2 }"></td>
 								</tr>
 								<tr>
 									<th><span>별명</span></th>
 									<td><input type="text" 
-										name="nickname" id="nickname"></td>
+										name="nickname" id="nickname" value="${memberInfo.nickname }"></td>
 								</tr>
 								<tr>
 									<th>홈페이지</th>
 									<td><input type="text" 
-										name="homepage" id="homepage" placeholder="https://tomorrowhome.com"></td>
+										name="homepage" id="homepage" placeholder="https://tomorrowhome.com" value="${memberInfo.homepage }"></td>
 								</tr>
 								<tr>
 									<th>성별</th>
@@ -129,7 +124,7 @@
 								<tr>
 									<th>생년월일</th>
 									<td><input type="date" 
-										name="birthday" id="birthday" placeholder="YYYY-MM-DD"></td>
+										name="birthday" id="birthday" placeholder="YYYY-MM-DD" value="${memberInfo.birthday }"></td>
 								</tr>
 								<tr>
 									<th>프로필이미지</th>
@@ -139,7 +134,7 @@
 								<tr>
 									<th>한줄소개</th>
 									<td><input type="text" 
-										name="lineIntroduction" id="lineIntroduction"></td>
+										name="lineIntroduction" id="lineIntroduction" value="${memberInfo.lineIntroduction }"></td>
 								</tr>
 
 							</tbody>

@@ -1,10 +1,14 @@
 package com.tomorrowHome.member.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -87,14 +91,30 @@ public class MemberController {
 	
 	//mypage로 이동
 	@GetMapping("/mypage/main")
-	public String mypage() {
+	public String mypage(HttpSession session, Model model) {
+		AuthUserDTO authUser = (AuthUserDTO) session.getAttribute("authUser");
+		System.out.println("membercontroller>>>>>authUser>>>>>>"+authUser);
+		Map<String, Object> mypageMap = memberService.getMypageMemberInfo(authUser.getMemberId());
+		model.addAttribute("mypageMap", mypageMap);
 		return "member/mypage";
 	}
 	
 	//mypage_setting으로 이동
 	@GetMapping("/mypage/setting")
-	public String mypageSetting() {
+	public String mypageSetting(Model model, HttpSession session) {
+		AuthUserDTO authUser = (AuthUserDTO) session.getAttribute("authUser");
+		MemberDTO memberInfo = memberService.modifyInfo(authUser.getMemberId());
+		model.addAttribute("memberInfo", memberInfo);
 		return "member/mypage_setting";
 	}
+	
+	//로그아웃 - 세션삭제
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "/";
+	}
+	
+	
 	
 }

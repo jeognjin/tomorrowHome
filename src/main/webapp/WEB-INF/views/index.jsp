@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
+   pageEncoding="UTF-8"%>
+   
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="./common/header.jsp"%>
 
@@ -9,12 +9,6 @@
 <c:set var="boardList" value="${boardList }"/>
 <c:set var="goodsList" value="${goodsList }"/>
 <c:set var="mainCategoryList" value="${mainCategoryList }"/>
-<c:if test="${regist eq 'success'}">
-<script type="text/javascript">
-alert("회원가입 성공");
-</script>
-</c:if>
-
 <!-- 홈 페이지 전체 영역------------------------------------------------------------- -->
     <div class="home-page">
       <!-- 홈 페이지 상단 이미지 ------------------------------------------------------->
@@ -22,9 +16,9 @@ alert("회원가입 성공");
         <div class="home-header__upper">
           <div>
             <img alt="홈페이지 메인 이미지"
-				src="${contextPath}/communityDownload?boardId=${boardList[0].boardId}&fileName=${boardList[0].boardThumbnail}" >
+            src="${contextPath}/communityDownload?boardId=${boardList[11].boardId}&fileName=${boardList[11].boardThumbnail}" >
             <div class="home-header-tit">
-              <h4>${boardList[0].title }</h4>
+              <h4>${boardList[11].title }</h4>
               <a href="#">보러가기</a>
             </div>
           </div>
@@ -83,7 +77,7 @@ alert("회원가입 성공");
       <section class="container home-section home-stories">
         <h3 class="home-section__tit">오늘의 스토리</h3>
         <ul class="home-stories__content">
-        <c:forEach var="i" begin="1" end="3">
+        <c:forEach var="i" begin="12" end="14">
         <li class="home-stories__item">
             <article>
               <a href="">
@@ -133,6 +127,7 @@ alert("회원가입 성공");
           </ul>
         </div>
       </section>
+      
 
       <!-- 오늘의 딜 영역 -->
       <section class="container home-section">
@@ -177,13 +172,21 @@ alert("회원가입 성공");
             </div>
           </div>
           <ul class="popular-content__wrap">
-          <c:forEach var="i" begin="4" end="11">
+          <c:forEach var="i" begin="3" end="10">
             <li class="popular-item__wrap">
               <a href="">
                 <article>
                   <div>
+                  <%-- <c:choose>
+                  <c:when test="${boardList[i].boardId >= '4'"> </c:when>
+                  <img src="${contextPath}/communityDownload?boardId=${boardList[i].boardId}&fileName=${boardList[i].boardThumbnail}" alt="인기 사진">
+                  <span class="popular-item__number">1</span> 
+                  <c:otherwise>
+                  <img src="${contextPath}/communityDownload?boardId=${boardList[i].boardId}&fileName=${boardList[i].boardThumbnail}" alt="인기 사진">
+                  </c:otherwise>
+                  </c:choose> --%>
                     <img src="${contextPath}/communityDownload?boardId=${boardList[i].boardId}&fileName=${boardList[i].boardThumbnail}" alt="인기 사진">
-                    <!-- <span class="popular-item__number">1</span> -->
+                  <!--   <span class="popular-item__number">1</span> -->
                   </div>
                 </article>
               </a>
@@ -208,7 +211,7 @@ alert("회원가입 성공");
             </div>
           </div>
           <ul class="user-review__content">
-          <c:forEach var="i" begin="12" end="14">
+          <c:forEach var="i" begin="0" end="2">
             <li class="user-review__item">
               <a href="">
                 <article>
@@ -246,5 +249,5 @@ alert("회원가입 성공");
     </div>
     
    
-	
+   
 <%@include file="./common/footer.jsp"%>

@@ -29,7 +29,7 @@
 .click_profile_iamge_parent{
 	position: relative;
 }
-.click_profile_image_wrap{
+#click_profile_image_wrap{
 	position: absolute;
 	width: 200px;
 	z-index: 1000;
@@ -39,6 +39,8 @@
     border: 1px solid rgb(218, 221, 224);
     border-radius: 6px;
     box-shadow: rgb(63 71 77 / 20%) 0px 4px 10px 0px;
+    color: black;
+    text-align: justify;
     display: none;
 }
 .click_profile_image_text{
@@ -47,6 +49,14 @@
 }
 .click_profile_image_text_box:hover {
 	background-color: rgba(197, 199, 219, 0.2);
+}
+#profile_member_image{
+	width: 38px;
+	height: 38px;
+	border-radius: 70px;
+	-moz-border-radius: 70px;
+	-khtml-border-radius: 70px;
+	-webkit-border-radius: 70px;
 }
 </style>
 <!--  <style>
@@ -82,54 +92,55 @@
             <i class="fas fa-search search_icon"></i>
               <input class="header-upper__searchBar_input" type="text" placeholder="오늘의집 통합검색">
             </div>
-            <a href="${contextPath }/cart"><i class="fas fa-shopping-cart"></i></a>
+            
             <ul>
-             <%-- <c:set var="authUser" value="${authUser }"> --%>
             <c:choose>
-            	<c:when test="${!empty authUser }">
-            	<li><a href="/member/mypage/scrapbook"><i class="fa-regular fa-bookmark"></i></a></li>
-            	 	<c:when test="${!empty authUser.profileImage}">
-            	 		<li><a href="/member/mypage/main"><img alt="profile" src="${contextPath}/profileDownload?memberId=${authUser.memberId}&fileName=${authUser.profileImage}"></a></li>
+            	<c:when test="${not empty authUser }">
+            	<li><a href="#"><i class="fa-solid fa-bookmark"></i></a></li>
+            	<li><a href="#"><i class="fa-solid fa-heart"></i></a></li>
+             	 <c:choose>
+            	 	<c:when test="${not empty authUser.profileImage}">
+            	 		<li id="click_profile_iamge_parent"><a><img alt="profile" id="profile_member_image" src="${contextPath}/profileDownload?memberId=${authUser.memberId}&fileName=${authUser.profileImage}"></a></li>
             	 	</c:when>
-            	 	<%-- <c:otherwise>
-            	 		<li><a onclick="click_to_show_profile_image_text();" ><i id="profile_icon" class="fa-regular fa-face-smile"></i></a></li>
-            	 	</c:otherwise> --%>
+            	 	<c:otherwise>
+            	 		<li id="click_profile_iamge_parent2"><a><img alt="profile_image" src="https://ifh.cc/g/BVmFxg.jpg" id="profile_icon"></a></li>
+            	 	</c:otherwise>	
+            	 	 </c:choose>	
             	</c:when>
+            	
             	<c:otherwise>
+            	<li><a href="${contextPath }/cart"><i class="fas fa-shopping-cart"></i></a></li> 
             	 <li><a href="/member/loginForm">로그인</a></li>
              	 <li><a href="/member/registForm">회원가입</a></li>
-             	 <li class="click_profile_iamge_parent"><a id="click_profile_iamge_parent"><img alt="profile_image" src="https://ifh.cc/g/BVmFxg.jpg" id="profile_icon"></a>
-	             	 <div class="click_profile_image_wrap" id="click_profile_image_wrap">
-	              	<div class="click_profile_image_text_box">
-	              		<a class="click_profile_image_text" href="/member/mypage/main">마이페이지</a>
-	              	</div>
-	              	<div class="click_profile_image_text_box">
-	              		<a class="click_profile_image_text" href="/member/mypage/shopping">나의쇼핑</a>
-	              	</div>
-	              	<div class="click_profile_image_text_box">
-	              		<a class="click_profile_image_text" href="#">이벤트</a>
-	              	</div>
-	              	<div class="click_profile_image_text_box">
-	              		<a class="click_profile_image_text" href="#">전문가 신청</a>
-	              	</div>
-	              	<div class="click_profile_image_text_box">
-	              		<a class="click_profile_image_text" href="#">판매자 신청</a>
-	              	</div>
-	              	<div class="click_profile_image_text_box">
-	              		<a class="click_profile_image_text" href="#">고객센터</a>
-	              	</div>
-	              	<div class="click_profile_image_text_box">
-	              		<a class="click_profile_image_text" href="/member/logout">로그아웃</a>
-	              	</div>
-	              </div>
-             	 </li>
             	</c:otherwise>
             </c:choose>
-            <%-- </c:set> --%>
               
              <!--  <li><a href="">고객센터</a></li> -->
-              <button class="header-upper__writeBt" id="header_writeBt">
+              <button class="header-upper__writeBt click_profile_iamge_parent" id="header_writeBt">
                	글쓰기
+               	 <div class="click_profile_image_wrap" id="click_profile_image_wrap">
+			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
+			              		<a class="click_profile_image_text" href="/member/mypage/main">마이페이지</a>
+			              	</div>
+			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
+			              		<a class="click_profile_image_text" href="/member/mypage/shopping">나의쇼핑</a>
+			              	</div>
+			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
+			              		<a class="click_profile_image_text" href="#">이벤트</a>
+			              	</div>
+			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
+			              		<a class="click_profile_image_text" href="#">전문가 신청</a>
+			              	</div>
+			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
+			              		<a class="click_profile_image_text" href="#">판매자 신청</a>
+			              	</div>
+			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
+			              		<a class="click_profile_image_text" href="#">고객센터</a>
+			              	</div>
+			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
+			              		<a class="click_profile_image_text" href="/member/logout">로그아웃</a>
+			              	</div>
+			              </div>
                 <div class="header-upper__lists" id="header_lists">
                   <a href="">
                     <h4>사진 올리기</h4>
@@ -200,9 +211,7 @@
         </div>
       </div>
     </header>
-<script type="text/javascript">
 
-</script>
 
 <script type="text/javascript">
 
@@ -213,10 +222,9 @@
 		
 		 $('nav').not("#header_community_nav_bar").hide();
 		 
-	  $("#click_profile_iamge_parent").click(function(){
-	    $("#click_profile_image_wrap").toggle();
-	  });
-	  
+
+	   
+
 	  $("#header_writeBt").click(function(){
 		    $("#header_lists").toggle();
 		  });
@@ -236,23 +244,15 @@
 		    $("#header_apartment_nav_bar").show();
 		  }, menu);
 	  
-	/*   $("#header_nav_store").click(function(){
-		    $("#header_community_nav_bar").hide();
-		    $("#header_apartment_nav_bar").hide();
-		    $("#header_store_nav_bar").show();
-		  });
 	  
-	  $("#header_nav_community").click(function(){
-		    $("#header_store_nav_bar").hide();
-		    $("#header_apartment_nav_bar").hide();
-		    $("#header_community_nav_bar").show();
+	  $("#click_profile_iamge_parent2").click(function(){
+		    $("#click_profile_image_wrap").toggle();
 		  });
+		
+		  $("#click_profile_iamge_parent").click(function(){
+	    $("#click_profile_image_wrap").toggle();
+	  });
 	  
-	  $("#header_nav_apartment").click(function(){
-		    $("#header_store_nav_bar").hide();
-		    $("#header_community_nav_bar").hide();
-		    $("#header_apartment_nav_bar").show();
-		  }); */
 	  
 	});
 
@@ -275,6 +275,8 @@
 			
 		}
 	}	
+	
+	
 
 /* 	$(function(){
 		var lastScrollTop =0,
@@ -291,4 +293,7 @@
 		});
 		
 	}); */
+	
+	
+	
 </script>

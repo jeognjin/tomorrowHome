@@ -55,7 +55,7 @@ public class FileController {
 	protected void profileDownload(String fileName, String memberId,
 			                 HttpServletResponse response) throws Exception {		
 		String CURR_IMAGE_REPO_PATH = "C:\\tomorrowHome_images\\profile";
-		
+		System.out.println("FileController>>>>>>fileName, memberId"+fileName+":"+memberId);
 		Download(fileName, memberId, response, CURR_IMAGE_REPO_PATH);
 	}
 	
