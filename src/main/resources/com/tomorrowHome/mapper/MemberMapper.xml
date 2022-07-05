@@ -42,10 +42,29 @@
    <result property="endDate" column="end_date" />
 </resultMap>
 
-<resultMap id="AuthResult" type="AuthUserDTO">
+<resultMap id="authResult" type="AuthUserDTO">
    <result property="memberId" column="member_id" />
    <result property="nickname" column="nickname" />
    <result property="profileImage" column="profile_image" />
+</resultMap>
+
+<resultMap id="orderManagementResult" type="OrderManagementDTO">
+   <result property="orderId" column="order_id" />
+   <result property="goodsId" column="goods_id" />
+   <result property="payOrderTime" column="pay_order_time" />
+   <result property="productThumbnail" column="product_thumbnail" />
+   <result property="goodsBrand" column="goods_brand" />
+   <result property="goodsName" column="goods_name" />
+   <result property="goodsPrice" column="goods_price" />
+   <result property="discountRate" column="discount_rate" />
+   <result property="orderCount" column="order_count" />
+</resultMap>
+
+<resultMap id="pointResult" type="PointDTO">
+   <result property="pointId" column="point_id" />
+   <result property="memberId" column="member_id" />
+   <result property="point" column="point" />
+   <result property="useDate" column="use_date" />
 </resultMap>
 
 <insert id="insertMember">
@@ -120,6 +139,28 @@ update member set nickname = '${nickname}', homepage = '${homepage}', birthday =
 <select id="updatePassword" resultMap="memberResult">
 <![CDATA[
 update member set password = '#{password}' where member_id = #{memberId}
+]]>
+</select>
+
+<select id="selectOrderManagementOfmember" resultMap="orderManagementResult">
+<![CDATA[
+select so.order_id, p.goods_id, so.pay_order_time, p.product_thumbnail, p.goods_brand, p.goods_name, p.goods_price, p.discount_rate, so.order_count
+from store_order so, member m, product p
+where so.member_id = m.member_id
+and so.goods_id = p.goods_id
+and m.member_id = #{memberId}
+]]>
+</select>
+
+<select id="getPointOfMember" resultMap="pointResult">
+<![CDATA[
+select * from point where member_id = #{memberId}
+]]>
+</select>
+
+<select id="getCouponOfMember" resultMap="couponResult">
+<![CDATA[
+select * from coupon 
 ]]>
 </select>
 

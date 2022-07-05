@@ -123,7 +123,7 @@
 			              		<a class="click_profile_image_text" href="/member/mypage/main">마이페이지</a>
 			              	</div>
 			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
-			              		<a class="click_profile_image_text" href="/member/mypage/shopping">나의쇼핑</a>
+			              		<a class="click_profile_image_text" href="/member/mypage/myShopping">나의쇼핑</a>
 			              	</div>
 			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
 			              		<a class="click_profile_image_text" href="#">이벤트</a>

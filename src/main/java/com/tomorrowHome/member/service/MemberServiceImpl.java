@@ -14,6 +14,8 @@ import com.tomorrowHome.member.dto.AuthUserDTO;
 import com.tomorrowHome.member.dto.CouponDTO;
 import com.tomorrowHome.member.dto.FollowDTO;
 import com.tomorrowHome.member.dto.MemberDTO;
+import com.tomorrowHome.member.dto.OrderManagementDTO;
+import com.tomorrowHome.member.dto.PointDTO;
 import com.tomorrowHome.store.product.dto.ProductDTO;
 
 @Service
@@ -88,5 +90,19 @@ public class MemberServiceImpl implements MemberService {
 	public Integer changePassword(MemberDTO memberDTO) {
 		return memberMapper.updatePassword(memberDTO);
 	}
+
+	//마이페이지 - 나의쇼핑 접근시 보여줄 쇼핑관련 데이터 가져가기
+	@Override
+	public Map<String, Object> getMypageShoppingInfo(int memberId) {
+		Map<String, Object> mypageMap = new HashMap<String, Object>();
+		List<OrderManagementDTO> OrderManagement = memberMapper.selectOrderManagementOfmember(memberId);
+		List<PointDTO> point = memberMapper.getPointOfMember(memberId);
+		List<CouponDTO> coupon = memberMapper.getCouponOfMember(memberId);
+		mypageMap.put("OrderManagement", OrderManagement);
+		mypageMap.put("point", point);
+		mypageMap.put("coupon", coupon);
+		return mypageMap;
+	}
+
 
 }

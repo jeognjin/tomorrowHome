@@ -84,7 +84,7 @@
 		<div id="header_community_nav_bar">
 			<a class="header-lower__item " href="/member/mypage/main">프로필</a> <a
 				class="header-lower__item" href="/member/mypage/myShopping">나의쇼핑</a> <a
-				class="header-lower__item active_" href="/member/mypage/setting">설정</a>
+				class="header-lower__item active_" href="#">설정</a>
 		</div>
 	</div>
 </div>

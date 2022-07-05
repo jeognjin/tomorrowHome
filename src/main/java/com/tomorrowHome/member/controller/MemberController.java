@@ -168,9 +168,12 @@ public class MemberController {
 	}
 	
 	@GetMapping("/mypage/myShopping")
-	public String mypageShopping() {
+	public String mypageShopping(HttpSession session ,Model model) {
+		AuthUserDTO authUser = (AuthUserDTO) session.getAttribute("authUser");
+		System.out.println("membercontroller>>>>>authUser>>>>>>" + authUser);
+		Map<String, Object> mypageMap = memberService.getMypageShoppingInfo(authUser.getMemberId());
+		model.addAttribute("mypageMap", mypageMap);
 		return "member/mypage_shopping";
-		
 	}
 
 }

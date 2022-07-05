@@ -12,6 +12,9 @@
     <typeAlias type="com.tomorrowHome.member.dto.AuthUserDTO" alias="AuthUserDTO" />
     <typeAlias type="com.tomorrowHome.member.dto.MemberDTO" alias="MemberDTO" />
     <typeAlias type="com.tomorrowHome.member.dto.CouponDTO" alias="CouponDTO" />
+    <typeAlias type="com.tomorrowHome.store.order.dto.OrderDTO" alias="OrderDTO" />
+    <typeAlias type="com.tomorrowHome.member.dto.PointDTO" alias="PointDTO" />
+    <typeAlias type="com.tomorrowHome.member.dto.OrderManagementDTO" alias="OrderManagementDTO" />
   </typeAliases>
 </configuration>
 

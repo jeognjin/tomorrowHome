@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.tomorrowHome.member.dto.AuthUserDTO;
 import com.tomorrowHome.member.dto.MemberDTO;
+import com.tomorrowHome.member.dto.OrderManagementDTO;
 
 public interface MemberService {
 
@@ -21,6 +22,9 @@ public interface MemberService {
 	boolean modifyMember(MemberDTO memberDTO);
 
 	Integer changePassword(MemberDTO memberDTO);
+
+	Map<String, Object> getMypageShoppingInfo(int memberId);
+
 
 	
 

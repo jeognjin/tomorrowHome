@@ -9,6 +9,8 @@ import com.tomorrowHome.member.dto.AuthUserDTO;
 import com.tomorrowHome.member.dto.CouponDTO;
 import com.tomorrowHome.member.dto.FollowDTO;
 import com.tomorrowHome.member.dto.MemberDTO;
+import com.tomorrowHome.member.dto.OrderManagementDTO;
+import com.tomorrowHome.member.dto.PointDTO;
 
 @Transactional
 public interface MemberMapper {
@@ -36,6 +38,12 @@ public interface MemberMapper {
 	boolean updateMemberInfo(MemberDTO memberDTO);
 
 	Integer updatePassword(MemberDTO memberDTO);
+
+	List<OrderManagementDTO> selectOrderManagementOfmember(int memberId);
+
+	List<PointDTO> getPointOfMember(int memberId);
+
+	List<CouponDTO> getCouponOfMember(int memberId);
 
 
 }
