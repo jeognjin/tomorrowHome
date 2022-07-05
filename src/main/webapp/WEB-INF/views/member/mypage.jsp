@@ -112,9 +112,7 @@
 	font-size: 35px;
 }
 
-.profile_submenu {
-	width: 70%;
-}
+
 
 .mypage_show_all_wrap {
 	display: flex; 
@@ -125,7 +123,6 @@
 .mypage_show_all_images {
 	border: 1px dashed gray;
 	height: 200px;
-	width: 90%;
 	margin: 10px auto;
 	text-align: center;
 	line-height: 14;
@@ -193,7 +190,6 @@ a{
 	cursor: pointer;
 }
 .menu_image{
-	width: 70%;
 	display: flex;
 }
 #menu_image{ display: none;}
@@ -216,7 +212,7 @@ a{
 	<div class="inner">
 		<div id="header_community_nav_bar">
 			<a class="header-lower__item active_" href="#">프로필</a> <a
-				class="header-lower__item" href="">나의쇼핑</a> <a
+				class="header-lower__item" href="/member/mypage/myShopping">나의쇼핑</a> <a
 				class="header-lower__item" href="/member/mypage/setting">설정</a>
 		</div>
 	</div>
@@ -294,7 +290,7 @@ a{
 	<!-- mypage_side_profile_card -->
 	
 	
-
+	<div class="submenu_all_wrap">
 	
 
 	<div class="menu_showall profile_submenu" id="menu_showall">
@@ -364,7 +360,7 @@ a{
 
 
 <!-- 사진 tab 시작-------------------------------------------------------------------------- -->
-<div class="profile_submenu menu_image" id="menu_image" style="width: 70%">
+<div class="profile_submenu menu_image" id="menu_image" >
 	<div class="mypage_show_all_detail_wrap">
 		<div class="mypage_show_all_title">
 			사진<a>${fn:length(imageWriteByMember)}</a>
@@ -482,8 +478,7 @@ a{
 </div>
 <!-- 좋아요 tab 끝-------------------------------------------------------------------------- -->
 
-
-<div class="clear_both"></div>
+</div>
 
 <script type="text/javascript">
 
@@ -533,5 +528,7 @@ function menu_click_like() {
 
 
 </script>
+
+
 
 <%@include file="../common/footer.jsp"%>

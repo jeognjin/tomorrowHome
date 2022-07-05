@@ -10,13 +10,17 @@ public interface MemberService {
 
 	boolean registMember(MemberDTO memberDTO);
 
-	int findNickname(String nickname);
+	Integer findNickname(String nickname);
 
-	AuthUserDTO login(MemberDTO memberDTO);
+	MemberDTO login(MemberDTO memberDTO);
 
 	Map<String, Object> getMypageMemberInfo(int memberId);
 
 	MemberDTO modifyInfo(int memberId);
+
+	boolean modifyMember(MemberDTO memberDTO);
+
+	Integer changePassword(MemberDTO memberDTO);
 
 	
 

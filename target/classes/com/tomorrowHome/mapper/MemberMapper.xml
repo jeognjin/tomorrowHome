@@ -52,11 +52,11 @@
 insert into member(member_id, email1, email2, password, nickname) values(member_id_seq.nextval, '${email1}', '${email2}', '${password}', '${nickname}')
 </insert>
 
-<select id="selectOneOfNickname" resultType="int">
+<select id="selectOneOfNickname" resultType="integer">
 select * from member where nickname = #{nickname}
 </select>
 
-<select id="selectOneOfEmail" resultMap="AuthResult">
+<select id="selectOneOfEmail" resultMap="memberResult">
 select * from member where email1 = '${email1}' and email2 = '${email2}'
 </select>
 
@@ -75,30 +75,52 @@ and m.member_id = #{member_id}
 </select>
 
 <select id="selectCouponOfMember" resultMap="couponResult">
+<![CDATA[
 select * from coupon
 where coupon_id in (select coupon_id from coupon_member cm, member m
 where cm.member_id = m.member_id
 and m.member_id = #{member_id})
+]]>
 </select>
 
 <select id="selectFollerOfMember" resultMap="memberResult">
+<![CDATA[
 select * from member 
 where member_id in (select member_id_follwing from member m, feed f
 where m.member_id = f.member_id_follwer and m.member_id = #{member_id})
+]]>
 </select>
 
 <select id="selectFollwingOfMember" resultMap="memberResult">
+<![CDATA[
 select * from member 
 where member_id in (select member_id_follwer from member m, feed f
 where m.member_id = f.member_id_follwing and m.member_id = #{member_id})
+]]>
 </select>
 
 <select id="selectBoardWriteByMember" resultMap="boardResult">
+<![CDATA[
 select * from board where member_id = #{member_id}
+]]>
 </select>
 
 <select id="selectOneOfMemberId" resultMap="memberResult">
+<![CDATA[
 select * from member where member_id = #{member_id}
+]]>
+</select>
+
+<select id="updateMemberInfo" >
+<![CDATA[
+update member set nickname = '${nickname}', homepage = '${homepage}', birthday = '${birthday}', profile_image = '${profileImage}', line_introduction = '${lineIntroduction}' where member_id = ${member_id}
+]]> 
+</select>
+
+<select id="updatePassword" resultMap="memberResult">
+<![CDATA[
+update member set password = '#{password}' where member_id = #{memberId}
+]]>
 </select>
 
 </mapper>

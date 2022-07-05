@@ -28,12 +28,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int findNickname(String nickname) {
+	public Integer findNickname(String nickname) {
 		return memberMapper.selectOneOfNickname(nickname);
 	}
 
 	@Override
-	public AuthUserDTO login(MemberDTO memberDTO) {
+	public MemberDTO login(MemberDTO memberDTO) {
 		return memberMapper.selectOneOfEmail(memberDTO);
 	}
 
@@ -49,11 +49,11 @@ public class MemberServiceImpl implements MemberService {
 		List<CommunityBoardDTO> boardWriteByMember = memberMapper.selectBoardWriteByMember(memberId);
 		List<CommunityBoardDTO> imageWriteByMember = new ArrayList<CommunityBoardDTO>();
 		List<CommunityBoardDTO> housewarmingWriteByMember = new ArrayList<CommunityBoardDTO>();
-		for(CommunityBoardDTO boardDTO : boardWriteByMember) {
-			if(boardDTO.getCategoryId() == '0') {
+		for (CommunityBoardDTO boardDTO : boardWriteByMember) {
+			if (boardDTO.getCategoryId() == '0') {
 				imageWriteByMember.add(boardDTO);
 			}
-			if(boardDTO.getCategoryId() == '1') {
+			if (boardDTO.getCategoryId() == '1') {
 				housewarmingWriteByMember.add(boardDTO);
 			}
 		}
@@ -65,16 +65,28 @@ public class MemberServiceImpl implements MemberService {
 		mypageMap.put("imageWriteByMember", imageWriteByMember);
 		mypageMap.put("housewarmingWriteByMember", housewarmingWriteByMember);
 
-		System.out.println("boardWriteByMember>>>>>>>>>"+boardWriteByMember);
-		System.out.println("imageWriteByMember>>>>>>>>>"+imageWriteByMember);
-		System.out.println("housewarmingWriteByMember>>>>>>>>>"+housewarmingWriteByMember);
+		System.out.println("boardWriteByMember>>>>>>>>>" + boardWriteByMember);
+		System.out.println("imageWriteByMember>>>>>>>>>" + imageWriteByMember);
+		System.out.println("housewarmingWriteByMember>>>>>>>>>" + housewarmingWriteByMember);
 		return mypageMap;
 	}
 
-	//회원정보 수정
+	// 회원정보 수정 페이지 접근할때 멤버 정보 가져오기
 	@Override
 	public MemberDTO modifyInfo(int memberId) {
 		return memberMapper.selectOneOfMemberId(memberId);
+	}
+
+	// 회원정보 수정하기
+	@Override
+	public boolean modifyMember(MemberDTO memberDTO) {
+		return memberMapper.updateMemberInfo(memberDTO);
+	}
+
+	// 비밀번호 변경
+	@Override
+	public Integer changePassword(MemberDTO memberDTO) {
+		return memberMapper.updatePassword(memberDTO);
 	}
 
 }

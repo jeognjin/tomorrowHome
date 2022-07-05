@@ -64,8 +64,6 @@ public class EmailController {
         });
     }
 
-
-
     //입력받은 인증키와 세션에 있던 인증키가 동일한지 확인
 	@PostMapping("/authMatch")
 	@ResponseBody

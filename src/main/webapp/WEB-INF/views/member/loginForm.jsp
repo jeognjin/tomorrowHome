@@ -216,7 +216,7 @@ form{
 		console.log("email2",email2);
 		
 	
-		 //ajax로 인증번호 보내기
+		 //ajax로 아이디 비밀번호 보내고 리턴값 받기
 		$.ajax({
 			type : "post",
 			async : false,

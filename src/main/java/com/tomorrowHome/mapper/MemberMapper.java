@@ -15,9 +15,9 @@ public interface MemberMapper {
 
 	boolean insertMember(MemberDTO memberDTO);
 
-	int selectOneOfNickname(String nickname);
+	Integer selectOneOfNickname(String nickname);
 
-	AuthUserDTO selectOneOfEmail(MemberDTO memberDTO);
+	MemberDTO selectOneOfEmail(MemberDTO memberDTO);
 
 	List<CommunityBoardDTO> selectLikeBoardOfMember(int memberId);
 
@@ -32,6 +32,10 @@ public interface MemberMapper {
 	List<CommunityBoardDTO> selectBoardWriteByMember(int memberId);
 
 	MemberDTO selectOneOfMemberId(int memberId);
+
+	boolean updateMemberInfo(MemberDTO memberDTO);
+
+	Integer updatePassword(MemberDTO memberDTO);
 
 
 }
