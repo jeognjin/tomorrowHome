@@ -15,6 +15,7 @@
     <typeAlias type="com.tomorrowHome.store.order.dto.OrderDTO" alias="OrderDTO" />
     <typeAlias type="com.tomorrowHome.member.dto.PointDTO" alias="PointDTO" />
     <typeAlias type="com.tomorrowHome.member.dto.OrderManagementDTO" alias="OrderManagementDTO" />
+    <typeAlias type="com.tomorrowHome.store.cart.dto.CartDTO" alias="CartDTO" />
   </typeAliases>
 </configuration>
 

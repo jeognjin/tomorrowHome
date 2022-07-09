@@ -8,16 +8,16 @@ import lombok.Data;
 
 @Data
 public class ProductDTO {
-	private int goodsId; //상품 번호
-	private String goodsName; //상품 이름
-	private String goodsBrand; //상품 브랜드
-	private int goodsPrice; //상품 가격(원가)
-	private double discountRate; //상품 할인율
-	private double pointRate; //포인트 적립율
-	private Date registGoodsDate; //등록 날짜
-	private String productThumbnail; //상품 섬네일
-	private String goodsStatus; //스토어 분류 
-	private int goodsCategoryId; //카테고리ID
+	private int goodsId; //�긽�뭹 踰덊샇
+	private String goodsName; //�긽�뭹 �씠由�
+	private String goodsBrand; //�긽�뭹 釉뚮옖�뱶
+	private int goodsPrice; //�긽�뭹 媛�寃�(�썝媛�)
+	private double discountRate; //�긽�뭹 �븷�씤�쑉
+	private double pointRate; //�룷�씤�듃 �쟻由쎌쑉
+	private Date registGoodsDate; //�벑濡� �궇吏�
+	private String productThumbnail; //�긽�뭹 �꽟�꽕�씪
+	private String goodsStatus; //�뒪�넗�뼱 遺꾨쪟 
+	private int goodsCategoryId; //移댄뀒怨좊━ID
 	
 	
 

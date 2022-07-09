@@ -23,8 +23,16 @@ public class ProductServiceImpl implements ProductService{
 	private ProductMapper productMapper;
 		
 	@Override
-	public List<ProductDTO> listGoods() {
-		return productMapper.selectAllGoods();
+	public Map<String, List<ProductDTO>> listGoods() {
+		Map<String, List<ProductDTO>> listMap = new HashMap<>();
+		Map<String, Integer> map = new HashMap<>();
+		map.put("begin", 1);
+		map.put("end", 8);
+		List<ProductDTO> storeList = productMapper.selectGoodsByPopurarity(map);
+		List<ProductDTO> todayList = productMapper.selectGoodsByDiscountRate(map);
+		listMap.put("storeList", storeList);
+		listMap.put("todayList", todayList);
+		return listMap;
 		
 	}
 
@@ -34,4 +42,27 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.selectGoodsByPopurarity(map);
 	}
 	
+	@Override
+	public List<ProductDTO> todayDealListGoods(Map<String, Integer> map) {
+		
+		return productMapper.selectGoodsByDiscountRate(map);
+	}
+
+	@Override
+	public List<Map<String, String>> storeCategoryList() {
+		return productMapper.selectCategoryList();
+		
+	}
+
+	@Override
+	public List<ProductDTO> goodsListByCategory(int category) {
+		
+		return productMapper.selectListByCategory(category);
+	}
+
+	@Override
+	public ProductDTO listGoodsByGoodsId(int goodsId) {
+		
+		return productMapper.selectlistGoodsByGoodsId(goodsId);
+	}
 }

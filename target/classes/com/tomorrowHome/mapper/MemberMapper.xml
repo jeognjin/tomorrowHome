@@ -51,6 +51,7 @@
 <resultMap id="orderManagementResult" type="OrderManagementDTO">
    <result property="orderId" column="order_id" />
    <result property="goodsId" column="goods_id" />
+   <result property="deliveryState" column="delivery_state" />
    <result property="payOrderTime" column="pay_order_time" />
    <result property="productThumbnail" column="product_thumbnail" />
    <result property="goodsBrand" column="goods_brand" />
@@ -130,21 +131,29 @@ select * from member where member_id = #{member_id}
 ]]>
 </select>
 
-<select id="updateMemberInfo" >
+<update id="updateMemberInfo">
 <![CDATA[
-update member set nickname = '${nickname}', homepage = '${homepage}', birthday = '${birthday}', profile_image = '${profileImage}', line_introduction = '${lineIntroduction}' where member_id = ${member_id}
-]]> 
-</select>
-
-<select id="updatePassword" resultMap="memberResult">
-<![CDATA[
-update member set password = '#{password}' where member_id = #{memberId}
+update member set nickname = #{nickname, jdbcType=VARCHAR}, homepage = #{homepage, jdbcType=VARCHAR}, 
+birthday = #{birthday, jdbcType=DATE}, profile_image = #{profileImage, jdbcType=VARCHAR}, line_introduction = #{lineIntroduction, jdbcType=VARCHAR}
+where member_id = #{memberId}
 ]]>
-</select>
+</update>
+
+<update id="updatePassword">
+<![CDATA[
+update member set password = #{password} where member_id = #{memberId}
+]]>
+</update>
+
+<update id="updateMemberProfileImage">
+<![CDATA[
+update member set profile_image = #{profileImage} where member_id = #{memberId}
+]]>
+</update>
 
 <select id="selectOrderManagementOfmember" resultMap="orderManagementResult">
 <![CDATA[
-select so.order_id, p.goods_id, so.pay_order_time, p.product_thumbnail, p.goods_brand, p.goods_name, p.goods_price, p.discount_rate, so.order_count
+select so.order_id, p.goods_id,so.delivery_state, so.pay_order_time, p.product_thumbnail, p.goods_brand, p.goods_name, p.goods_price, p.discount_rate, so.order_count
 from store_order so, member m, product p
 where so.member_id = m.member_id
 and so.goods_id = p.goods_id
@@ -161,6 +170,12 @@ select * from point where member_id = #{memberId}
 <select id="getCouponOfMember" resultMap="couponResult">
 <![CDATA[
 select * from coupon 
+]]>
+</select>
+
+<select id="selectOneOfMemberIdReturnAuthUserDTO" resultMap="authResult">
+<![CDATA[
+select * from member where member_id = #{member_id}
 ]]>
 </select>
 

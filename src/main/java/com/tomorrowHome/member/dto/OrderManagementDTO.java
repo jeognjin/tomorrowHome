@@ -9,6 +9,7 @@ public class OrderManagementDTO {
 
 	private int orderId; /* 주문번호 */
 	private int goodsId; //상품 번호
+	private int deliveryState; /* 배송 상태 */
 	private Date payOrderTime; /* 결제시간 */
 	private String productThumbnail; //상품 섬네일
 	private String goodsBrand; //상품 브랜드

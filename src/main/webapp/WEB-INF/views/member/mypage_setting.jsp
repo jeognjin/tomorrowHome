@@ -77,7 +77,6 @@
 }
 </style>
 
-<c:set var="memberInfo" value="${memberInfo }" />
 
 <div class="header-lower mypage_top_navbar">
 	<div class="inner">
@@ -97,7 +96,7 @@
 	</div>
 </div>
 <div class="regist_form_wrap" id="regist_form_wrap">
-	<form method="post" id="modify_form">
+	<form method="post" id="modify_form" action="${contextPath }/member/modify">
 		<div class="wrap wd668">
 			<div class="container">
 				<div class="form_txtInput">
@@ -140,10 +139,10 @@
 								</tr>
 								<tr>
 									<th>프로필이미지</th>
-									<td><input type="file" name="profileImage"
-										id="profileImage"> <c:choose>
+									<td><input type="file" name="main_image"
+										id="profileImage" onchange="loadFile(event)"> <c:choose>
 											<c:when test="${not empty authUser.profileImage}">
-												<img class="mypage_profile_image" alt="profile"
+												<img id="output" class="mypage_profile_image" alt="profile"
 													src="${contextPath}/profileDownload?memberId=${authUser.memberId}&fileName=${authUser.profileImage}">
 											</c:when>
 											<c:otherwise>
@@ -251,7 +250,7 @@
 	}
 
 	function submit_click() {
-
+		console.log("submit_click()>>");
 		//닉네임 변경하면 중복된 닉네임 있는지 ajax로 값 넘겨서 확인 후 데이터 받아오기
 		let nickname = "<c:out value='${memberInfo.nickname}' />";
 		let changeNickname = document.getElementById('nickname').value;
@@ -276,43 +275,78 @@
 					} //end if (overlap)
 					if(data.trim() == 'unused'){
 						console.log('unused');
-						modofy_submit();
+						profile_image_submit();
 					}//end if (unused)
 				}// end success
 			}); //end ajax
-		} //end if
+		}else{
+			profile_image_submit();
+		}
 		
 
 	}//submit_click()
 
-	function modofy_submit() {
-		console.log('modofy_submit');
+	function profile_image_submit(){
+		console.log("profile_image_submit()>>");
+      var formData = new FormData(); 
+      formData.append("file", document.getElementById("profileImage").files[0]); 
+
+      $.ajax({
+        url: "${contextPath }/member/modifyProfileImage", 
+        data: formData, 
+        type: "POST",
+        async: true, 
+        enctype: "multipart/form-data", 
+        processData: false, 
+        contentType: false, 
+
+        success : function(data) {
+			if (data.trim() == 'success') {
+				modify_submit();
+				//document.getElementById('modify_form').submit();
+			} //end if
+		}// end success
 		
+      });
+	
+	}
+	
+ 	function modify_submit() {
+		console.log('modofy_submit()');
+	
 		let memberId = "<c:out value='${memberInfo.memberId}' />";
 		let homepage = document.getElementById('homepage').value;
 		let birthday = document.getElementById('birthday').value;
 		let lineIntroduction = document.getElementById('lineIntroduction').value;
 		let changeNickname = document.getElementById('nickname').value;
-		
-		$.ajax({
-			type : "post",
-			async : false,
-			url : "${contextPath }/member/modify", //회원정보 수정
-			data : {
+		let profileImage = document.getElementById('profileImage').value;
+		let param = {
 				memberId : memberId,
 				nickname : changeNickname,
 				homepage : homepage,
 				birthday : birthday,
 				lineIntroduction : lineIntroduction
-			},
+			};
+		console.log("param >>> ", param);
+		$.ajax({
+			type : 'POST',
+			url : "${contextPath }/member/modify", //회원정보 수정
+			contentType: "application/json",
+			data : JSON.stringify(param),
 			success : function(data) {
 				if (data.trim() == 'success') {
-					alert("회원정보 수정완료");
+					alert("회원정보 수정완료.");
+					location.href="${contextPath }/member/mypage/main";
 				} //end if
 			}// end success
 
-		}); //end ajax
-	}
+		}); //end ajax 
+	} 
+	
+	
+	
+
+	
 
 	function password_change_click() {
 		
@@ -340,16 +374,17 @@
 			return;
 			}
 		
-		
+		var params = {
+				password : password,
+				memberId : memberId
+			};
+		console.log(params);
 		
 		$.ajax({
 			type : "post",
 			async : false,
 			url : "${contextPath }/member/changePassword",
-			data : {
-				password : password,
-				memberId : memberId
-			},
+			data : params,
 			success : function(data) {
 				if (data.trim() == 'success') {
 					alert("비밀번호 변경 완료");
@@ -359,85 +394,16 @@
 		
 	}
 	
-	/* $(document).ready(function() {
-	
-
-
-	 $("input[type='file']").change(function(e){
-
-	 var formData = new FormData();
-	
-	 var inputFile = $("input[name='profileImage']");
-	
-	 var files = inputFile[0].files;
-	
-	 for(var i = 0; i < files.length; i++){
-
-	 if(!checkExtension(files[i].name, files[i].size) ){
-	 return false;
-	 }
-	 formData.append("uploadFile", files[i]);
-	
-	 }
-	
-	 $.ajax({
-	 url: '/uploadProfileImage',
-	 processData: false, 
-	 contentType: false,data: 
-	 formData,type: 'POST',
-	 beforeSend: function(xhr) {
-	 xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-	 },
-	 dataType:'json',
-	 success: function(result){
-	 console.log(result); 
-	 showUploadResult(result); //업로드 결과 처리 함수 
-
-	 }
-	 }); //$.ajax
-	
-	 });    
-
-	 function showUploadResult(uploadResultArr){
-	
-	 if(!uploadResultArr || uploadResultArr.length == 0){ return; }
-	
-	 var uploadUL = $(".uploadResult ul");
-	
-	 var str ="";
-	
-	 $(uploadResultArr).each(function(i, obj){
-	
-	 if(obj.image){
-	 var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-	 str += "<li data-path='"+obj.uploadPath+"'";
-			str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
-			str +" ><div>";
-	 str += "<span> "+ obj.fileName+"</span>";
-	 str += "<button type='button' data-file=\'"+fileCallPath+"\' "
-			str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-	 str += "<img src='/display?fileName="+fileCallPath+"'>";
-	 str += "</div>";
-	 str +"</li>";
-	 }else{
-	 var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);			      
-	 var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
-	
-	 str += "<li "
-			str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
-	 str += "<span> "+ obj.fileName+"</span>";
-	 str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' " 
-			str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-	 str += "<img src='/resources/img/attach.png'></a>";
-	 str += "</div>";
-	 str +"</li>";
-	 }
-
-	 });
-	
-	 uploadUL.append(str);
-	 }
-	 }); */
+	var loadFile = function(event) {
+	    var reader = new FileReader();
+	    reader.onload = function(){
+	      var output = document.getElementById('output');
+	      output.src = reader.result;
+	    };
+	    reader.readAsDataURL(event.target.files[0]);
+	  };
+	  
+	  
 </script>
 
 <%@include file="../common/footer.jsp"%>

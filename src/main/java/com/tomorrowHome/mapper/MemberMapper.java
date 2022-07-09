@@ -35,15 +35,21 @@ public interface MemberMapper {
 
 	MemberDTO selectOneOfMemberId(int memberId);
 
-	boolean updateMemberInfo(MemberDTO memberDTO);
+	void updateMemberInfo(MemberDTO memberDTO);
 
-	Integer updatePassword(MemberDTO memberDTO);
+	void updatePassword(MemberDTO memberDTO);
 
 	List<OrderManagementDTO> selectOrderManagementOfmember(int memberId);
 
 	List<PointDTO> getPointOfMember(int memberId);
 
 	List<CouponDTO> getCouponOfMember(int memberId);
+
+	void updateMemberProfileImage(String profileImage);
+
+	void updateMemberProfileImage(AuthUserDTO authUser);
+
+	AuthUserDTO selectOneOfMemberIdReturnAuthUserDTO(int memberId);
 
 
 }

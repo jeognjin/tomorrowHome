@@ -35,8 +35,6 @@
     </div>
   </div>
 
-  <script src="js/write.js"></script>
-  <script src="js/mobileSearch.js"></script>
-  <script src="js/bannerSlider.js"></script>
+
 </body>
 </html>

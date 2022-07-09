@@ -14,7 +14,15 @@ public interface ProductMapper {
 
 	List<ProductDTO> selectGoodsByPopurarity(Map<String, Integer> map);
 
+	List<ProductDTO> selectGoodsByDiscountRate(Map<String, Integer> map);
 
+	List<Map<String, String>> selectCategoryList();
+
+	List<ProductDTO> selectListByCategory(int category);
+
+	ProductDTO selectlistGoodsByGoodsId(int goodsId);
+
+	
 
 	
 }

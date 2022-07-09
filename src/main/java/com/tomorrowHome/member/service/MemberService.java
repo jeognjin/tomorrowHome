@@ -1,5 +1,6 @@
 package com.tomorrowHome.member.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -19,11 +20,17 @@ public interface MemberService {
 
 	MemberDTO modifyInfo(int memberId);
 
-	boolean modifyMember(MemberDTO memberDTO);
 
-	Integer changePassword(MemberDTO memberDTO);
+	void changePassword(MemberDTO memberDTO) throws SQLException;
 
 	Map<String, Object> getMypageShoppingInfo(int memberId);
+
+	void modifyMemberInfo(MemberDTO memberInfo) throws SQLException;
+
+	void modifyMemberProfileImage(AuthUserDTO authUser);
+
+	AuthUserDTO getMemberInfo(int memberId);
+
 
 
 	

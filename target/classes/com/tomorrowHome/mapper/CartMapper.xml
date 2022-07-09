@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.tomorrowHome.mapper.CartMapper">
+  
+   <!-- 리절트 맵 정의 -->
+	<resultMap id="goodsResult" type="ProductDTO">
+		<result property="goodsId" column="goods_id" />
+		<result property="goodsName" column="goods_name" />
+		<result property="goodsBrand" column="goods_brand" />
+		<result property="goodsPrice" column="goods_price" />
+		<result property="discountRate" column="discount_rate" />
+		<result property="pointRate" column="point_rate" />
+		<result property="registGoodsDate" column="regist_goods_date" />
+		<result property="productThumbnail" column="product_thumbnail" />
+		<result property="goodsStatus" column="goods_status" />
+		<result property="goodsCategoryId" column="goods_category_id" />
+	</resultMap>
+
+	<!-- <resultMap id="goodsImageResult" type="ProductImageDTO">
+		<result property="imageId" column="image_id" />
+		<result property="goodsId" column="goods_id" />
+		<result property="fileName" column="file_name" />
+		<result property="fileType" column="file_type" />
+	</resultMap> -->
+	
+ <!--  <resultMap id="cartResult" type="CartDTO">
+		<result property="cartId" column="cart_id" />
+		<result property="cartGoodsQty" column="cart_goods_qty" />
+		<result property="goodsId" column="goods_id" />
+		<result property="memberId" column="member_id" />
+	</resultMap> -->
+
+	
+
+	<!-- 카트 추가 -->
+	<insert id="addCart">
+	
+		insert into shopping_cart(member_id, goods_id, cart_goods_qty)
+		values(#{memberId}, #{goodsId}, #{cartGoodsQty}) 
+	
+	</insert>
+	
+	
+	<!-- 카트 삭제 -->
+	<delete id="deleteCart">
+	
+		delete from shopping_cart where cart_id = #{cartId}
+	
+	</delete>
+	
+	<!-- 카트 수량 수정 -->
+	<update id="modifyCount">
+	
+		update shopping_cart set cart_goods_qty=#{cartGoodsQty} where cart_id = #{cartId}
+	
+	</update>
+	
+	
+	<!-- 카트 목록 -->
+<!-- 	<select id="getCart" resultType="cartResult">
+	
+		select a.cart_id, a.member_id, a.goods_id, a.cart_goods_qty, b.goods_name, b.goods_price, b.discount_rate
+		from shopping_cart a left outer join product b on a.goods_id = b.goods_id
+		where member_id = #{memberId}	
+	
+	</select> -->
+	
+	<!-- 카트 확인 -->
+	<!-- <select id="checkCart" resultType="cartResult">
+	
+		select * from shopping_cart 
+		where member_id = #{memberId} and goods_id = #{goodsId}
+	
+	</select>	 -->
+	
+	<delete id="deleteOrderCart">
+	
+		delete from shopping_cart where member_id = #{memberId} and goods_id = #{goodsId}
+	
+	</delete>	
+	
+	
+  </mapper>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@include file="../common/header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -9,14 +11,16 @@
 <title>쇼핑은 쉽게, 스타일링은 즐겁게! 내일의집 스토어</title>
 <!-- css -->
 <link rel="stylesheet" href="${contextPath }/resources/css/style.css">
+
 </head>
 <body style="margin: 0; overflow-x: hidden">
 
 
 <!-- BODY : community_home : main page-->
 <c:set var="boardList" value="${boardList }"/>
-<c:set var="goodsList" value="${goodsList }"/>
 <c:set var="mainCategoryList" value="${mainCategoryList }"/>
+<c:set var="storeList" value="${goodsMap.storeList }"/>
+<c:set var="todayList" value="${goodsMap.todayList }"/>
 
 <!-- 홈 페이지 전체 영역------------------------------------------------------------- -->
     <div>
@@ -32,9 +36,6 @@
             <div class="store_main_inner">
                 <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/165603550745057937.png?gif=1&w=2560&q=100" >
             </div>
-<!--            $(document).ready(function(){
-  $('.store_main_container').store_main_container();
-}); -->
         </div>
     </div>
     <div class="bt">
@@ -151,22 +152,25 @@
         <div class="home-section__wrap">
        <header class="store-index-today-deal-list__header" style="display:flex; justify-content: space-between;">
        <h3 class="home-section__tit">오늘의딜</h3>
-       <a class="store_more" href="" style="">더보기</a>
+       <a class="store_more" href="${contextPath }/todayDeals">더보기</a>
        </header>
           <ul class="home-section__container" style="overflow-x: hidden;">
           <c:forEach var="i" begin="0" end="3">
             <li class="home-section__item">
               <article>
-                <a href="">
+                <a href="${contextPath }/productDetail/${todayList[i].goodsId}">
                   <div class="home-section__img-wrap">
-                    <img src="${contextPath}/productDownload?goodsId=${goodsList[i].goodsId}&fileName=${goodsList[i].productThumbnail}" alt="${goodsList[i].goodsName}">
+                    <img src="${contextPath}/productDownload?goodsId=${todayList[i].goodsId}&fileName=${todayList[i].productThumbnail}" alt="${todayList[i].goodsName}">
                   </div>
                   <div class="home-section__item__details">
-                    <h4 class="home-section__item__tit">${goodsList[i].goodsBrand }</h4>
-                    <p class="home-section__item__sub">${goodsList[i].goodsName}</p>
+                    <h4 class="home-section__item__tit">${todayList[i].goodsBrand }</h4>
+                    <p class="home-section__item__sub">${todayList[i].goodsName}</p>
                     <div class="home-section__item__sale">
-                      <div class="home-section__item__percent">${goodsList[i].discountRate}%</div>
-                      <div class="home-section__item__price"><fmt:formatNumber value="${goodsList[i].goodsPrice}" pattern="#,###" /> 외</div>
+                      <div class="home-section__item__percent">${todayList[i].discountRate}%</div>
+                      <div class="home-section__item__price">
+                      <c:set var="price" value="${todayList[i].goodsPrice - (todayList[i].goodsPrice*((todayList[i].discountRate)/100)) }"/>
+                      <fmt:formatNumber type="number" pattern="###,###,###,###" value="${price-(price%100)}" /> 외</div>
+                      
                     </div>
                     <div class="home-section__item__review">
                       <div class="home-section__item__grade">4.7</div>
@@ -205,11 +209,13 @@
       <section class="container home-section">
         <div class="home-section__wrap">
           <h3 class="home-section__tit">인기 상품</h3>
+
+</div>
           <ul class="home-section__container pop" style="overflow-x: hidden; flex-flow:row wrap">
-          <c:forEach var="item" items="${goodsList}" >
+          <c:forEach var="item" items="${storeList}" >
             <li class="home-section__item">
               <article>
-                <a href="">
+                <a href="${contextPath }/productDetail/${item.goodsId}">
                   <div class="home-section__img-wrap">
                     <img src="${contextPath}/productDownload?goodsId=${item.goodsId}&fileName=${item.productThumbnail}" alt="${item.goodsName}">
                   </div>
@@ -218,7 +224,9 @@
                     <p class="home-section__item__sub">${item.goodsName}</p>
                     <div class="home-section__item__sale">
                       <div class="home-section__item__percent">${item.discountRate}%</div>
-                      <div class="home-section__item__price"><fmt:formatNumber value="${item.goodsPrice}" pattern="#,###" /> 외</div>
+                      <div class="home-section__item__price">
+                      <c:set var="price" value="${item.goodsPrice - (item.goodsPrice*((item.discountRate)/100)) }"/>
+                      <fmt:formatNumber type="number" pattern="###,###,###,###" value="${price-(price%100)}" /> 외</div>
                     </div>
                     <div class="home-section__item__review">
                       <div class="home-section__item__grade">4.7</div>
@@ -232,8 +240,9 @@
            
           </ul>
         </div>
-        <script>
-        
+      </section>
+      </div>
+         <script>
         $(window).scroll(function() {
         	console.log($(window).scrollTop());
         	console.log($(document).height());
@@ -262,7 +271,8 @@
           				let goodsName = item.goodsName;
           				let goodsBrand = item.goodsBrand ;
           				let discountRate = item.discountRate;
-          				let goodsPrice = new Intl.NumberFormat().format(item.goodsPrice);
+          				let discountPrice = item.goodsPrice - (item.goodsPrice*((item.discountRate)/100));
+          				let goodsPrice = new Intl.NumberFormat().format((parseInt(discountPrice/100))*100);
 						console.log(goodsPrice);
           				let li = `<li class="home-section__item">
           	              <article>
@@ -276,7 +286,7 @@
           	                    <div class="home-section__item__sale">
           	                      <div class="home-section__item__percent">${'${discountRate}'}%</div>
           	                      <div class="home-section__item__price">${'${goodsPrice}'} 외</div>
-          	                    </div>
+          	                    
           	                    <div class="home-section__item__review">
           	                      <div class="home-section__item__grade">4.7</div>
           	                      <div class="home-section__item__reviews">리뷰 3,452</div>
@@ -290,14 +300,9 @@
 					});
           		}
           	});
-              
-              
-              
-              
+                         
             }
         });
         </script>
-      </section>
-      </div>
       </body>
 <%@include file="../common/footer.jsp"%>

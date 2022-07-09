@@ -24,10 +24,16 @@
 		<result property="fileName" column="file_name" />
 		<result property="fileType" column="file_type" />
 	</resultMap>
-
+	
+	<resultMap id="cartResult" type="CartDTO">
+		<result property="cart_id" column="cart_id" />
+		<result property="goods_id" column="goods_title" />
+		<result property="member_id" column="member_id" />
+		<result property="cart_goods_qty" column="cart_goods_qty" />
+	</resultMap>
 
 	<select id="selectAllGoods" resultMap="goodsResult">
-		select * from product
+		select * from product where goods_id >= 10000
 	</select>
 
 	<select id="selectAllGoodsImages" resultMap="goodsImageResult">
@@ -39,9 +45,39 @@
 	<![CDATA[  
 		select rownum, rm, b.* from
 		(select rownum rm, a.* from
+		(select * from product order by read_count desc) a ) b
+		where rm >= #{begin} and rm <= #{end}
+	]]>
+	</select>
+	
+	<select id="selectGoodsByDiscountRate" resultMap="goodsResult">
+	<![CDATA[  
+		select rownum, rm, b.* from
+		(select rownum rm, a.* from
 		(select * from product order by discount_rate desc) a ) b
 		where rm >= #{begin} and rm <= #{end}
 	]]>
 	</select>
-
+	
+	<select id="selectCategoryList" resultType="java.util.Map">
+		SELECT  LEVEL AS LVL,
+        goods_category_id,
+        category_name,
+        high_level
+  FROM  goods_category
+  START WITH high_level is null
+  CONNECT BY PRIOR goods_category_id = high_level
+  ORDER SIBLINGS BY category_name
+	</select>
+	
+	<select id="selectListByCategory" resultMap="goodsResult">
+		select * from product where goods_category_id = #{category}
+	
+	</select>
+	
+	<select id="selectlistGoodsByGoodsId" resultMap="goodsResult">
+		select * from product where goods_id = #{goods_id}
+	
+	</select>
+	
 </mapper>

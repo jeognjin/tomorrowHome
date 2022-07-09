@@ -198,7 +198,8 @@ a{
 	margin: 0 30px;
 }
 .mypage_shopping_order_list_image{
-	object-fit: cover;
+	width: 100px;
+	height: 100px;
 }
 .mypage_shopping_order_list_wrap{
 	display: flex;
@@ -272,6 +273,19 @@ a{
 <div class="mypage_shopping_all_wrap" id="mypage_shopping_all_wrap">
 	<div class="mypage_shopping_state_all_wrap">
 	<div class="mypage_shopping_state_wrap">
+	<c:set var="state_one" value="0"/>
+	<c:set var="state_two" value="0"/>
+	<c:set var="state_three" value="0"/>
+	<c:set var="state_four" value="0"/>
+	<c:set var="state_five" value="0"/>
+	<c:set var="state_six" value="0"/>
+	<c:forEach items="i" begin="0" end="${(fn:length(OrderManagement))-1}">
+		<c:choose>
+			<c:when test="${OrderManagement[i].deliveryState eq 5 }">
+				${state_one + 1 }
+			</c:when>
+		</c:choose>
+	</c:forEach>
 		<div class="mypage_shopping_state_text">
 			<p>입금대기</p>
 			<p><a class="mypage_shopping_state_count">0</a></p>
@@ -301,7 +315,7 @@ a{
 	<div class="mypage_shopping_state_wrap">
 		<div class="mypage_shopping_state_text">
 			<p>배송중</p>
-			<p><a class="mypage_shopping_state_count">0</a></p>
+			<p><a class="mypage_shopping_state_count">1</a></p>
 		</div>
 		<div class="mypage_shopping_state_arrow">
 			<img class="mypage_shopping_state_arrow_image" alt="arrow" src="http://www.clipartbest.com/cliparts/acq/Lxr/acqLxrdRi.jpg">
@@ -310,7 +324,7 @@ a{
 	<div class="mypage_shopping_state_wrap">
 		<div class="mypage_shopping_state_text">
 			<p>배송완료</p>
-			<p><a class="mypage_shopping_state_count">0</a></p>
+			<p><a class="mypage_shopping_state_count">1</a></p>
 		</div>
 		<div class="mypage_shopping_state_arrow">
 			<img class="mypage_shopping_state_arrow_image" alt="arrow" src="http://www.clipartbest.com/cliparts/acq/Lxr/acqLxrdRi.jpg">
@@ -319,7 +333,7 @@ a{
 	<div class="mypage_shopping_state_wrap">
 		<div class="mypage_shopping_state_text">
 			<p>구매확정</p>
-			<p><a class="mypage_shopping_state_count">0</a></p>
+			<p><a class="mypage_shopping_state_count">2</a></p>
 		</div>
 	</div>
 	</div> <!-- mypage_shopping_state_all_wrap -->
@@ -327,28 +341,26 @@ a{
 	<div class="mypage_shopping_list_all_wrap">
 		<div class="mypage_shopping_list_select">
 			<select class="mypage_shopping_list_selector">
-				<optgroup label="기간" >
-					<option>1개월 전</option>
-					<option>3개월 전</option>
-					<option>4개월 전</option>
-					<option>1년 전</option>
-					<option>2년 전</option>
-					<option>3년 전</option>
-				</optgroup>
+				<option>기간</option>
+				<option>1개월 전</option>
+				<option>3개월 전</option>
+				<option>4개월 전</option>
+				<option>1년 전</option>
+				<option>2년 전</option>
+				<option>3년 전</option>
 			</select>
 			
 			<select class="mypage_shopping_list_selector">
-				<optgroup label="주문상태" >
-					<option>입금대기</option>
-					<option>결제완료</option>
-					<option>배송준비</option>
-					<option>배송중</option>
-					<option>배송완료</option>
-					<option>구매확정</option>
-					<option>취소</option>
-					<option>교환</option>
-					<option>환불</option>
-				</optgroup>
+				<option>주문상태</option>
+				<option>입금대기</option>
+				<option>결제완료</option>
+				<option>배송준비</option>
+				<option>배송중</option>
+				<option>배송완료</option>
+				<option>구매확정</option>
+				<option>취소</option>
+				<option>교환</option>
+				<option>환불</option>
 			</select>
 		</div><!-- mypage_shopping_list_select -->
 		
@@ -359,7 +371,27 @@ a{
 						<p>${OrderManagement[i].goodsId } / <fmt:formatDate value="${OrderManagement[i].payOrderTime }" pattern="yyyy.MM.dd"/></p>
 					</div>
 					<div class="mypage_shopping_order_list_state">
-							입금대기
+						<c:choose>
+							<c:when test="${OrderManagement[i].deliveryState eq '1' }">
+								입금대기
+							</c:when>
+							<c:when test="${OrderManagement[i].deliveryState eq '2' }">
+								결제완료
+							</c:when>
+							<c:when test="${OrderManagement[i].deliveryState eq '3' }">
+								배송준비
+							</c:when>
+							<c:when test="${OrderManagement[i].deliveryState eq '4' }">
+								배송중
+							</c:when>
+							<c:when test="${OrderManagement[i].deliveryState eq '5' }">
+								배송완료
+							</c:when>
+							<c:when test="${OrderManagement[i].deliveryState eq '6' }">
+								구매확정
+							</c:when>
+						</c:choose>
+							
 						</div>
 					<div class="mypage_shopping_order_list_wrap">
 						
@@ -372,7 +404,7 @@ a{
 						</div>
 						<c:set var="price" value="${OrderManagement[i].goodsPrice - (OrderManagement[i].goodsPrice*((OrderManagement[i].discountRate)/100)) }"/>
 						<div class="mypage_shopping_order_list_price_count">
-							<fmt:formatNumber type="number" pattern="###,###,###,###" value="${price }" />원 / ${OrderManagement[i].orderCount }개
+							<fmt:formatNumber type="number" pattern="###,###,###,###" value="${price-(price%100)}" />원 / ${OrderManagement[i].orderCount }개
 						</div>
 						<div class="mypage_shopping_order_list_button">
 							<a>상세보기</a>
@@ -417,12 +449,12 @@ a{
 <fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />             <%-- 오늘날짜 --%>
 <fmt:formatDate value="${monthAfter}" pattern="yyyyMMddHHmm" var="endDate"/>        <%-- 한달뒤날짜 --%> 
 
-<c:forEach var="i" begin="0" end="${(fn:length(point))-1}">
+<%-- <c:forEach var="i" begin="0" end="${(fn:length(point))-1}">
 	${point_all } += ${point[i].point}
 	<c:if test="${nowDate < point[i].useDate && point[i].useDate < monthAfter}">
 		${missing_after_month } += ${point[i].point}
 	</c:if>
-</c:forEach>
+</c:forEach> --%>
 <div class="mypage_point_all_wrap" id="mypage_point_all_wrap">
 	<div class="mypage_point_wrap">
 		<h2 class="mypage_point_keep_title">사용 가능한 포인트</h2>

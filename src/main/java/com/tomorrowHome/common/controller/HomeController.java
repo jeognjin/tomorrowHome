@@ -41,31 +41,36 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home(Model model) {
-		List<ProductDTO> goodsList = productService.listGoods();
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", 1);
+		map.put("end", 8);
+		List<ProductDTO> goodsList = productService.todayDealListGoods(map);
 		List<CommunityBoardDTO> boardList = boardService.listBoard();
 		List<MainCategoryDTO> mainCategoryList = mainCategoryService.listMain();
 		model.addAttribute("goodsList", goodsList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("mainCategoryList", mainCategoryList);
-
+		model.addAttribute("currPage", "community");
 		System.out.println("goodsList>>>" + goodsList);
 		System.out.println("boardList>>>" + boardList);
 		System.out.println("mainCategoryList>>>" + mainCategoryList);
+		
 		return "index";
 	}
 
+	/* ------- 스토어 ---------*/
+	
 	@GetMapping("/store")
 	public String store(Model model) {
 		
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("begin", 1);
-		map.put("end", 8);
-		List<ProductDTO> goodsList = productService.storeListGoods(map);
+		Map<String, List<ProductDTO>> goodsMap= productService.listGoods();
 		List<MainCategoryDTO> mainCategoryList = mainCategoryService.listMain();
-		model.addAttribute("goodsList", goodsList);
+		
+		model.addAttribute("goodsMap", goodsMap);
 		model.addAttribute("mainCategoryList", mainCategoryList);
-
-		System.out.println("goodsList>>>" + goodsList);
+		model.addAttribute("currPage", "store");
+		
+		System.out.println("goodsMap>>>" + goodsMap);
 		System.out.println("mainCategoryList>>>" + mainCategoryList);
 		return "store/storeMain";
 	}
@@ -83,10 +88,9 @@ public class HomeController {
 		System.out.println("goodsList>>>"+goodsList);
 		return goodsList;
 	}
+	
+	
+	
 
-	@GetMapping("/cart")
-	public String cart_empty(Model model) {
-
-		return "store/cartEmpty";
-	}
+	
 }

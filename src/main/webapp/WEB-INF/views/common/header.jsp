@@ -10,7 +10,7 @@
   <!-- 구글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Myeongjo&family=Nanum+Gothic:wght@400&display=swap" rel="stylesheet">
   
 <!-- 아이콘 용 폰트 어썸 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -20,7 +20,6 @@
 
  <!-- jQuery 스크립트 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="jquery-3.6.0.min.js"></script>
 <style>
 #profile_icon{
 	width: 25px;
@@ -82,7 +81,7 @@
               <ul>
                 <li class="header-upper__item upper__active" id="header_nav_community"><a href="${contextPath }/">커뮤니티</a></li>
                 <li class="header-upper__item" id="header_nav_store"><a href="${contextPath }/store">스토어</a></li>
-                <li class="header-upper__item" id="header_nav_apartment"><a href="">인테리어시공</a></li>
+                <li class="header-upper__item" id="header_nav_apartment"><a href="${contextPath }/openAPI/apartment">인테리어</a></li>
               </ul>
             </div>
           </div>
@@ -96,8 +95,9 @@
             <ul>
             <c:choose>
             	<c:when test="${not empty authUser }">
-            	<li><a href="#"><i class="fa-solid fa-bookmark"></i></a></li>
-            	<li><a href="#"><i class="fa-solid fa-heart"></i></a></li>
+            	<li><a href="${contextPath }/cart"><i class="fas fa-shopping-cart"></i></a></li> 
+            	<li><a href="${contextPath }/member/mypage/main"><i class="fa-solid fa-bookmark"></i></a></li>
+            	<li><a href="${contextPath }/member/mypage/main"><i class="fa-solid fa-heart"></i></a></li>
              	 <c:choose>
             	 	<c:when test="${not empty authUser.profileImage}">
             	 		<li id="click_profile_iamge_parent"><a><img alt="profile" id="profile_member_image" src="${contextPath}/profileDownload?memberId=${authUser.memberId}&fileName=${authUser.profileImage}"></a></li>
@@ -110,17 +110,16 @@
             	
             	<c:otherwise>
             	<li><a href="${contextPath }/cart"><i class="fas fa-shopping-cart"></i></a></li> 
-            	 <li><a href="/member/loginForm">로그인</a></li>
-             	 <li><a href="/member/registForm">회원가입</a></li>
+            	 <li><a href="${contextPath }/member/loginForm">로그인</a></li>
+             	 <li><a href="${contextPath }/member/registForm">회원가입</a></li>
             	</c:otherwise>
             </c:choose>
               
-             <!--  <li><a href="">고객센터</a></li> -->
               <button class="header-upper__writeBt click_profile_iamge_parent" id="header_writeBt">
                	글쓰기
                	 <div class="click_profile_image_wrap" id="click_profile_image_wrap">
 			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
-			              		<a class="click_profile_image_text" href="/member/mypage/main">마이페이지</a>
+			              		<a class="click_profile_image_text" href="${contextPath }/member/mypage/main">마이페이지</a>
 			              	</div>
 			              	<div class="click_profile_image_text_box" style="padding: 10px 5px;">
 			              		<a class="click_profile_image_text" href="/member/mypage/myShopping">나의쇼핑</a>
@@ -142,27 +141,27 @@
 			              	</div>
 			              </div>
                 <div class="header-upper__lists" id="header_lists">
-                  <a href="">
+                  <a href="${contextPath }/community/imagewrite">
                     <h4>사진 올리기</h4>
                     <p>우리 집의 공간과 나의 일상을 기록해 보세요.</p>
                   </a>
-                  <a href="">
+                  <a href="${contextPath }/community/housewarmingwrite">
                     <h4>집들이 글쓰기</h4>
                     <p>집에 관한 이야기를 글로 작성해 보세요.</p>
                   </a>
-                  <a href="">
+                  <a href="#">
                     <h4>노하우 글쓰기</h4>
                     <p>다양한 인테리어 노하우를 공유해 주세요.</p>
                   </a>
-                  <a href="">
+                  <a href="#">
                     <h4>상품 리뷰 글쓰기</h4>
                     <p>상품 리뷰를 작성하고 포인트도 받아 보세요.</p>
                   </a>
-                  <a href="">
+                  <a href="#">
                     <h4>시공 전문가 리뷰쓰기</h4>
                     <p>시공 전문가 리뷰를 작성하고 포인트도 받아보세요.</p>
                   </a>
-                  <a href="">
+                  <a href="#">
                     <h4>인테리어 질문하기</h4>
                     <p>인테리어 고수들과 전문가들에게 질문해 보세요.</p>
                   </a>
@@ -179,10 +178,10 @@
         <div class="inner">
         
           <nav id="header_community_nav_bar">
-            <a class="header-lower__item active" href="">홈</a>
-            <a class="header-lower__item" href="">팔로잉</a>
-            <a class="header-lower__item" href="">사진</a>
-            <a class="header-lower__item" href="">집들이</a>
+            <a class="header-lower__item active" href="${contextPath }/">홈</a>
+            <a class="header-lower__item" href="${contextPath }/community/follow">팔로잉</a>
+            <a class="header-lower__item" href="${contextPath }/community/image">사진</a>
+            <a class="header-lower__item" href="${contextPath }/community/housewarming">집들이</a>
             <a class="header-lower__item" href="">노하우</a>
             <a class="header-lower__item" href="">전문가집들이</a>
             <a class="header-lower__item" href="">셀프가이드</a>
@@ -191,7 +190,7 @@
           </nav>
           <nav id="header_store_nav_bar">
             <a class="header-lower__item active" href="${contextPath }/store">스토어홈</a>
-            <a class="header-lower__item" href="">카테고리</a>
+            <a class="header-lower__item" href="${contextPath }/storeCategory">카테고리</a>
             <a class="header-lower__item" href="">베스트</a>
             <a class="header-lower__item" href="${contextPath }/todayDeals">오늘의딜</a>
             <a class="header-lower__item" href="">인기가구특가</a>
@@ -202,8 +201,8 @@
             <a class="header-lower__item" href="">기획전</a>
           </nav>
           <nav id="header_apartment_nav_bar">
-            <a class="header-lower__item active" href="">우리동네 아파트</a>
-            <a class="header-lower__item " href="">니네동네 아파트</a>
+            <a class="header-lower__item active" href="${contextPath }/openAPI/apartment">우리동네 아파트</a>
+            <a class="header-lower__item " href="${contextPath }/openAPI/book">추천도서</a>
             <a class="header-lower__item " href="">뒷동네 아파트</a>
             <a class="header-lower__item " href="">앞동네 아파트</a>
           </nav>
@@ -221,11 +220,11 @@
 		menu();
 		
 		 $('nav').not("#header_community_nav_bar").hide();
-		 
 
-	   
-
-	  $("#header_writeBt").click(function(){
+	  
+	});
+	
+	 $("#header_writeBt").click(function(){
 		    $("#header_lists").toggle();
 		  });
 	  
@@ -243,18 +242,6 @@
 		  $('nav').not("#header_apartment_nav_bar").hide();
 		    $("#header_apartment_nav_bar").show();
 		  }, menu);
-	  
-	  
-	  $("#click_profile_iamge_parent2").click(function(){
-		    $("#click_profile_image_wrap").toggle();
-		  });
-		
-		  $("#click_profile_iamge_parent").click(function(){
-	    $("#click_profile_image_wrap").toggle();
-	  });
-	  
-	  
-	});
 
 	function menu() {
 		if(currPage == 'community'){
@@ -278,22 +265,16 @@
 	
 	
 
-/* 	$(function(){
-		var lastScrollTop =0,
-		delta = 15;
-		$(window).scroll(function(event){
-			var st = $(this).scrollTop();
-			if(Math.abs(lastScrollTop - st) <= delta)return;
-			if((st > lastScrollTop) && (lastScrollTop > 0)){
-				$("header_community_nav_bar").css("top", "-68");
-			}else{
-				$("header_community_nav_bar").css("top", "0px");
-			}
-			lastScrollTop = st;
-		});
-		
-	}); */
+
+
 	
+	  $("#click_profile_iamge_parent2").click(function(){
+		    $("#click_profile_image_wrap").toggle();
+		  });
+		
+		  $("#click_profile_iamge_parent").click(function(){
+	    $("#click_profile_image_wrap").toggle();
+	  });
 	
 	
 </script>

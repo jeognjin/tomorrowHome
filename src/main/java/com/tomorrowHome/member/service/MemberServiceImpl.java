@@ -1,5 +1,6 @@
 package com.tomorrowHome.member.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,16 +80,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.selectOneOfMemberId(memberId);
 	}
 
-	// 회원정보 수정하기
-	@Override
-	public boolean modifyMember(MemberDTO memberDTO) {
-		return memberMapper.updateMemberInfo(memberDTO);
-	}
-
 	// 비밀번호 변경
 	@Override
-	public Integer changePassword(MemberDTO memberDTO) {
-		return memberMapper.updatePassword(memberDTO);
+	public void changePassword(MemberDTO memberDTO) throws SQLException{
+		memberMapper.updatePassword(memberDTO);
 	}
 
 	//마이페이지 - 나의쇼핑 접근시 보여줄 쇼핑관련 데이터 가져가기
@@ -103,6 +98,25 @@ public class MemberServiceImpl implements MemberService {
 		mypageMap.put("coupon", coupon);
 		return mypageMap;
 	}
+
+	//회원정보 수정하기
+	@Override
+	public void modifyMemberInfo(MemberDTO memberInfo) throws SQLException{
+		memberMapper.updateMemberInfo(memberInfo);
+	}
+
+	//회원 프로필 사진 수정
+	@Override
+	public void modifyMemberProfileImage(AuthUserDTO authUser) {
+		memberMapper.updateMemberProfileImage(authUser);
+	}
+
+	@Override
+	public AuthUserDTO getMemberInfo(int memberId) {
+		return memberMapper.selectOneOfMemberIdReturnAuthUserDTO(memberId);
+	}
+
+
 
 
 }
