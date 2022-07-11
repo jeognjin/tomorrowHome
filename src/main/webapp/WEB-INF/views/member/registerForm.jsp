@@ -176,7 +176,7 @@
 	
     display = document.getElementById('timer'); 
     let interval;
-	//인증번호 발송 누르면 타이머 시작
+	//인증번호 발송 누르면 이메일 전송 및 10분 타이머 시작
 	function sendMailAndStartTimer() {
 		let auth_minutes = 60 * 10; //10분
 		var regist_form = document.getElementById('regist_form');

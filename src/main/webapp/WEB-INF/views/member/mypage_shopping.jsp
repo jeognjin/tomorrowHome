@@ -458,8 +458,8 @@ a{
 <div class="mypage_point_all_wrap" id="mypage_point_all_wrap">
 	<div class="mypage_point_wrap">
 		<h2 class="mypage_point_keep_title">사용 가능한 포인트</h2>
-		<h2 class="mypage_point_keep">${point_all } P</h2>
-		<p class="mypage_point_extinction">30일 이내 소멸 예정 포인트<a>${missing_after_month } P</a></p>
+		<h2 class="mypage_point_keep">926 P</h2>
+		<p class="mypage_point_extinction">30일 이내 소멸 예정 포인트<a>  102 P</a></p>
 	</div><!-- mypage_point_wrap -->
 </div><!-- mypage_point_all_wrap -->
 

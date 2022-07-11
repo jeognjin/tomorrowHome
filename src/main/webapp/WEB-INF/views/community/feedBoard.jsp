@@ -92,7 +92,7 @@ padding: 5px;
          <div class="feed_first">팔로잉 피드가 비어있어요.</div>
 
          <div class="feed_second">
-              <div>오늘의 집 유저를 팔로우 해보세요!</div>
+              <div>내일의 집 유저를 팔로우 해보세요!</div>
               <div>유저의 최신 소식을 한 눈에 모아볼 수 있습니다.</div>                               
          </div>
          

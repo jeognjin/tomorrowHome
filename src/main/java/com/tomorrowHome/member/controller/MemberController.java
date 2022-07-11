@@ -79,7 +79,6 @@ public class MemberController {
 			System.out.println("MemberController nickname>>>>>>unused2");
 			return "unused";
 		}
-
 	}
 
 	// 로그인 누르면 로그인폼으로 보내기

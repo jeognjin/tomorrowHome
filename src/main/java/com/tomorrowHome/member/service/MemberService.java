@@ -20,7 +20,6 @@ public interface MemberService {
 
 	MemberDTO modifyInfo(int memberId);
 
-
 	void changePassword(MemberDTO memberDTO) throws SQLException;
 
 	Map<String, Object> getMypageShoppingInfo(int memberId);

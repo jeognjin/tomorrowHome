@@ -8,7 +8,7 @@
 <style>
 .book_recommend_all_wrap {
 	width: 100%;
-	max-width: 1200px;
+	max-width: 1100px;
 	margin: 20px auto;
 }
 /* .book_recommend_wrap{
@@ -109,8 +109,6 @@ a {
 		});
 		
 	}); //ready
-	
-
 
 	function ajax_load() {
 		let query = $("#query").val();

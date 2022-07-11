@@ -73,7 +73,9 @@ insert into member(member_id, email1, email2, password, nickname) values(member_
 </insert>
 
 <select id="selectOneOfNickname" resultType="integer">
+<![CDATA[
 select * from member where nickname = #{nickname}
+]]>
 </select>
 
 <select id="selectOneOfEmail" resultMap="memberResult">

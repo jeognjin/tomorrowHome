@@ -203,8 +203,6 @@
           <nav id="header_apartment_nav_bar">
             <a class="header-lower__item active" href="${contextPath }/openAPI/apartment">우리동네 아파트</a>
             <a class="header-lower__item " href="${contextPath }/openAPI/book">추천도서</a>
-            <a class="header-lower__item " href="">뒷동네 아파트</a>
-            <a class="header-lower__item " href="">앞동네 아파트</a>
           </nav>
           <div>3D인테리어</div>
         </div>

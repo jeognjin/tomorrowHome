@@ -22,28 +22,19 @@ public class MailSendService {
 
     //인증코드 난수 발생
     private String getAuthCode(int size) {
-    	
         Random random = new Random();
         StringBuffer buffer = new StringBuffer();
         int tablelength = characterTable.length;
-        
-//        int num = 0;
 
         for(int i = 0; i < size; i++) {
         	buffer.append(characterTable[random.nextInt(tablelength)]);
         }
-        
-//        while(buffer.length() < size) {
-//            num = random.nextInt(10);
-//            buffer.append(num);
-//        }
-
         return buffer.toString();
     }
 
     //인증메일 보내기
     public String sendAuthMail(String email) {
-        //6자리 난수 인증번호 생성
+        //10자리 난수 인증번호 생성
         String authKey = getAuthCode(10);
 
         //인증메일 보내기
@@ -62,7 +53,6 @@ public class MailSendService {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
           return authKey;
     }
 }

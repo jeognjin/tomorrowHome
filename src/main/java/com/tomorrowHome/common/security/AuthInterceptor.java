@@ -16,9 +16,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// 1. handler 종류 확인
-		// 우리가 관심 있는 것은 Controller에 있는 메서드이므로 HandlerMethod 타입인지 체크
 		if (handler instanceof HandlerMethod == false) {
-			// return true이면 Controller에 있는 메서드가 아니므로, 그대로 컨트롤러로 진행
+			// return true이면 Controller에 있는 메서드가 아니므로 컨트롤러로 진행
 			return true;
 		}
 
@@ -28,12 +27,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// 3. @Auth 받아오기
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
 
-		// 4. method에 @Auth가 없는 경우, 즉 인증이 필요 없는 요청
+		// 4. method에 @Auth가 없는 경우. 인증이 필요 없는 요청
 		if (auth == null) {
 			return true;
 		}
 
-		// 5. @Auth가 있는 경우이므로, 세션이 있는지 체크
+		// 5. @Auth가 있는 경우이므로 세션이 있는지 체크
 		HttpSession session = request.getSession();
 		if (session == null) {
 			// 로그인 화면으로 이동
@@ -48,9 +47,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 
-
-
-		// 8. 접근허가, 즉 메서드를 실행하도록 함
+		// 7. 접근허가. 메서드를 실행하도록 함
 		return true;
 	}
 }

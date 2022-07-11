@@ -306,7 +306,6 @@
 				//document.getElementById('modify_form').submit();
 			} //end if
 		}// end success
-		
       });
 	
 	}
