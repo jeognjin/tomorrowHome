@@ -6,9 +6,9 @@
 
 
 <style>
-ul, li {
+/* ul, li {
    display: block;
-}
+} */
 
 a {
 	display: block;
