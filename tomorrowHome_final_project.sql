@@ -23,6 +23,7 @@
 --drop table main_category_images CASCADE CONSTRAINTS ;
 --drop table adress_book CASCADE CONSTRAINTS ;
 --drop table detail_images CASCADE CONSTRAINTS ;
+--drop table guest_shopping_cart CASCADE CONSTRAINTS ;
 --
 --drop SEQUENCE goods_category_id_seq;
 --drop SEQUENCE image_id_seq;
@@ -39,6 +40,8 @@
 --drop SEQUENCE main_category_id_seq;
 --drop SEQUENCE adress_book_seq;
 --drop SEQUENCE store_order_seq;
+--drop SEQUENCE guest_shopping_cart_seq;
+--drop SEQUENCE shopping_cart_seq;
 
 create SEQUENCE goods_category_id_seq;
 create SEQUENCE image_id_seq;
@@ -55,6 +58,8 @@ create SEQUENCE reply_id_seq;
 create SEQUENCE main_category_id_seq;
 create SEQUENCE adress_book_seq;
 create SEQUENCE store_order_seq;
+create SEQUENCE guest_shopping_cart_seq;
+create SEQUENCE shopping_cart_seq;
 
 /* 게시판 */
 CREATE TABLE board (
@@ -379,6 +384,22 @@ ALTER TABLE adress_book
 			adress_book_id
 		);
 
+/* 비회원장바구니 */
+CREATE TABLE guest_shopping_cart (
+	cart_id NUMBER NOT NULL, /* 장바구니 번호 */
+	cart_goods_qty NUMBER, /* 담은 수량 */
+	goods_id NUMBER, /* 상품번호 */
+	cookieValue VARCHAR2(50), /* 쿠키값 */
+	regdate DATE DEFAULT sysdate /* 날짜 */
+);
+
+ALTER TABLE guest_shopping_cart
+	ADD
+		CONSTRAINT PK_guest_shopping_cart
+		PRIMARY KEY (
+			cart_id
+		);
+
 ALTER TABLE board
 	ADD
 		CONSTRAINT FK_catagory_TO_board
@@ -627,4 +648,14 @@ ALTER TABLE adress_book
 		)
 		REFERENCES member (
 			member_id
+		);
+
+ALTER TABLE guest_shopping_cart
+	ADD
+		CONSTRAINT FK_pro_TO_guest_shop_cart
+		FOREIGN KEY (
+			goods_id
+		)
+		REFERENCES product (
+			goods_id
 		);
