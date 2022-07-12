@@ -9,5 +9,6 @@ public class CartDTO {
 	private int cartGoodsQty;
 	private int goodsId;
 	private int memberId;
+	private String cookieValue;
 	
 }

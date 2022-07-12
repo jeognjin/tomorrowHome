@@ -4,22 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@include file="../common/header.jsp"%>
-
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-     내일의 집
-    </title>
-    <link rel="stylesheet" href="${contextPath }/resources/css/style.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#3da5f5" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="msapplication-TileColor" content="#3da5f5" />
     <meta name="theme-color" content="#ffffff" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,114 +17,22 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css"
     />
-   
-  </head>
-  
+    <link rel="stylesheet" href="${contextPath }/resources/css/productDetail.css">
+
+
   <body>
-
-                  <!-- 로그인을 한 경우 -->
-             <!--      <div class="button-group">
-                    <button
-                      class="gnb-icon-button is-search lg-hidden"
-                      type="button"
-                      aria-label="검색창 열기 버튼"
-                    >
-                      <i class="ic-search"></i>
-                    </button>
-
-                    <a
-                      class="gnb-icon-button sm-hidden"
-                      href="/"
-                      aria-label="스크랩북 페이지로 이동"
-                    >
-                      <i class="ic-bookmark"></i>
-                    </a>
-
-                    <a
-                      class="gnb-icon-button sm-hidden"
-                      href="/"
-                      aria-label="내 소식 페이지로 이동"
-                    >
-                      <i class="ic-bell"></i>
-                    </a>
-
-                    <a
-                      class="gnb-icon-button is-cart"
-                      href="/"
-                      aria-label="장바구니 페이지로 이동"
-                    >
-                      <i class="ic-cart"></i>
-                      <strong class="badge">9</strong>
-                    </a>
-
-                    <div class="my-menu sm-hidden">
-                      is-active
-                      <button
-                        class="my-menu-button"
-                        type="button"
-                        aria-label="마이메뉴 열기 버튼"
-                      >
-                        <img
-                          src="./assets/images/img-user-01.jpg"
-                          alt="프로필 이미지"
-                        />
-                      </button>
-
-                      <div class="my-menu-content">
-                        <ul class="my-menu-list">
-                          <li class="my-menu-item">
-                            <a href="/">마이페이지</a>
-                          </li>
-                          <li class="my-menu-item">
-                            <a href="/">나의 쇼핑</a>
-                          </li>
-                          <li class="my-menu-item"><a href="/">이벤트</a></li>
-                          <li class="my-menu-item">
-                            <button type="button">로그아웃</button>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div> -->
-
-                  <!-- 로그인 하지 않은 경우 -->
-                  <!-- <div class="button-group">
-                    <button
-                      class="gnb-icon-button is-search lg-hidden"
-                      type="button"
-                      aria-label="검색창 열기 버튼"
-                    >
-                      <a href="/">
-                        <i class="ic-search"></i>
-                      </a>
-                    </button>
-  
-                    <a
-                      class="gnb-icon-button is-cart"
-                      href="/"
-                      aria-label="장바구니 페이지로 이동"
-                    >
-                      <i class="ic-cart"></i>
-                    </a>
-  
-                    <div class="gnb-auth sm-hidden">
-                      <a href="/">로그인</a>
-                      <a href="/">회원가입</a>
-                    </div>
-                  </div> -->
-
-     
+    
     <main class="product-show">
-      <div class="container_detail">
+      <div class="container">
         <div class="row">
           <div class="col-sm-4">
             <div class="breadcrumb">
               <a href="#">가구</a>
-             <i class="lnb-item is-active fa-solid fa-angle-right"></i>
+             <i class="ic-chevron fa-solid fa-angle-right"></i>
               <a href="#">매트리스·토퍼</a>
-              <i class="lnb-item is-active fa-solid fa-angle-right"></i>
+              <i class="ic-chevron fa-solid fa-angle-right"></i>
               <a href="#">매트리스</a>
-              <i class="lnb-item is-active fa-solid fa-angle-right"></i>
+              <i class="ic-chevron fa-solid fa-angle-right"></i>
               <a href="#">스프링매트리스</a>
             </div>
           </div>
@@ -155,10 +48,10 @@
                     role="tabpanel"
                     aria-labelledby="product-carousel-tab-1"
                   >
-                    <figure>
+                   <figure>
                       <img src="${contextPath}/productDownload?goodsId=${productDTO.goodsId}&fileName=${productDTO.productThumbnail}" alt="" />
                       <figcaption class="visually-hidden">
-                       fff
+                       
                       </figcaption>
                     </figure>
                   </li>
@@ -168,9 +61,9 @@
                     aria-labelledby="product-carousel-tab-2"
                   >
                     <figure>
-                      <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/159583583797965488.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="" />
+                      <img src="${contextPath}/productDownload?goodsId=${productDTO.goodsId}&fileName=${productDTO.productThumbnail}" alt="" />
                       <figcaption class="visually-hidden">
-                        보아르 전기히터 상세이미지 2
+                       
                       </figcaption>
                     </figure>
                   </li>
@@ -180,9 +73,9 @@
                     aria-labelledby="product-carousel-tab-3"
                   >
                     <figure>
-                      <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165604236522218778.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="" />
+                      <img src="${contextPath}/productDownload?goodsId=${productDTO.goodsId}&fileName=${productDTO.productThumbnail}" alt="" />
                       <figcaption class="visually-hidden">
-                        보아르 전기히터 상세이미지 3
+                       
                       </figcaption>
                     </figure>
                   </li>
@@ -192,15 +85,16 @@
                     aria-labelledby="product-carousel-tab-4"
                   >
                     <figure>
-                      <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165604279730488990.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="" />
+                      <img src="${contextPath}/productDownload?goodsId=${productDTO.goodsId}&fileName=${productDTO.productThumbnail}" alt="" />
                       <figcaption class="visually-hidden">
-                        보아르 전기히터 상세이미지 4
+                       
                       </figcaption>
                     </figure>
                   </li>
                 </ol>
               </div>
 
+<!-- -- 옆에 작은 이미지 -- -->
               <div class="product-carousel-thumbnail">
                 <ol class="thumbnail-list" class="slider-item" role="tablist">
                   <li
@@ -219,10 +113,8 @@
                     role="tab"
                   >
                     <button type="button">
-                      <img
-                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/159583583797965488.jpg?gif=1&w=640&h=640&c=c&webp=1"
-                        alt="2번 이미지"
-                      />
+                      <img src="${contextPath}/productDownload?goodsId=${productDTO.goodsId}&fileName=${productDTO.productThumbnail}" alt="1번 이미지" />
+                      
                     </button>
                   </li>
                   <li
@@ -231,10 +123,8 @@
                     role="tab"
                   >
                     <button type="button">
-                      <img
-                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165604236522218778.jpg?gif=1&w=640&h=640&c=c&webp=1"
-                        alt="3번 이미지"
-                      />
+                      <img src="${contextPath}/productDownload?goodsId=${productDTO.goodsId}&fileName=${productDTO.productThumbnail}" alt="1번 이미지" />
+                      
                     </button>
                   </li>
                   <li
@@ -243,10 +133,8 @@
                     role="tab"
                   >
                     <button type="button">
-                      <img
-                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165604279730488990.jpg?gif=1&w=640&h=640&c=c&webp=1"
-                        alt="4번 이미지"
-                      />
+                      <img src="${contextPath}/productDownload?goodsId=${productDTO.goodsId}&fileName=${productDTO.productThumbnail}" alt="1번 이미지" />
+                      
                     </button>
                   </li>
                 </ol>
@@ -254,10 +142,11 @@
             </div>
           </div>
           
+          <!-- 상품 정보 -->
           <div class="col-sm-4 col-md-6 col-lg-5">
             <section class="product-info">
               <header class="product-info-header">
-                <a class="info-brand" href="#">${productDTO.goodsBrand}</a>
+                 <a class="info-brand" href="#">${productDTO.goodsBrand}</a>
                 <h1 class="info-title">
                   ${productDTO.goodsName}
                 </h1>
@@ -267,8 +156,7 @@
                   <i class="fa-solid fa-star ic-star is-active"></i>
                   <i class="fa-solid fa-star ic-star is-active"></i>
                   <i class="fa-solid fa-star ic-star is-active"></i>
-                  <i class="fa-solid fa-star ic-star is-active"></i>
-                    
+                  <i class="fa-solid fa-star ic-star is-active"></i>               
                   </div>
                   <p>
                     <strong>566</strong>
@@ -277,6 +165,34 @@
                 </div>
               </header>
 
+              <!-- NOTE: 모바일용 가격 -->
+              <div class="product-info-price sm-only">
+                <div class="info-original-price">
+                  <div class="discount-rate">
+                    <span class="rate">${productDTO.discountRate}</span>
+                    <span class="percent">%</span>
+                  </div>
+                  <div class="price-off">
+                    <strong class="amount">${productDTO.goodsPrice}</strong>
+                    <span class="currency sm-hidden">원</span>
+                  </div>
+                </div>
+
+                <div class="info-sale-price">
+                  <div class="price-20">
+                    <c:set var="price" value="${productDTO.goodsPrice - (productDTO.goodsPrice*((productDTO.discountRate)/100)) }"/>
+                        <strong class="amount"></strong>
+                        <span class="currency"><fmt:formatNumber type="number" pattern="###,###,###,###" value="${price-(price%100)}" />원</span>
+                      </div>
+                  <strong class="tag-red"> 특가 </strong>
+                </div>
+                <p class="info-point">
+                  <strong>987p</strong>
+                  적립해드립니다. (VIP 3배 혜택 적용됨)
+                </p>
+              </div>
+
+              <!-- NOTE: 태블릿 이후 가격 -->
               <div class="product-info-price sm-hidden">
                 <div class="info-price-wrapper">
                   <div class="discount-rate">
@@ -292,7 +208,7 @@
 
                     <div class="info-sale-price">
                       <div class="price-32">
-                      <c:set var="price" value="${productDTO.goodsPrice - (productDTO.goodsPrice*((productDTO.discountRate)/100)) }"/>
+                        <c:set var="price" value="${productDTO.goodsPrice - (productDTO.goodsPrice*((productDTO.discountRate)/100)) }"/>
                         <strong class="amount"></strong>
                         <span class="currency"><fmt:formatNumber type="number" pattern="###,###,###,###" value="${price-(price%100)}" />원</span>
                       </div>
@@ -324,8 +240,7 @@
                     <option value="4">선택사항 4</option>
                     <option value="5">선택사항 5</option>
                   </select>
-                  <i class="ic-caret fa-solid fa-caret-down"></i>
-                 
+                 	<i class="ic-caret fa-solid fa-caret-down"></i>
                 </div>
 
                 <div class="select-group">
@@ -347,15 +262,13 @@
                     <div class="checkout-card">
                       <header class="checkout-header">
                         <h4 class="checkout-title">
-                          그린 H0044DHA / 포근한 온기를 전해주는 보아르 미니멀
-                          전기 히터
+                           ${productDTO.goodsName}
                         </h4>
                         <button
                           class="delete-button"
                           type="button"
                           aria-label="상품 삭제"
                         >
-                        
                           <i class="ic-close fa-solid fa-xmark"></i>
                         </button>
                       </header>
@@ -374,8 +287,9 @@
 
                         <output class="checkout-output" for="checkout-item-1">
                           <div class="price-16">
-                            <strong class="amount">32,900</strong>
-                            <span class="currency">원</span>
+                          <c:set var="price" value="${productDTO.goodsPrice - (productDTO.goodsPrice*((productDTO.discountRate)/100)) }"/>
+                        <strong class="amount"></strong>
+                        <span class="currency"><fmt:formatNumber type="number" pattern="###,###,###,###" value="${price-(price%100)}" />원</span>
                           </div>
                         </output>
                       </footer>
@@ -389,15 +303,16 @@
                 <dd>
                   <output for="select-1 select-2">
                     <div class="price-20">
-                      <strong class="amount">0</strong>
-                      <span class="currency">원</span>
+                      <c:set var="price" value="${productDTO.goodsPrice - (productDTO.goodsPrice*((productDTO.discountRate)/100)) }"/>
+                        <strong class="amount"></strong>
+                        <span class="currency"><fmt:formatNumber type="number" pattern="###,###,###,###" value="${price-(price%100)}" />원</span>
                     </div>
                   </output>
                 </dd>
               </dl>
 
               <div class="button-group">
-                <button class="btn-outlined btn-55" type="button">
+                <button class="btn-outlined btn-55 go-cart" type="button" data-toggle="modal" data-target="#myModal">
                   장바구니
                 </button>
                 <button class="btn-primary btn-55" type="submit">
@@ -407,9 +322,10 @@
             </form>
           </div>
         </div>
-        
-<!-- 상품 디테일 이미지  -->
-        <!-- <div class="row sm-only">
+
+<!-- 유저들의 스타일링 -->
+
+        <div class="row sm-only">
           <div class="col-sm-4">
             <div class="product-section-divider" aria-hidden></div>
 
@@ -434,7 +350,7 @@
                         <div class="gallery-card">
                           <figure class="gallery-card-image">
                             <img
-                              src="./assets/images/img-review-01.jpg"
+                              src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/160475387504737988.jpeg?gif=1&w=360&webp=1"
                               alt=""
                             />
                             <figcaption class="visually-hidden">
@@ -444,8 +360,8 @@
 
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
-                              <img
-                                src="./assets/images/img-user-01.jpg"
+                               <img
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -463,8 +379,8 @@
                       >
                         <div class="gallery-card">
                           <figure class="gallery-card-image">
-                            <img
-                              src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/162379973256796523.jpg?gif=1&w=360&webp=1"
+                           <img
+                              src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/160724110280822018.jpeg?gif=1&w=360&webp=1"
                               alt=""
                             />
                             <figcaption class="visually-hidden">
@@ -475,7 +391,7 @@
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
                               <img
-                                src="./assets/images/img-user-02.jpg"
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -493,7 +409,7 @@
                       >
                         <div class="gallery-card">
                           <figure class="gallery-card-image">
-                            <img
+                             <img
                               src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/162379973256796523.jpg?gif=1&w=360&webp=1"
                               alt=""
                             />
@@ -505,7 +421,7 @@
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
                               <img
-                                src="./assets/images/img-user-03.jpg"
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -535,7 +451,7 @@
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
                               <img
-                                src="./assets/images/img-user-04.jpg"
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -565,7 +481,7 @@
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
                               <img
-                                src="./assets/images/img-user-05.jpg"
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -595,7 +511,7 @@
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
                               <img
-                                src="./assets/images/img-user-06.jpg"
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -625,7 +541,7 @@
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
                               <img
-                                src="./assets/images/img-user-07.jpg"
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -643,7 +559,7 @@
                       >
                         <div class="gallery-card">
                           <figure class="gallery-card-image">
-                            <img
+                             <img
                               src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/161241732699783898.jpeg?gif=1&w=360&webp=1"
                               alt=""
                             />
@@ -655,7 +571,7 @@
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
                               <img
-                                src="./assets/images/img-user-08.jpg"
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -673,7 +589,7 @@
                       >
                         <div class="gallery-card">
                           <figure class="gallery-card-image">
-                            <img
+                           <img
                               src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/162884796936741885.jpg?gif=1&w=480&webp=1"
                               alt=""
                             />
@@ -685,7 +601,7 @@
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
                               <img
-                                src="./assets/images/img-user-09.jpg"
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -703,7 +619,7 @@
                       >
                         <div class="gallery-card">
                           <figure class="gallery-card-image">
-                            <img
+                             <img
                               src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/164402108099068261.jpeg?gif=1&w=360&webp=1"
                               alt=""
                             />
@@ -715,7 +631,7 @@
                           <div class="gallery-card-detail">
                             <a class="avatar-32" href="#">
                               <img
-                                src="./assets/images/img-user-10.jpg"
+                                src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                                 alt="user-image"
                               />
                             </a>
@@ -728,7 +644,7 @@
                     </ol>
                   </div>
 
-                  <div class="user-gallery-thumbnail">
+                 <div class="user-gallery-thumbnail">
                     <ol class="thumbnail-list" role="tablist">
                       <li
                         class="thumbnail-item"
@@ -737,7 +653,7 @@
                       >
                         <button type="button">
                           <img
-                            src="./assets/images/img-review-01.jpg"
+                            src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/160475387504737988.jpeg?gif=1&w=360&webp=1"
                             alt="1번 스타일링샷"
                           />
                         </button>
@@ -750,7 +666,7 @@
                       >
                         <button type="button">
                           <img
-                            src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/162379973256796523.jpg?gif=1&w=360&webp=1"
+                            src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/160724110280822018.jpeg?gif=1&w=360&webp=1"
                             alt="2번 스타일링샷"
                           />
                         </button>
@@ -869,9 +785,9 @@
           </div>
         </div>
       </div>
- -->
+
       <div class="product-tab">
-        <div class="container_detail">
+        <div class="container">
           <div class="row">
             <div class="col-sm-4 col-lg-8">
               <ul class="product-tab-list" role="tablist">
@@ -922,7 +838,7 @@
         </div>
       </div>
 
-   <div class="container_detail">
+      <div class="container">
         <div class="row">
           <div class="col-sm-4 col-lg-8">
             <section class="product-section product-user-gallery sm-hidden">
@@ -930,7 +846,7 @@
                 <h1 class="title">유저들의 스타일링샷</h1>
                 <strong class="badge" aria-label="461개">461</strong>
                 <a class="icon-button is-right" href="#" aria-label="더보기">
-                  <i class="ic-chevron fa-solid fa-chevron-right"></i>
+                  <i class="ic-chevron" aria-hidden></i>
                 </a>
               </header>
 
@@ -1238,14 +1154,14 @@
                         </div>
                       </li>
                     </ol>
-
+                    
                     <div class="user-gallery-controls sm-hidden">
                       <button
                         class="control-button is-prev"
                         type="button"
                         aria-label="이전 이미지"
                       >
-                       <i class="fa-solid fa-chevron-left"></i>
+                        <i class="fa-solid fa-chevron-left"></i>
                       </button>
                       <button
                         class="control-button is-next"
@@ -1393,7 +1309,7 @@
                 </div>
               </div>
             </section>
- 
+<!-- 상품정보 시작  -->
             <section
               class="product-section product-spec is-open"
               id="product-spec"
@@ -1410,66 +1326,14 @@
                   </button>
                 </div>
 
+                <c:forEach var="item"  items="${imageList}">
                 <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/165631531364722654.jpg" alt="" />
+                  <img src="${contextPath}/productDownload?goodsId=${productDTO.goodsId}&fileName=${item}" alt="" />
                   <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 01
+                    	보아르 전기 히터 상세 이미지 01
                   </figcaption>
                 </figure>
-                <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/165607208365019676.jpg" alt="" />
-                  <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 02
-                  </figcaption>
-                </figure>
-                <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/165607209394911934.jpg" alt="" />
-                  <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 03
-                  </figcaption>
-                </figure>
-                <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/165607211165448740.jpg" alt="" />
-                  <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 04
-                  </figcaption>
-                </figure>
-                <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/165607212996336587.jpg" alt="" />
-                  <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 05
-                  </figcaption>
-                </figure>
-                <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/164931013906011780.jpg" alt="" />
-                  <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 06
-                  </figcaption>
-                </figure>
-                <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/165153605347178306.jpg" alt="" />
-                  <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 07
-                  </figcaption>
-                </figure>
-                <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/164931015707926358.jpg" alt="" />
-                  <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 08
-                  </figcaption>
-                </figure>
-                <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/164931016402789037.jpg" alt="" />
-                  <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 09
-                  </figcaption>
-                </figure>
-                <figure>
-                  <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/descriptions/url/162694614733829109.jpg" alt="" />
-                  <figcaption class="visually-hidden">
-                    보아르 전기 히터 상세 이미지 10
-                  </figcaption>
-                </figure>
+      		</c:forEach>
 
                 <table class="product-table">
                   <tbody>
@@ -1547,7 +1411,7 @@
                       >4.8</strong
                     >
                     <div class="star-rating">
-                    <i class="fa-solid fa-star ic-star is-active"></i>
+                      <i class="fa-solid fa-star ic-star is-active"></i>
                     <i class="fa-solid fa-star ic-star is-active"></i>
                     <i class="fa-solid fa-star ic-star is-active"></i>
                     <i class="fa-solid fa-star ic-star is-active"></i>
@@ -1653,11 +1517,11 @@
                               class="star-rating-13"
                               aria-label="5.0점 / 5.0점"
                             >
-                              <i class="fa-solid fa-star ic-star is-active"></i>
-                              <i class="fa-solid fa-star ic-star is-active"></i>
-                              <i class="fa-solid fa-star ic-star is-active"></i>
-                              <i class="fa-solid fa-star ic-star is-active"></i>
-                              <i class="fa-solid fa-star ic-star is-active"></i>
+                              <i class="ic-star is-active"></i>
+                              <i class="ic-star is-active"></i>
+                              <i class="ic-star is-active"></i>
+                              <i class="ic-star is-active"></i>
+                              <i class="ic-star is-active"></i>
                             </div>
 
                             <div class="misc">
@@ -1780,7 +1644,6 @@
                               <i class="fa-solid fa-star ic-star is-active"></i>
                               <i class="fa-solid fa-star ic-star is-active"></i>
                               <i class="fa-solid fa-star ic-star is-active"></i>
-                              
                             </div>
 
                             <div class="misc">
@@ -1825,8 +1688,8 @@
                         <h3 class="visually-hidden">쿠쿠 님이 작성한 리뷰</h3>
 
                         <a class="avatar-24" href="#">
-                          <img
-                            src="./assets/images/img-user-03.jpg"
+                         <img
+                            src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                             alt="user-image"
                           />
                         </a>
@@ -1841,12 +1704,11 @@
                               class="star-rating-13"
                               aria-label="5.0점 / 5.0점"
                             >
-                              <i class="fa-solid fa-star ic-star is-active"></i>
+                               <i class="fa-solid fa-star ic-star is-active"></i>
                               <i class="fa-solid fa-star ic-star is-active"></i>
                               <i class="fa-solid fa-star ic-star is-active"></i>
                               <i class="fa-solid fa-star ic-star"></i>
                               <i class="fa-solid fa-star ic-star"></i>
-                              
                             </div>
 
                             <div class="misc">
@@ -1894,7 +1756,7 @@
 
                         <a class="avatar-24" href="#">
                           <img
-                            src="./assets/images/img-user-05.jpg"
+                            src="https://mblogthumb-phinf.pstatic.net/20150427_261/ninevincent_1430122791768m7oO1_JPEG/kakao_1.jpg?type=w2"
                             alt="user-image"
                           />
                         </a>
@@ -1909,7 +1771,7 @@
                               class="star-rating-13"
                               aria-label="5.0점 / 5.0점"
                             >
-                              <i class="fa-solid fa-star ic-star is-active"></i>
+                             <i class="fa-solid fa-star ic-star is-active"></i>
                               <i class="fa-solid fa-star ic-star is-active"></i>
                               <i class="fa-solid fa-star ic-star is-active"></i>
                               <i class="fa-solid fa-star ic-star is-active"></i>
@@ -1946,12 +1808,13 @@
                     <li class="page-item"><a href="#">5</a></li>
                   </ol>
                   <button class="page-control page-next" type="button">
-                    <i class="ic-chevron fa-light fa-chevron-right"></i>
+                    <i class="ic-chevron fa-solid fa-angle-right"></i>
                   </button>
                 </div>
               </div>
             </section>
             <div class="product-section-divider sm-only" aria-hidden></div>
+            
 
             <!-- 리뷰가 없는 경우 -->
             <!-- <section
@@ -2123,7 +1986,7 @@
                     <li class="page-item"><a href="#">5</a></li>
                   </ol>
                   <button class="page-control page-next" type="button">
-                    <i class="ic-chevron"></i>
+                    <i class="ic-chevron fa-solid fa-angle-right"></i>
                   </button>
                 </div>
               </div>
@@ -2210,8 +2073,8 @@
               </section>
               <div class="product-section-divider sm-only" aria-hidden></div>
             </div>
-
 <!------------------ 비슷한 상품  -------------------->
+
             <section
               class="product-section product-recommendation"
               id="product-recomendation"
@@ -2223,31 +2086,31 @@
 
               <div class="product-section-content">
                 <ul class="product-list">
+                   <c:forEach var="item" items="${goodsCategoryList}">
                   <li class="product-item">
                     <a href="#">
                       <div class="product-card">
                         <div class="product-card-image">
                           <img
-                            src="./assets/images/img-recommendation-01.jpg"
-                            alt=""
-                          />
+									src="${contextPath}/productDownload?goodsId=${item.goodsId}&fileName=${item.productThumbnail}"
+									alt="${item.goodsName}">
                         </div>
 
-                        <span class="product-card-brand">emk</span>
+                        <span class="product-card-brand">${item.goodsBrand }</span>
 
                         <h3 class="product-card-title">
-                          시즌템! 감성 레트로 전기히터 EQH-S161 3 colors
+                          ${item.goodsName}
                         </h3>
 
                         <div class="product-card-price">
-                          <span class="percent">72%</span>
-                          <strong class="price">49,000</strong>
+                          <span class="percent">${item.discountRate}%</span>
+                          <strong class="price"><fmt:formatNumber value="${item.goodsPrice}" pattern="#,###" /></strong>
                         </div>
 
                         <dl class="product-card-detail">
                           <div class="rating">
                             <dt>
-                              <i class="fa-solid fa-star ic-star"></i>
+                              <i class="ic-star"></i>
                               <span class="visually-hidden">평점</span>
                             </dt>
                             <dd>4.6</dd>
@@ -2263,131 +2126,7 @@
                     </a>
                   </li>
 
-                  <li class="product-item">
-                    <a href="#">
-                      <div class="product-card">
-                        <div class="product-card-image">
-                          <img
-                            src="./assets/images/img-recommendation-02.jpg"
-                            alt=""
-                          />
-                        </div>
-
-                        <span class="product-card-brand"
-                          >플러스마이너스제로
-                        </span>
-
-                        <h3 class="product-card-title">
-                          원적외선 2단 히터 XHS-Y010
-                        </h3>
-
-                        <div class="product-card-price">
-                          <span class="percent">10%</span>
-                          <strong class="price">88,200</strong>
-                        </div>
-
-                        <dl class="product-card-detail">
-                          <div class="rating">
-                            <dt>
-                            <i class="fa-solid fa-star ic-star"></i>
-                              <!-- <i class="ic-star"></i> -->
-                              <span class="visually-hidden">평점</span>
-                            </dt>
-                            <dd>4.5</dd>
-                          </div>
-                          <div class="review">
-                            <dt>리뷰</dt>
-                            <dd>28</dd>
-                          </div>
-                        </dl>
-
-                        <strong class="tag-gray"> 무료배송 </strong>
-                      </div>
-                    </a>
-                  </li>
-
-                  <li class="product-item">
-                    <a href="#">
-                      <div class="product-card">
-                        <div class="product-card-image">
-                          <img
-                            src="./assets/images/img-recommendation-03.jpg"
-                            alt=""
-                          />
-                        </div>
-
-                        <span class="product-card-brand"
-                          >플러스마이너스제로</span
-                        >
-
-                        <h3 class="product-card-title">
-                          리플렉트 에코히터 4colors
-                        </h3>
-
-                        <div class="product-card-price">
-                          <span class="percent">23%</span>
-                          <strong class="price">129,000</strong>
-                        </div>
-
-                        <dl class="product-card-detail">
-                          <div class="rating">
-                            <dt>
-                            <i class="fa-solid fa-star ic-star"></i>
-                              <!-- <i class="ic-star"></i> -->
-                              <span class="visually-hidden">평점</span>
-                            </dt>
-                            <dd>4.6</dd>
-                          </div>
-                          <div class="review">
-                            <dt>리뷰</dt>
-                            <dd>605</dd>
-                          </div>
-                        </dl>
-
-                        <strong class="tag-gray"> 무료배송 </strong>
-                      </div>
-                    </a>
-                  </li>
-
-                  <li class="product-item">
-                    <a href="#">
-                      <div class="product-card">
-                        <div class="product-card-image">
-                          <img
-                            src="./assets/images/img-recommendation-04.jpg"
-                            alt=""
-                          />
-                        </div>
-
-                        <span class="product-card-brand">코시나</span>
-
-                        <h3 class="product-card-title">
-                          오방난로 히터 6종 모음전
-                        </h3>
-
-                        <div class="product-card-price">
-                          <span class="percent">52%</span>
-                          <strong class="price">56,900</strong>
-                        </div>
-
-                        <dl class="product-card-detail">
-                          <div class="rating">
-                            <dt>
-                              <i class="fa-solid fa-star ic-star"></i>
-                              <span class="visually-hidden">평점</span>
-                            </dt>
-                            <dd>4.6</dd>
-                          </div>
-                          <div class="review">
-                            <dt>리뷰</dt>
-                            <dd>250</dd>
-                          </div>
-                        </dl>
-
-                        <strong class="tag-gray"> 무료배송 </strong>
-                      </div>
-                    </a>
-                  </li>
+                 </c:forEach>
                 </ul>
               </div>
             </section>
@@ -2414,7 +2153,7 @@
                     <option value="4">선택사항 4</option>
                     <option value="5">선택사항 5</option>
                   </select>
-                  <i class="ic-caret" aria-hidden></i>
+                  <i class="ic-caret fa-solid fa-caret-down"></i>
                 </div>
 
                 <div class="select-group">
@@ -2426,7 +2165,7 @@
                     <option value="4">선택사항 4</option>
                     <option value="5">선택사항 5</option>
                   </select>
-                  <i class="ic-caret" aria-hidden></i>
+                  <i class="ic-caret fa-solid fa-caret-down"></i>
                 </div>
               </div>
 
@@ -2436,28 +2175,27 @@
                     <div class="checkout-card">
                       <header class="checkout-header">
                         <h4 class="checkout-title">
-                          그린 H0044DHA / 포근한 온기를 전해주는 보아르 미니멀
-                          전기 히터
+                          ${productDTO.goodsName}
                         </h4>
                         <button
                           class="delete-button"
                           type="button"
                           aria-label="상품 삭제"
                         >
-                          <i class="ic-close" aria-hidden></i>
+                          <i class="ic-close fa-solid fa-xmark"></i>
                         </button>
                       </header>
 
                       <footer class="checkout-footer">
                         <div class="checkout-select">
-                          <select id="floating-order-form-checkout-item-1">
+                          <select id="floating-order-form-checkout-item-1" name="quantity">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                           </select>
-                          <i class="ic-caret" aria-hidden></i>
+                          <i class="ic-caret fa-solid fa-caret-down"></i>
                         </div>
 
                         <output
@@ -2465,8 +2203,9 @@
                           for="floating-order-form-checkout-item-1"
                         >
                           <div class="price-16">
-                            <strong class="amount">32,900</strong>
-                            <span class="currency">원</span>
+                            <c:set var="price" value="${productDTO.goodsPrice - (productDTO.goodsPrice*((productDTO.discountRate)/100)) }"/>
+                        <strong class="amount"></strong>
+                        <span class="currency"><fmt:formatNumber type="number" pattern="###,###,###,###" value="${price-(price%100)}" />원</span>
                           </div>
                         </output>
                       </footer>
@@ -2482,13 +2221,13 @@
                     for="floating-order-form-select-1 floating-order-form-select-2"
                   >
                     <div class="price-20">
-                      <strong class="amount">0</strong>
-                      <span class="currency">원</span>
+                      <c:set var="price" value="${productDTO.goodsPrice - (productDTO.goodsPrice*((productDTO.discountRate)/100)) }"/>
+                        <strong class="amount"></strong>
+                        <span class="currency"><fmt:formatNumber type="number" pattern="###,###,###,###" value="${price-(price%100)}" />원</span>
                     </div>
                   </output>
                 </dd>
               </dl>
-
               <div class="button-group">
                 <!-- 북마크에 추가하기 전 -->
                 <button
@@ -2496,7 +2235,8 @@
                   type="button"
                   aria-label="북마크에 추가"
                 >
-                <i class="ic-bookmark fa-thin fa-bookmark"></i>
+                <i class="ic-bookmark fa-regular fa-bookmark"></i>
+               
                   
                 </button>
 
@@ -2509,7 +2249,7 @@
                   <i class="ic-bookmark-filled" aria-hidden></i>
                 </button> -->
 
-                <button class="btn-outlined btn-55" type="button">
+                <button class="btn-outlined btn-55 go-cart" type="button" data-toggle="modal" data-target="#myModal">
                   장바구니
                 </button>
                 <button class="btn-primary btn-55" type="submit">
@@ -2524,7 +2264,7 @@
       <div class="order-cta lg-hidden">
         <!-- NOTE: 북마크를 하지 않았을 때 -->
         <button class="btn-ghost btn-48" type="button">
-          <i class="ic-bookmark" aria-hidden></i>
+           <i class="ic-bookmark fa-thin fa-bookmark"></i>
           <span aria-label="북마크 18,302회"> 18,302 </span>
         </button>
 
@@ -2537,345 +2277,82 @@
         <button class="btn-primary btn-48" type="button">구매하기</button>
       </div>
     </main>
+              
+</form>
 
-   
-
-    <aside class="sidebar sm-only">
-      <header class="sidebar-header">
-        <h1 class="logo">
-          <a href="/">
-            <img src="./assets/images/Logo.svg" alt="내일의 집" />
-          </a>
-        </h1>
-
-        <!-- 로그인을 한 경우 -->
-        <div class="sidebar-user">
-          <a href="/">
-            <div class="avatar-24">
-              <img src="./assets/images/img-user-01.jpg" alt="user-image" />
-            </div>
-            <strong class="username">닉네임이긴경우테스트입니다</strong>
-          </a>
-        </div>
-
-        <!-- 로그인을 하지 않은 경우 -->
-        <!-- <div class="sidebar-auth">
-          <a class="btn-outlined btn-40" href="/">로그인</a>
-          <a class="btn-primary btn-40" href="/">회원가입</a>
-        </div> -->
-      </header>
-
-      <nav class="sidebar-nav">
-        <h2 class="visually-hidden">메뉴</h2>
-
-        <div class="drawer-menu is-community">
-          <button class="drawer-menu-button" type="button">
-            <i class="ic-community" aria-hidden></i>
-            커뮤니티
-            <i class="ic-chevron" aria-hidden></i>
-          </button>
-
-          <div class="drawer-menu-content">
-            <ul class="drawer-menu-list">
-              <li class="drawer-menu-item">
-                <a href="/">홈</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">사진</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">집들이</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">노하우</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">전문가집들이</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">셀프가이드</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">질문과답변</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">이벤트</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="drawer-menu is-store">
-          <button class="drawer-menu-button" type="button">
-            <i class="ic-store" aria-hidden></i>
-            스토어
-            <i class="ic-chevron" aria-hidden></i>
-          </button>
-
-          <div class="drawer-menu-content">
-            <ul class="drawer-menu-list">
-              <li class="drawer-menu-item">
-                <a href="/">스토어</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">카테고리</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">신혼가구</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">베스트</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">오늘의딜</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">연휴특가</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">월동준비</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">리퍼마켓</a>
-              </li>
-              <li class="drawer-menu-item is-active">
-                <a href="/">
-                  기획전
-                  <i class="ic-new" aria-label="새 기획전"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="drawer-menu is-expert">
-          <button class="drawer-menu-button" type="button">
-            <i class="ic-expert" aria-hidden></i>
-            인테리어시공
-            <i class="ic-chevron" aria-hidden></i>
-          </button>
-
-          <div class="drawer-menu-content">
-            <ul class="drawer-menu-list">
-              <li class="drawer-menu-item">
-                <a href="/">시공홈</a>
-              </li>
-              <li class="drawer-menu-item">
-                <a href="/">시공스토어</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- 로그인을 한 경우 -->
-        <div class="sidebar-user-menu">
-          <ul class="user-menu-list">
-            <li class="user-menu-item"><a href="/">마이페이지</a></li>
-            <li class="user-menu-item"><a href="/">나의 쇼핑</a></li>
-            <li class="user-menu-item"><a href="/">스크랩북</a></li>
-            <li class="user-menu-item"><a href="/">알림</a></li>
-            <li class="user-menu-item"><a href="/">이벤트</a></li>
-          </ul>
-        </div>
-      </nav>
-    </aside>
-
-    <aside class="search-modal lg-hidden">
-      <div class="container_detail">
-        <div class="row">
-          <div class="col-sm-4">
-            <header class="search-modal-header">
-              <h1 class="visually-hidden">검색창</h1>
-
-              <div class="search-modal-form">
-                <div class="input-group">
-                  <i class="ic-search" aria-hidden></i>
-                  <input class="form-input" type="text" placeholder="search" />
-                </div>
-
-                <button class="btn-ghost btn-40" type="button">취소</button>
-              </div>
-            </header>
-
-            <section class="search-history">
-              <header class="search-history-header">
-                <h2 class="title">최근 검색어</h2>
-                <button type="button">전체 삭제</button>
-              </header>
-
-              <!-- 최근 검색어가 존재할 경우 -->
-              <div class="search-history-content">
-                <ol class="search-history-list">
-                  <li class="search-history-item">
-                    <button class="word-button" type="button">가습기</button>
-                    <button class="delete-button" type="button">
-                      <i class="ic-close" aria-label="검색어 삭제"></i>
-                    </button>
-                  </li>
-                  <li class="search-history-item">
-                    <button class="word-button" type="button">
-                      에어프라이어
-                    </button>
-                    <button class="delete-button" type="button">
-                      <i class="ic-close" aria-label="검색어 삭제"></i>
-                    </button>
-                  </li>
-                  <li class="search-history-item">
-                    <button class="word-button" type="button">테이블</button>
-                    <button class="delete-button" type="button">
-                      <i class="ic-close" aria-label="검색어 삭제"></i>
-                    </button>
-                  </li>
-                </ol>
-              </div>
-
-              <!-- 최근 검색어가 존재하지 않을 경우 -->
-              <!-- <div class="search-history-content">
-                <p class="placeholder">최근 검색한 내역이 없습니다.</p>
-              </div> -->
-            </section>
-          </div>
-        </div>
+      <div class="modal-overlay" id="myModal" style="display:none">
+    <div class="css-ks7ymz">
+        <h2 class="css-ehxlh5">장바구니에 담았습니다.</h2>
+    </div>
+    <div class="css-o1dwno">
+        <button class="css-1q4ibmb close-area" type="button">
+          쇼핑 계속하기
+        </button>
+        <button class="css-tq0z8c" type="submit" onclick="${contextPath }/cart/{memberId}">
+          장바구니 가기
+        </button>
       </div>
-    </aside>
+</div>
 
-    <aside class="order-form-modal lg-hidden">
-      <h1 class="visually-hidden">주문창</h1>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.go-cart').click(function() {
+		let params = {
+				"goodsId": ${productDTO.goodsId},
+				"cartGoodsQty": $('#floating-order-form-checkout-item-1 option:selected').val()
+		};
+		console.log("params  >>> ", params);
+		$.ajax({
+			type: "POST",
+			url: "${contextPath}/cart/add",
+			data: JSON.stringify(params),
+			contentType: "application/json",
+			success: function(result){
+				if(result == "success"){
+					openModal();
+				}else if(result == "already_registered"){
+					alert("이미 장바구니에 등록된 상품입니다");
+				}
+			},
+			error: function (err) {
+				console.log("err >>> ", err);
+			}
+		});
+		
+		
+	});
+});
+function openModal(){
+	$('#myModal').css("display","block");
+}
+function closeModal(){
+	$('#myModal').css("display","none");
+}
 
-      <form class="order-form" action="/" method="POST">
-        <div class="container_detail">
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="order-inputs">
-                <div class="select-group is-active">
-                  <select
-                    class="form-select"
-                    id="order-form-modal-select-1"
-                    required
-                  >
-                    <option value="">선택</option>
-                    <option value="1">선택사항 1</option>
-                    <option value="2">선택사항 2</option>
-                    <option value="3">선택사항 3</option>
-                    <option value="4">선택사항 4</option>
-                    <option value="5">선택사항 5</option>
-                  </select>
-                  <i class="ic-caret" aria-hidden></i>
-                </div>
+//모달창의 쇼핑 계속하기 버튼을 누르면 모달창이 꺼지게 하기
+const closeBtn = document.querySelector(".close-area");
+console.log("closeBtn >>>>>>>>>>>>>>> ", closeBtn); 
+closeBtn.addEventListener("click", function() {
+	closeModal();
+});
 
-                <div class="select-group">
-                  <select class="form-select" id="order-form-modal-select-2">
-                    <option value="">추가상품(선택)</option>
-                    <option value="1">선택사항 1</option>
-                    <option value="2">선택사항 2</option>
-                    <option value="3">선택사항 3</option>
-                    <option value="4">선택사항 4</option>
-                    <option value="5">선택사항 5</option>
-                  </select>
-                  <i class="ic-caret" aria-hidden></i>
-                </div>
-              </div>
+//모달창 바깥 영역을 클릭하면 모달창이 꺼지게 하기
+/* modal.addEventListener("click", e => {
+    const evTarget = e.target
+    if(evTarget.classList.contains("modal-overlay")) {
+    	closeModal()
+    }
+}); */
 
-              <div class="order-checkout">
-                <ul class="checkout-list">
-                  <li class="checkout-item">
-                    <div class="checkout-card">
-                      <header class="checkout-header">
-                        <h4 class="checkout-title">
-                          그린 H0044DHA / 포근한 온기를 전해주는 보아르 미니멀
-                          전기 히터
-                        </h4>
-                        <button
-                          class="delete-button"
-                          type="button"
-                          aria-label="상품 삭제"
-                        >
-                          <i class="ic-close" aria-hidden></i>
-                        </button>
-                      </header>
+//모달창이 켜진 상태에서 ESC 버튼을 누르면 모달창이 꺼지게 하기
+/* window.addEventListener("keyup", e => {
+    if(isModalOn() && e.key === "Escape") {
+        modalOff()
+    }
+}); */
 
-                      <footer class="checkout-footer">
-                        <div class="checkout-select">
-                          <select id="order-form-modal-checkout-item-1">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                          </select>
-                          <i class="ic-caret" aria-hidden></i>
-                        </div>
+</script>
 
-                        <output
-                          class="checkout-output"
-                          for="order-form-modal-checkout-item-1"
-                        >
-                          <div class="price-16">
-                            <strong class="amount">32,900</strong>
-                            <span class="currency">원</span>
-                          </div>
-                        </output>
-                      </footer>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <dl class="order-summary">
-                <dt>주문금액</dt>
-                <dd>
-                  <output
-                    for="order-form-modal-select-1 order-form-modal-select-2"
-                  >
-                    <div class="price-20">
-                      <strong class="amount">32,990</strong>
-                      <span class="currency">원</span>
-                    </div>
-                  </output>
-                </dd>
-              </dl>
-            </div>
-          </div>
-        </div>
-
-        <div class="button-group">
-          <button class="btn-secondary btn-48" type="button">장바구니</button>
-          <button class="btn-primary btn-48" type="submit">구매하기</button>
-        </div>
-      </form>
-    </aside>
-
-    <aside class="cart-modal">
-      <h1 class="cart-title">장바구니에 상품을 담았습니다.</h1>
-
-      <div class="button-group">
-        <a class="btn-48 btn-primary" href="/">장바구니 보러가기</a>
-        <button class="btn-48 btn-secondary" type="button">확인</button>
-      </div>
-    </aside>
-
-    <!-- 북마크에 추가했을 때 -->
-    <aside class="bookmark-toast">
-      <h1 class="bookmark-title">스크랩했습니다</h1>
-      <button class="close-button" type="button" aria-label="닫기">
-        <i class="ic-close" aria-hidden></i>
-      </button>
-
-      <div class="button-group">
-        <a class="btn-32 btn-outlined" href="/">스크랩북 보기</a>
-        <button class="btn-32 btn-primary" type="button">폴더에 담기</button>
-      </div>
-    </aside>
-
-    <!-- 북마크에서 삭제했을 때 -->
-    <!-- <aside class="bookmark-toast">
-      <h1 class="bookmark-title">스크랩북에서 삭제했습니다</h1>
-      <button class="close-button" type="button" aria-label="닫기">
-        <i class="ic-close" aria-hidden></i>
-      </button>
-    </aside> -->
-
-    <div class="overlay" aria-hidden></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
     <!-- lodash : Throttle로 퍼포먼스 개선 -->
@@ -2896,12 +2373,6 @@
     <script src="${contextPath }/resources/js/review.js"></script>
     <script src="${contextPath }/resources/js/product-tab.js"></script>
   </body>
-  <script>
-
-</script>
-</html>
-
-  
-
 <%@include file="../common/footer.jsp"%>
+
 

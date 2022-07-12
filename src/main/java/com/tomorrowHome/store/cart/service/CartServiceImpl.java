@@ -1,5 +1,6 @@
 package com.tomorrowHome.store.cart.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,44 +20,54 @@ public class CartServiceImpl implements CartService {
 	private CartMapper cartMapper;
 
 	@Override
-	public int addCart(CartDTO cart) {
-
-		// 장바구니 데이터 체크
-		CartDTO checkCart = cartMapper.checkCart(cart);
+	public int addCart(CartDTO cart) throws Exception {
 		
-		if(checkCart != null) {
+		int result = cartMapper.checkCart(cart);
+		
+		if (result > 0 ) {
 			return 2;
 		}
+		// 장바구니 등록 & 결과 반환
+		return cartMapper.addCart(cart);
+	}
+	
+
+	@Override
+	public int guestAddCart(CartDTO cart) throws Exception {
 		
-		// 장바구니 등록 & 에러 시 0반환
-		try {
-			return cartMapper.addCart(cart);
-		} catch (Exception e) {
-			return 0;
-		}		
-		
+		int result = cartMapper.guestCheckCart(cart);
+		if (result > 0 ) {
+			return 2;
+		}
+		return cartMapper.guestAddCart(cart);
+	}
+	
+	@Override
+	public List<CartDTO> getCartList(String memberId) {
+
+		List<CartDTO> cart = cartMapper.getCart(memberId);
+
+		return cart;
+
 	}
 
 	@Override
-	public List<CartDTO> getCartList(String memberId) {
-		
-		List<CartDTO> cart = cartMapper.getCart(memberId);
-		
-		return cart;
-		
-	}
-	
-	@Override
 	public int modifyCount(CartDTO cart) {
-		
+
 		return cartMapper.modifyCount(cart);
-	}	
-	
+	}
+
 	@Override
 	public int deleteCart(int cartId) {
 
 		return cartMapper.deleteCart(cartId);
-	}	
-	
-	
+	}
+
+	@Override
+	public List<CartDTO> goodsCartList() {
+
+		return null;
+	}
+
+
 }

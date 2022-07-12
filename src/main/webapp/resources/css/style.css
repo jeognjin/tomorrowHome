@@ -1408,7 +1408,7 @@ button {
     border-top: 1px solid #dadada;
     font-size: 20px;
     font-weight: 700;
-    padding: 0 0 0 16px;
+    padding: 10px 0 0 0;
 
 }
 .category-side-bar-other a {
@@ -1551,7 +1551,7 @@ button {
 
 /* -----------------product detail------------------ */
 
-  
+/*   
 .drawer-menu.is-active .drawer-menu-button {
   color: #3da5f5; }
 
@@ -3542,7 +3542,7 @@ button {
       padding: 0 4px 2px; }
       .pagination .page-item a:hover,
       .pagination .page-item button:hover {
-        color: #3da5f5; }
+        color: #3da5f5; } */
         
 /* ------------장바구니 페이지-------------- */
 .commerce-cart-wrap {
@@ -4033,10 +4033,7 @@ svg:not(:root) {
     width: 70%;
     display: flex;
 }
-.commerce-cart__side-bar {
-    padding: 30px 0;
-    width: 30%
-}
+
 .commerce-cart_content_all_wrap{
 	display: flex;
 }

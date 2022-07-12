@@ -6,6 +6,36 @@
 button {
 	display: block;
 }
+.commerce-cart-wrap{
+	max-width: 1100px;
+	margin: 20px auto;
+}
+.commerce-cart__side-bar-wrap{
+	padding: 0;
+}
+.commerce-cart__side-bar{
+	width: 100%;
+}
+.commerce-cart__side-bar {
+    padding: 0;
+    width: 100%;
+}
+.commerce-cart__header-wrap{
+	display: block;
+	width: 90%;
+	height: 50px;
+	margin: 20px auto 0 auto;
+}
+.commerce-cart__header{
+	display: block;
+	width: 100%;
+}
+.commerce-cart__content__group-list{
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+}
+
 </style>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@include file="../common/header.jsp"%>
