@@ -35,14 +35,16 @@ public class CartController {
 
 	/* 장바구니 페이지 이동 */
 	@GetMapping("/cart/{memberId}")
-	public String cartPageGET(@PathVariable("memberId") String memberId, Model model, @RequestBody CartDTO cart, HttpServletRequest request, HttpServletResponse response,
+	public String cartPageGET(@PathVariable("memberId") String memberId, Model model, @RequestBody CartDTO cart, 
+			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 
 		model.addAttribute("cartInfo", cartService.getCartList(memberId));
 		AuthUserDTO userDTO = (AuthUserDTO) session.getAttribute("authUser");
 		Cookie cookie = WebUtils.getCookie(request, "cartCookie");
+		int count = cartService.
 		return "store/cartEmpty";
-//		return "store/cartList";
+		return "store/cartList";
 	}
 
 	@PostMapping("/cart/add")
