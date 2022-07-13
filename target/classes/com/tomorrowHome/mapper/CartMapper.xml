@@ -19,8 +19,7 @@
              <result property="productThumbnail"  column="product_thumbnail" />
         </association>
 	</resultMap>
-
-
+	
 	<!-- 카트 추가 -->
 	<insert id="addCart">
 		insert into shopping_cart(CART_ID, member_id, goods_id, cart_goods_qty)
