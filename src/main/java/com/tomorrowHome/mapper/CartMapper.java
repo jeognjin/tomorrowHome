@@ -17,7 +17,8 @@ public interface CartMapper {
 	public int modifyCount(CartDTO cart);
 	
 	/* 카트 목록 */
-	public List<CartDTO> getCart(String memberId);	
+	public List<CartDTO> selectGuestCartList(String cookieValue);	
+	public List<CartDTO> selectMemberCartList(int memberId);	
 	
 	/* 카트 확인 */
 	public int checkCart(CartDTO cart);		

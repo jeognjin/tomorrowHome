@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="${contextPath }/resources/css/style.css">
 <style>
 button {
 	display: block;
@@ -209,6 +210,15 @@ function fn_order_all_cart_goods(){
 }
 
 </script>
+<c:if test="">
+<div class="cart_empty">
+        <div class="cart_empty_content">
+            <img calss= "cart_empty_content_img" src="https://image.ohou.se/i/bucketplace-v2-development/uploads/assets/163703569663018673.png" alt="장바구니가 비었습니다.">
+            <a class = "cart_empty_content_button" href="/store" style="background-color: #35c5f0;">상품 담으러 가기</a>
+        </div>
+    </div>
+</c:if>
+<c:if test="">
 <div class="commerce-cart-wrap">
 <div class="commerce-cart_content_all_wrap">
 <div class="commerce-cart__content" style="width: 750px;">
@@ -391,4 +401,5 @@ function fn_order_all_cart_goods(){
 </div> 
 </div>
 </div>
+</c:if>
 <%@include file="../common/footer.jsp"%>

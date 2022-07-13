@@ -1,6 +1,7 @@
 package com.tomorrowHome.store.cart.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.util.WebUtils;
 import com.tomorrowHome.member.dto.AuthUserDTO;
 import com.tomorrowHome.store.cart.dto.CartDTO;
 import com.tomorrowHome.store.cart.service.CartService;
+import com.tomorrowHome.store.product.dto.ProductDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -35,15 +37,27 @@ public class CartController {
 
 	/* 장바구니 페이지 이동 */
 	@GetMapping("/cart/{memberId}")
-	public String cartPageGET(@PathVariable("memberId") String memberId, Model model, @RequestBody CartDTO cart, 
-			HttpServletRequest request, HttpServletResponse response,
-			HttpSession session) {
-
-		model.addAttribute("cartInfo", cartService.getCartList(memberId));
-		AuthUserDTO userDTO = (AuthUserDTO) session.getAttribute("authUser");
-		Cookie cookie = WebUtils.getCookie(request, "cartCookie");
-		int count = cartService.
-		return "store/cartEmpty";
+	public String cartPageGET(@PathVariable(required = false) String memberId, Model model, 
+			HttpServletRequest request) {
+		
+		if(memberId == null) {
+			Cookie cookie = WebUtils.getCookie(request, "cartCookie");
+			if(cookie == null) {
+				model.addAttribute("cart", null);
+			}else {
+				String cookieValue = cookie.getValue();
+				List<CartDTO> cartDTOs = cartService.getCartList(cookieValue);
+				System.out.println("cartDTOs >>>>>> "+ cartDTOs);
+			}
+		}
+		
+	
+		//장바구니에 상품이 있는지 확인
+		//int count = cartService.cartGoodsQty(ProductDTO.getcartGoodsQty);
+//		if(count == 0) {//장바구니 상품이 없으면
+//			return "store/cartEmpty";
+//		}
+		
 		return "store/cartList";
 	}
 
@@ -114,7 +128,7 @@ public class CartController {
 
 	}
 
-	/* 장바구니 수량 수정 */
+	/* 장바구니 수량 삭제 */
 	@PostMapping("/cart/delete")
 	public String deleteCartPOST(CartDTO cart) {
 

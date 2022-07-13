@@ -43,12 +43,19 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
-	public List<CartDTO> getCartList(String memberId) {
+	public List<CartDTO> getCartList(String cookieValue) {
 
-		List<CartDTO> cart = cartMapper.getCart(memberId);
+		List<CartDTO> cart = cartMapper.selectGuestCartList(cookieValue);
 
 		return cart;
+	}
+	
+	@Override
+	public List<CartDTO> getCartList(int memberId) {
 
+		List<CartDTO> cart = cartMapper.selectMemberCartList(memberId);
+
+		return cart;
 	}
 
 	@Override

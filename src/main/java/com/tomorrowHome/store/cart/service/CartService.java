@@ -14,7 +14,8 @@ public interface CartService {
 	public int guestAddCart(CartDTO cart) throws Exception;	
 	
 	/* 장바구니 정보 리스트 */
-	public List<CartDTO> getCartList(String memberId);	
+	public List<CartDTO> getCartList(String cookieValue);	
+	public List<CartDTO> getCartList(int  memberId);	
 	
 	/* 카트 수량 수정 */
 	public int modifyCount(CartDTO cart);		
@@ -22,6 +23,7 @@ public interface CartService {
 	/* 카트 삭제 */
 	public int deleteCart(int cartId);
 
+	/* 장바구니 페이지 이동 */
 	public List<CartDTO> goodsCartList();
 
 	

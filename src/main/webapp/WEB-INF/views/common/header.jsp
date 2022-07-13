@@ -20,6 +20,7 @@
 
  <!-- jQuery 스크립트 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="jquery-3.6.0.min.js"></script>
 <style>
 #profile_icon{
 	width: 25px;
@@ -95,7 +96,7 @@
             <ul>
             <c:choose>
             	<c:when test="${not empty authUser }">
-            	<li><a href="${contextPath }/cart"><i class="fas fa-shopping-cart"></i></a></li> 
+            	<li><a href="${contextPath }/cart/${authUser.memberId}"><i class="fas fa-shopping-cart"></i></a></li> 
             	<li><a href="${contextPath }/member/mypage/main"><i class="fa-solid fa-bookmark"></i></a></li>
             	<li><a href="${contextPath }/member/mypage/main"><i class="fa-solid fa-heart"></i></a></li>
              	 <c:choose>
