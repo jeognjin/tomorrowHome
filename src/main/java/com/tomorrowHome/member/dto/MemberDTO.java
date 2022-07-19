@@ -17,6 +17,7 @@ public class MemberDTO {
 	String profileImage; /* 프로필사진 */
 	String lineIntroduction; /* 한줄소개 */
 	
+	
 
 	
 }

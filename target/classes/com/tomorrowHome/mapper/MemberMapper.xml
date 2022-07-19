@@ -136,7 +136,8 @@ select * from member where member_id = #{member_id}
 <update id="updateMemberInfo">
 <![CDATA[
 update member set nickname = #{nickname, jdbcType=VARCHAR}, homepage = #{homepage, jdbcType=VARCHAR}, 
-birthday = #{birthday, jdbcType=DATE}, profile_image = #{profileImage, jdbcType=VARCHAR}, line_introduction = #{lineIntroduction, jdbcType=VARCHAR}
+birthday = #{birthday, jdbcType=DATE}, profile_image = #{profileImage, jdbcType=VARCHAR}, 
+line_introduction = #{lineIntroduction, jdbcType=VARCHAR}
 where member_id = #{memberId}
 ]]>
 </update>

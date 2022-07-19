@@ -31,6 +31,15 @@
 		<result property="member_id" column="member_id" />
 		<result property="cart_goods_qty" column="cart_goods_qty" />
 	</resultMap>
+	
+	<resultMap id="reviewResult" type="ProductReviewDTO">
+		<result property="reviewId" column="review_id" />
+		<result property="goodsId" column="goods_id" />
+		<result property="memberId" column="member_id" />
+		<result property="content" column="content" />
+		<result property="reviewImage" column="review_image" />
+		<result property="regdate" column="regdate" />
+	</resultMap>
 
 	<select id="selectAllGoods" resultMap="goodsResult">
 		select * from product where goods_id >= 10000
@@ -79,5 +88,11 @@
 		select * from product where goods_id = #{goods_id}
 	
 	</select>
+	
+	<insert id="insertReview">
+	<![CDATA[ 
+	insert into product_review(review_id, goods_id, member_id, content, review_image) values(product_review_seq.nextval, '${goodsId}', '${memberId}', '${content}', '${reviewImage}')
+	]]>
+	</insert>
 	
 </mapper>

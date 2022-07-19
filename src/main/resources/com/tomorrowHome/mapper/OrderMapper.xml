@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.tomorrowHome.mapper.OrderMapper">
+  
+   <!-- 리절트 맵 정의 -->
+
+ <resultMap id="orderResult" type="OrderDTO">
+		<result property="orderId" column="order_id" />
+		<result property="memberId" column="member_id" />
+		<result property="goodsId" column="goods_id" />
+		<result property="orderName" column="order_name" />
+		<result property="orderCount" column="order_count" />
+		<result property="goodsSalesPrice" column="goods_sales_price" />
+		<result property="deliveryType" column="delivery_type" />
+		<result property="deliveryMessage" column="delivery_message" />
+		<result property="deliveryState" column="delivery_state" />
+		<result property="payType" column="pay_type" />
+		<result property="payOrderTime" column="pay_order_time" />
+	</resultMap>
+	
+	
+	
+	<insert id="insertOrder">
+		insert into store_order(order_id, member_id, goods_id, order_name, order_count, goods_sales_price, delivery_type, delivery_message, delivery_state, pay_type, pay_order_time)
+		values(order_id_seq.nextval, #{memberId, jdbcType=INTEGER}, #{goodsId, jdbcType=INTEGER}, #{orderName, jdbcType=VARCHAR},#{orderCount, jdbcType=INTEGER}, #{goodsSalesPrice, jdbcType=INTEGER}, #{deliveryType, jdbcType=VARCHAR}, #{deliveryMessage, jdbcType=VARCHAR}, #{deliveryState, jdbcType=INTEGER}, #{payType, jdbcType=VARCHAR}, sysdate ) 
+	</insert>
+	
+	
+	
+  </mapper>

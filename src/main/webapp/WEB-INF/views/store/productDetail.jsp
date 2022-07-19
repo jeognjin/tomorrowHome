@@ -18,11 +18,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css"
     />
     <link rel="stylesheet" href="${contextPath }/resources/css/productDetail.css">
-    
-<!-- -----------------bootscrap----------------------- -->    
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style>
 .badge{
@@ -30,9 +25,130 @@
 	padding: 0;
 	margin: 0;
 }
-
+.modal_goods_img{
+	width: 100px;
+	height: 100px;
+}
+.modal_point_warp{
+	align-items: center;
+    height: 45px;
+    background-color: #525b61;
+    padding: 0 16px;
+    color: #fff;
+    font-weight: 700;
+    display: table;
+    width: 100%;
+}
+.modal_point_text{
+	display: table-cell;
+    vertical-align: middle;
+}
+.modal_goods_image_title_wrap{
+	align-items: center;
+    margin: 20px 0 30px;
+    color: #292929;
+    display: flex;
+}
+.modal_review_content textarea{
+	width: 100%;
+	resize: none;
+	    border-radius: 4px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+}
+.modal_submit_button button{
+	width: 100%;
+    height: 45px;
+    padding: 0;
+    line-height: 43px;
+    margin-bottom: 32px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    background: none;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #35c5f0;
+    border-color: #35c5f0;
+    color: #fff;
+}
+#output{
+	width: 200px;
+	height: 200px;
+	display: none;
+}
+.modal_comment{
+	list-style-type: disc;
+    line-height: 1.1;
+    color: #424242;
+    font-size: 10px;
+    display: block;
+    text-align: left;
+}
+.modal-title{
+	font-weight: 700;
+	text-align: center;
+	padding: 20px 0;
+}
+.modal_goods_title{
+	padding: 10px;
+}
+.modal_goods_brand{
+	font-size: 11px;
+    color: #757575;
+    margin-bottom: 6px;
+}
+.modal_goods_name{
+	margin-bottom: 6px;
+    font-size: 15px;
+    line-height: 1.2;
+}
+.modal_image_upload_title{
+	display: flex;
+}
+.modal_image_upload_text{
+	align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.modal_image_upload_point{
+	margin-left: 8px;
+    height: 28px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #525b61;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+#reviewModal{
+	position: absolute;
+	background-color: #fff;
+	border: 1px solid #8c8d96;
+	border-radius: 5px;
+	padding: 20px;
+	display: none;
+}
+#order_button{
+	width: 50%;
+}
+#side_order_form{
+	position: fixed;
+    top: 50px;
+    right: 70px;
+    background-color: #fff;
+    display: none;
+}
+#order_submit{
+	width: 50%;
+}
+.product-recommendation{
+	overflow: hidden;
+	height: 400px;
+}
 </style>
-
   <body>
     
     <main class="product-show">
@@ -328,9 +444,9 @@
                 <button class="btn-outlined btn-55 go-cart" type="button" data-toggle="modal" data-target="#myModal">
                   장바구니
                 </button>
-                <button class="btn-primary btn-55" type="submit">
+                <a class="btn-primary btn-55" id="order_button" href="${contextPath }/orderGoods?goodsId=${productDTO.goodsId}">
                   바로구매
-                </button>
+                </a>
               </div>
             </form>
           </div>
@@ -1414,51 +1530,75 @@
               <header class="product-section-header">
                 <h1 class="title">리뷰</h1>
                 <strong class="badge" aria-label="566개">566</strong>
-                <button type="button" data-toggle="modal" data-target="#reviewModal">리뷰쓰기</button>
+                <a class="text-button" onclick="review_modal_open();">리뷰쓰기</a>
               </header>
-
-
+  
   <!-- ----------------------------review Modal---------------------------------------------------- -->
 
 
 <!-- Modal -->
+
   <div class="modal fade" id="reviewModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">리뷰 쓰기</h4>
-        </div>
         <div class="modal-body">
+        	<div class="modal_title"><h4 class="modal-title">리뷰 쓰기</h4></div>
           	<div class="modal_point_warp">
-          		<p>포토리뷰 250P, 일반리뷰 0P</p>
+          		<p class="modal_point_text">포토리뷰 250P, 일반리뷰 0P</p>
           	</div>
 			<div class="modal_goods_image_title_wrap">
 				<div class="modal_goods_image">
-					<img alt="상품이미지" src="">
+					<img class="modal_goods_img" alt="상품이미지" src="${contextPath}/productDownload?goodsId=${productDTO.goodsId}&fileName=${productDTO.productThumbnail}">
 				</div>
 				<div class="modal_goods_title">
-					<p>goods title</p>
+					<p class="modal_goods_brand">${productDTO.goodsBrand}</p>
+					<p class="modal_goods_name">${productDTO.goodsName}</p>
 				</div>
 			</div>
+			<div class="modal_image_upload_all_wrap">
+				<div class="modal_image_upload_title">
+					<p class="modal_image_upload_text">사진첨부(선택)</p>
+					<div class="modal_image_upload_point">
+						<p>포토리뷰<span>250P</span></p>
+					</div>
+				</div>
+				<div class="modal_image_upload_input">
+					<p>사진을 첨부해주세요. (최대1장)</p>
+					<input class="modal_image_upload_input" type="file" name="main_image" id="reviewImage" onchange="loadFile(event)">
+					<img id="output">
+				</div>
+			</div>
+			<div class="modal_review_content">
+				<textarea rows="7" name="content" id="content" ></textarea>
+			</div>
+			
+			<div class="modal_submit_button">
+				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="review_submit_click();">완료</button>
+			</div>
 
-
-
-        </div>
+        </div> <!-- modal-body -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">완료</button>
+          <ul class="modal_comment">
+          	<li class="modal_comment">상품을 직접 사용한 경우에만 리뷰 작성을 하실 수 있습니다.</li>
+          	<li class="modal_comment">비구매 상품 리뷰 포인트는 심사 후 지급됩니다. (영업일 기준 2~3일 소요)</li>
+          	<li class="modal_comment">포인트는 최초 작성한 리뷰를 기준으로 지급됩니다.</li>
+          	<li class="modal_comment">사진 첨부시 캡쳐, 도용, 유사상품 촬영, 동일상품 여부 식별이 불가한 경우에는 등록이 거절되며 사유는 별도 안내되지 않습니다.</li>
+          	<li class="modal_comment">상품과 무관한 내용이나 사진, 동일 문자 반복 등의 부적합한 리뷰는 사전 경고 없이 삭제 및 포인트 회수될 수 있습니다.</li>
+          </ul>
         </div>
-      </div>
+      </div> <!-- modal-content -->
       
-    </div>
+    </div> <!-- modal-dialog -->
   </div>
 
 
 
    <!-- ---------------------------review Modal end---------------------------------------------------- -->
-</div>
+
+  
+  
 
               <div class="product-section-content">
                 <div class="review-scoreboard">
@@ -1891,7 +2031,7 @@
                 </p>
               </div>
             </section>
-            <div class="product-section-divider sm-only" aria-hidden></div> -->
+            <div class="product-section-divider sm-only" aria-hidden></div> 
 
             <section
               class="product-section product-inquiry is-open"
@@ -2142,7 +2282,7 @@
 
               <div class="product-section-content">
                 <ul class="product-list">
-                   <c:forEach var="item" items="${goodsCategoryList}">
+                   <c:forEach var="item" items="${goodsCategoryList}" begin="0" end="3">
                   <li class="product-item">
                     <a href="#">
                       <div class="product-card">
@@ -2157,9 +2297,9 @@
                         <h3 class="product-card-title">
                           ${item.goodsName}
                         </h3>
-
+										
                         <div class="product-card-price">
-                          <span class="percent">${item.discountRate}%</span>
+                          <span class="percent">${item.discountRate}%</span> <!-- 원가 가격  -->
                           <strong class="price"><fmt:formatNumber value="${item.goodsPrice}" pattern="#,###" /></strong>
                         </div>
 
@@ -2189,7 +2329,7 @@
             <div class="product-section-divider sm-only" aria-hidden></div>
           </div>
 
-          <div class="col-lg-4 lg-only">
+          <div class="col-lg-4 lg-only" id="side_order_form">
             <form
               class="floating-order-form order-form"
               action="/"
@@ -2244,7 +2384,7 @@
 
                       <footer class="checkout-footer">
                         <div class="checkout-select">
-                          <select id="floating-order-form-checkout-item-1" name="quantity">
+                          <select id="floating-order-form-checkout-item-1" name="quantity" >
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -2308,9 +2448,9 @@
                 <button class="btn-outlined btn-55 go-cart" type="button" data-toggle="modal" data-target="#myModal">
                   장바구니
                 </button>
-                <button class="btn-primary btn-55" type="submit">
+                <a class="btn-primary btn-55" id="order_submit" href="${contextPath }/orderGoods?goodsId=${productDTO.goodsId}">
                   바로구매
-                </button>
+                </a>
               </div>
             </form>
           </div>
@@ -2336,7 +2476,7 @@
               
 </form>
 
-      <div class="modal-overlay" id="myModal" style="display:none">
+      <div class="modal-overlay" id="myModal" style="display:none; background-color: #fff ;">
     <div class="css-ks7ymz">
         <h2 class="css-ehxlh5">장바구니에 담았습니다.</h2>
     </div>
@@ -2344,7 +2484,7 @@
         <button class="css-1q4ibmb close-area" type="button">
           쇼핑 계속하기
         </button>
-        <button class="css-tq0z8c" type="submit" onclick="${contextPath }/cart/{memberId}">
+        <button class="css-tq0z8c" type="submit" onclick="location.href='${contextPath }/cart/${authUser.memberId}'">
           장바구니 가기
         </button>
       </div>
@@ -2352,10 +2492,21 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	console.log($(window).scrollTop());
+	
+	 $(window).scroll(function() {              
+		 let position = $(window).scrollTop(); // 현재 스크롤바의 위치값을 반환합니다. 
+		 if (position >= 1000){
+			 $('#side_order_form').css("display","block");
+			 }else{
+				 $('#side_order_form').css("display","none");
+				 }    
+		 });        
+	
 	$('.go-cart').click(function() {
 		let params = {
 				"goodsId": ${productDTO.goodsId},
-				"cartGoodsQty": $('#floating-order-form-checkout-item-1 option:selected').val()
+				"cartGoodsQty": $('#floating-order-form-checkout-item-1 option:selected, #checkout-item-1 option:selected').val()
 		};
 		console.log("params  >>> ", params);
 		$.ajax({
@@ -2373,40 +2524,179 @@ $(document).ready(function(){
 			error: function (err) {
 				console.log("err >>> ", err);
 			}
-		});
-		
-		
+		});		
 	});
 });
-function openModal(){
-	$('#myModal').css("display","block");
-}
-function closeModal(){
-	$('#myModal').css("display","none");
-}
 
-//모달창의 쇼핑 계속하기 버튼을 누르면 모달창이 꺼지게 하기
+/* function openModal(){
+	$('#myModal').css("display","block");
+} */
+/* function closeModal(){
+	$('#myModal').css("display","none");
+} */
+//모달창의 쇼핑 계속하기 버튼을 누르면 모달창이 꺼지게 하기, 시꺼먼 레이어와 모달 div 지우기
 const closeBtn = document.querySelector(".close-area");
 console.log("closeBtn >>>>>>>>>>>>>>> ", closeBtn); 
 closeBtn.addEventListener("click", function() {
 	closeModal();
+	bg.remove();
+	modal.style.display = 'none';
 });
 
-//모달창 바깥 영역을 클릭하면 모달창이 꺼지게 하기
-/* modal.addEventListener("click", e => {
-    const evTarget = e.target
-    if(evTarget.classList.contains("modal-overlay")) {
-    	closeModal()
-    }
-}); */
+function openModal() {
+    var zIndex = 9999;
+    var modal = $('#myModal');
 
-//모달창이 켜진 상태에서 ESC 버튼을 누르면 모달창이 꺼지게 하기
-/* window.addEventListener("keyup", e => {
-    if(isModalOn() && e.key === "Escape") {
-        modalOff()
-    }
-}); */
+    // 모달 div 뒤에 희끄무레한 레이어
+    var bg = $('<div>')
+        .css({
+            position: 'fixed',
+            zIndex: zIndex,
+            left: '0px',
+            top: '0px',
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            // 레이어 색갈은 여기서 바꾸면 됨
+            backgroundColor: 'rgba(0,0,0,0.4)'
+        })
+        .appendTo('body');
 
+    modal
+        .css({
+            position: 'fixed',
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+            // 시꺼먼 레이어 보다 한칸 위에 보이기
+            zIndex: zIndex + 1,
+
+            // div center 정렬
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            msTransform: 'translate(-50%, -50%)',
+            webkitTransform: 'translate(-50%, -50%)'
+           
+        })
+        .show()
+        // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+        .find('.close-area')
+        .on('click', function() {
+            bg.remove();
+            modal.hide();
+        });
+}
+
+//모달창 열기
+function review_modal_open(){
+	$('#reviewModal').css("display","block");
+	
+	 var zIndex = 9999;
+	    var modal = $('#reviewModal');
+
+	    // 모달 div 뒤에 희끄무레한 레이어
+	    var bg = $('<div>')
+	        .css({
+	            position: 'fixed',
+	            zIndex: zIndex,
+	            left: '0px',
+	            top: '0px',
+	            width: '100%',
+	            height: '100%',
+	            overflow: 'auto',
+	            // 레이어 색갈은 여기서 바꾸면 됨
+	            backgroundColor: 'rgba(0,0,0,0.4)'
+	        })
+	        .appendTo('body');
+
+	    modal
+	        .css({
+	            position: 'fixed',
+	            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+	            // 시꺼먼 레이어 보다 한칸 위에 보이기
+	            zIndex: zIndex + 1,
+
+	            // div center 정렬
+	            top: '50%',
+	            left: '50%',
+	            transform: 'translate(-50%, -50%)',
+	            msTransform: 'translate(-50%, -50%)',
+	            webkitTransform: 'translate(-50%, -50%)'
+	           
+	        })
+	        .show()
+	        // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+	        .find('.close-area')
+	        .on('click', function() {
+	            bg.remove();
+	            modal.hide();
+	        });
+}
+
+
+//리뷰 사진 업로드 미리보기 
+var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output');
+      output.src = reader.result;
+      output.style.display= 'block';
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+
+  //리뷰사진 저장하기
+  function review_submit_click(){
+    var formData = new FormData(); 
+    formData.append("file", document.getElementById("reviewImage").files[0]); 
+    $('#reviewModal').css("display","none");
+    $.ajax({
+      url: "${contextPath }/productReviewImage?goodsId=${productDTO.goodsId}", 
+      data: formData, 
+      type: "POST",
+      async: true, 
+      enctype: "multipart/form-data", 
+      processData: false, 
+      contentType: false, 
+
+      success : function(data) {
+			if (data.trim() == 'success') {
+				review_submit();
+			} //end if
+		}// end success
+    });
+	}
+
+  //리뷰 내용 DB에 저장하기
+  function review_submit(){  
+	let goodsId = "${productDTO.goodsId}";
+	let content = document.getElementById('content').value;
+	let param = {
+			goodsId : goodsId,
+			content : content,
+		};
+	console.log("param >>> ", param);
+	$.ajax({
+		type : 'POST',
+		url : "${contextPath }/productReview", //회원정보 수정
+		contentType: "application/json",
+		data : JSON.stringify(param),
+		success : function(data) {
+			if (data.trim() == 'success') {
+				alert("리뷰 작성완료");
+				location.href="${contextPath }/productDetail/"+goodsId;
+			}//end if
+			if(data.trim() == 'login'){
+				alert("로그인 후에 작성해주세요.");
+				location.href="${contextPath }/member/loginForm";
+			}
+		}// end success
+
+	}); //end ajax 
+  }
+
+ 
 </script>
 
 

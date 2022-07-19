@@ -61,7 +61,7 @@
 	
 	
 	<!-- 카트 목록 -->
-<select id="selectMemberCartList" resultType="cartResult">
+ <!-- <select id="selectMemberCartList" resultType="cartResult">
 		select a.cart_id, a.member_id, a.goods_id, a.cart_goods_qty, b.goods_name, b.goods_price, b.product_thumbnail
 		from shopping_cart a left outer join product b on a.goods_id = b.goods_id
 		where member_id = #{memberId}	
@@ -71,7 +71,7 @@
 		select a.cart_id, a.cookieValue, a.goods_id, a.cart_goods_qty, b.goods_name, b.goods_price, b.product_thumbnail
 		from guest_shopping_cart a left outer join product b on a.goods_id = b.goods_id
 		where cookieValue = #{cookieValue}	
-	</select>
+	</select>  -->
 	
 	
 	<!-- 카트 확인 -->

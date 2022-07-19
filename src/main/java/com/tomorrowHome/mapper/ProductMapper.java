@@ -3,8 +3,10 @@ package com.tomorrowHome.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.tomorrowHome.store.order.dto.OrderDTO;
 import com.tomorrowHome.store.product.dto.ProductDTO;
 import com.tomorrowHome.store.product.dto.ProductImageDTO;
+import com.tomorrowHome.store.product.dto.ProductReviewDTO;
 
 public interface ProductMapper {
 
@@ -21,6 +23,9 @@ public interface ProductMapper {
 	List<ProductDTO> selectListByCategory(int category);
 
 	ProductDTO selectlistGoodsByGoodsId(int goodsId);
+
+	void insertReview(ProductReviewDTO review);
+
 
 	
 
