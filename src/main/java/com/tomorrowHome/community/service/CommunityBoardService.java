@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.tomorrowHome.community.dto.CommunityBoardDTO;
 import com.tomorrowHome.community.dto.CommunityBoardImageDTO;
+import com.tomorrowHome.member.dto.MemberDTO;
 import com.tomorrowHome.store.product.dto.ProductDTO;
 
 public interface CommunityBoardService {
@@ -17,12 +18,24 @@ public interface CommunityBoardService {
 
 	int housewarmingBoardTotal();
 	
-	/* 이미지 상세 페이지 >ServiceImpl */
-	List<CommunityBoardDTO> imageViewBoard();
-
 	int addNewBoard(Map newBoardMap);
+	
+	int insertNewhouseBoard(Map newBoardMap);
 
 	void addBoardImages(List<CommunityBoardImageDTO> boardImageDTOs);
+
+	CommunityBoardDTO imageView(int boardId);
+
+	void readCount(int boardId);
+
+	List<CommunityBoardDTO> listFollwingBoard(int memberId);
+
+	List<CommunityBoardDTO> listfollowBoard();
+
+
+	
+
+	
 	
 
 

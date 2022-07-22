@@ -358,6 +358,28 @@ function order_submit() {
 	}); //end ajax 
 }
 
+
+$(document).ready(function(){
+	let query = "인테리어";
+	let size = 10;
+	let str = "";
+	
+	$.ajax({
+		type: 'get',
+		url : "https://dapi.kakao.com/v2/search/image",
+		headers: {"Authorization":"KakaoAK 58405f9a11bc7ec84314832891e85805"},
+		dataType: "json",
+		data: {"query":query, "size":size},
+		success: function(data) {
+			$(data.documents).each(function() {
+				let thumbnail_url = this.thumbnail_url;
+				str += "<img class='image'  src='"+thumbnail_url +"'>";
+			}); // end each
+			$("#img").append(str);
+		} //success
+	}); //end ajax
+}); //ready
+
 </script>
                     <%@include file="../common/footer.jsp" %>
         

@@ -17,13 +17,23 @@ public interface CommunityBoardMapper {
 	List<CommunityBoardDTO> selectBoardBycategoryIdhousewarming(Map<String, Integer> map);
 
 	int selectTotalOfCategoryIdHousewarming();
-	
-	/* 이미지 상세 페이지 > mapper.xml */
-	List<CommunityBoardDTO> selectImageView();
 
 	int insertNewBoard(Map newBoardMap);
 
+	int insertNewhouseBoard(Map newBoardMap);
+	
 	void insertNewBoardImages(List<CommunityBoardImageDTO> boardImageDTOs);
+
+	CommunityBoardDTO selectImageView(int boardId);
+
+	void updateReadCount(int boardId);
+
+	List<CommunityBoardDTO> selectFollwingBoard(int memberId);
+
+	List<CommunityBoardDTO> selectFollowBoard();
+
+	
+
 
 
 

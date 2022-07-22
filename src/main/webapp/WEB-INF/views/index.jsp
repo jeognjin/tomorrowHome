@@ -2,8 +2,8 @@
    pageEncoding="UTF-8"%>
    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@include file="./common/header.jsp"%>
 
+<%@include file="./common/header.jsp"%>
 
 <!-- BODY : community_home : main page-->
 <c:set var="boardList" value="${boardList }"/>
@@ -16,10 +16,10 @@
         <div class="home-header__upper">
           <div>
             <img alt="홈페이지 메인 이미지"
-            src="${contextPath}/communityDownload?boardId=${boardList[11].boardId}&fileName=${boardList[11].boardThumbnail}" >
+            src="${contextPath}/communityDownload?boardId=${boardList[10].boardId}&fileName=${boardList[10].boardThumbnail}" >
             <div class="home-header-tit">
-              <h4>${boardList[11].title }</h4>
-              <a href="#">보러가기</a>
+              <h4>${boardList[10].title }</h4>
+              <a href="${contextPath }/store">보러가기</a>
             </div>
           </div>
         </div>

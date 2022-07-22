@@ -38,64 +38,68 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class ProductController {
-
+	
 	@Autowired
 	private ProductService productService;
-
+	
+	
 	@GetMapping("/todayDeals")
 	public String todayDeals(Model model) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("begin", 1);
 		map.put("end", 8);
 		List<ProductDTO> goodsList = productService.todayDealListGoods(map);
-
+	
 		model.addAttribute("goodsList", goodsList);
 		model.addAttribute("url", "todayScroll");
 		model.addAttribute("currPage", "store");
 		return "store/todayDeal";
 	}
-
+	
 	@GetMapping("/todayScroll")
-	@ResponseBody
-	public List<ProductDTO> storeScroll(@Nullable @RequestParam("begin") String begin) {
+	@ResponseBody 
+	public List<ProductDTO> storeScroll(@Nullable @RequestParam("begin") String begin ) {
 		System.out.println("begin >>>>>>>>>>>>>>>> " + begin);
-
+		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("begin", Integer.parseInt(begin));
-		map.put("end", Integer.parseInt(begin) + 7);
-		List<ProductDTO> goodsList = productService.todayDealListGoods(map);
-
-		System.out.println("goodsList>>>" + goodsList);
+		map.put("end", Integer.parseInt(begin)+7);
+		List<ProductDTO> goodsList = productService.todayDealListGoods(map);	
+		
+		System.out.println("goodsList>>>"+goodsList);
 		return goodsList;
 	}
-
+	
 	@GetMapping("/storeCategory")
-	public String storeCategory(Model model, @Nullable @RequestParam("category") String category) {
-		if (category == null)
-			category = "101";
+	public String storeCategory(Model model, @Nullable@RequestParam("category") String category) {
+		if(category == null) category = "101";
 		List<Map<String, String>> storeCategoryList = productService.storeCategoryList();
 		List<ProductDTO> goodsCategoryList = productService.goodsListByCategory(Integer.parseInt(category));
-
-		Map<String, List<ProductDTO>> goodsMap = productService.listGoods();
-		model.addAttribute("goodsMap", goodsMap);
+		
+		
+		Map<String, List<ProductDTO>> goodsMap= productService.listGoods();
+		model.addAttribute("goodsMap", goodsMap);	 
 		model.addAttribute("storeCategoryList", storeCategoryList);
 		model.addAttribute("currPage", "store");
 		model.addAttribute("goodsCategoryList", goodsCategoryList);
 		model.addAttribute("category", "category");
-		System.out.println("storeCategoryList>>>" + storeCategoryList);
-		System.out.println("goodsCategoryList>>>" + goodsCategoryList);
-
+		System.out.println("storeCategoryList>>>"+ storeCategoryList);
+		System.out.println("goodsCategoryList>>>"+ goodsCategoryList);
+		
 		return "store/storeCategory";
 	}
-
+	
 	@GetMapping("/productDetail/{goodsId}")
 	public String productDetail(Model model, @PathVariable int goodsId) {
-		System.out.println("goodsId  >>>> " + goodsId);
-		ProductDTO productDTO = productService.listGoodsByGoodsId(goodsId);
+		System.out.println("goodsId  >>>> "+ goodsId);
+		ProductDTO productDTO= productService.listGoodsByGoodsId(goodsId);
+		/* List<CartDTO> cartList = new ArrayList<CartDTO>(); */
 		List<ProductDTO> goodsCategoryList = productService.goodsListByCategory(productDTO.getGoodsCategoryId());
-		System.out.println("productDTO>>>" + productDTO);
+		System.out.println("productDTO>>>"+ productDTO);
 		model.addAttribute("productDTO", productDTO);
+		/* model.addAttribute("cartList", cartList); */
 		model.addAttribute("goodsCategoryList", goodsCategoryList);
+		System.out.println("goodsCategoryList>>>>>>>>"+goodsCategoryList);
 		return "store/productDetail";
 	}
 
@@ -159,6 +163,4 @@ public class ProductController {
 		
 	}
 	
-	
-
 }

@@ -162,9 +162,25 @@ font-weight:900;
 text-align: center;
 }
 
-
+.home-section__details{
+display:flex;
+margin:0.5rem;
+}
+.profile_image{
+border-radius: 20px;
+width: 2.5rem;
+height: 2.5rem;
+object-fit: cover;
+margin: 0.5rem;
+}
 .home-section__img-wrap {
   position: relative;
+}
+
+.home-section__item article a img{
+object-fit: cover;
+height: 15rem;
+border-radius: 10px;
 }
 
 .home-section__img-wrap p{
@@ -180,6 +196,10 @@ text-align: center;
 
 .main h4{
 margin : 5px 15px;
+color: #757575;
+}
+
+.main h5{
 color: #757575;
 }
 
@@ -208,9 +228,23 @@ color: #757575;
 font-weight: 100;
 }
 
+.profile{
+display: flex;
+
+}
+.profile p{
+color: black;
+font-weight: 900;
+}
+.follow{
+color: #35c5f0;
+font-weight: 900;
+}
+.profile_first{
+display: inline-block;
+}
 
 </style>
-
       <!-- 커뮤니티 사진 메인 -->
       <section class="container home-section">
       
@@ -379,14 +413,47 @@ font-weight: 100;
           
             <li class="home-section__item">
               <article>
-                <a href="">
+                  <!-- 프로필 -->
+                  <div class="home-section__details"> 
+                   
+                    <!-- =프로필 사진  -->
+                   	<!-- board=boardId 에 있는 memberId -->
+                   
+                   <div class="profile__img-wrap">  
+
+                   	<c:choose>
+				       <c:when test="${not empty item.memberDTO.profileImage}">
+							<img class="profile_image" alt="profile"
+							src="${contextPath}/profileDownload?memberId=${item.memberDTO.memberId}&fileName=${item.memberDTO.profileImage}">
+						</c:when>
+						<c:otherwise>
+							<img class="profile_image" alt="profile_image"
+							src="https://ifh.cc/g/BVmFxg.jpg">
+						</c:otherwise>
+					</c:choose>
+					</div>
+					
+                   <div class="profile_first">
+                   	<div class="profile">
+                    <!-- =이름 -->
+                    <p>${item.memberDTO.nickname}&nbsp&middot&nbsp</p>
+                    <!-- =버튼(>db) -->
+                    <button class="follow" id="follow_bt">
+               	          팔로우</button>
+               	     </div>  
+               	     
+               	    <!-- =한줄 소개 -->	
+                   	<h5>${item.memberDTO.lineIntroduction }</h5>
+                   	
+                    </div> 
+                        
+                  </div>
                   
+                    <a href="${contextPath }/community/imageView?boardId=${item.boardId}">
                   <!-- =사진  -->
                   <div class="home-section__img-wrap">
                    
-                 <!-- /community/imageview?n=[상품번호] : 주소 > 상품번호를 이용해 상품들을 중복없이 구분 -->
-                    <%-- <a href="${contextPath }/community/imageView?n=${item.boardId}"><c:out value="${item.boardId}"/> --%>
-                    
+                 <!-- /community/imageview?n=[상품번호] : 주소 > 상품번호를 이용해 상품들을 중복없이 구분 -->    
 					<p>조회수 ${item.readCount}</p> 
                     <img src="${contextPath}/communityDownload?boardId=${item.boardId}&fileName=${item.boardThumbnail}" alt="${item.title}">
                     
@@ -397,7 +464,7 @@ font-weight: 100;
                    <div class="icon">
 					    <i class="far fa-heart"></i>
 					    <i class="far fa-bookmark"></i> 
-					    <i class="far fa-comment"></i>  
+					    <a href="${contextPath }/community/imageView?boardId=${item.boardId}"><i class="far fa-comment"></i></a> 
                    </div>
                   
                 
@@ -405,22 +472,6 @@ font-weight: 100;
                    <div class="home-section__item__details title">
 					    <h4 class="home-section__item__tit">${item.description}</h4>
                    </div>
-                  
-                  <%-- 				<!-- 프로필 -->
-                  <div class="home-section__details"> 
-                   
-                    <!-- =프로필 사진  -->
-                    <div class="home-section__img-wrap">  
-                    <img src="${contextPath}/communityDownload?boardId=${item.boardId}&fileName=${item.boardThumbnail}" alt="${item.title}">
-                   	</div>
-                    <!-- =이름 -->
-                    <h4>${boardList[i].title }</h4>
-                    <!-- =버튼(>db) -->
-                    <h4>팔로우</h4>
-              		<!-- =한줄 소개 -->	
-                    <h4>${boardList[i].title }</h4>
-                    
-                  </div>  --%>
 
                 </a>
               </article>
@@ -434,9 +485,9 @@ font-weight: 100;
         <script>
         
         $(window).scroll(function() {
-        	 console.log($(window).scrollTop());
+        	 /* console.log($(window).scrollTop());
         	console.log($(document).height() - $(window).height());
-            console.log('--------------------------------------------------------------');
+            console.log('--------------------------------------------------------------'); */
             
             if ($(window).scrollTop()+1 >= $(document).height() - $(window).height()) {
               /* console.log($(window).scrollTop());
@@ -460,27 +511,68 @@ font-weight: 100;
           				let readCount = item.readCount;
           				let title = item.title;
           				let description = item.description;
-
-          				console
+          				let memberId = item.memberDTO.memberId;
+          				let profileImage = item.memberDTO.profileImage;
+          				let nickname = item.memberDTO.nickname;
+          				let lineIntroduction = item.memberDTO.lineIntroduction; 
+          				let src = "";
+          				if ( profileImage == null ) {
+	    						src="https://ifh.cc/g/BVmFxg.jpg";
+	                   		} else {
+	                   			src="${contextPath}/profileDownload?memberId="+ memberId +"&fileName=" +profileImage;
+	                   		}
+          				console.log("src >>>>>>>>>>>>>>>>> ", src);
           				let li = `<li class="home-section__item">
           	              <article>
           	                <a href="">
-
+          	               	           
+          	              <!-- 프로필 -->
+                          <div class="home-section__details">
+                           
+                            <!-- =프로필 사진  -->
+                           	<!-- board=boardId 에 있는 memberId -->
+                           
+                           <div class="profile__img-wrap"> 
+                           
+                           <img class="profile_scroll" src= ${'${src}'} alt = ""  
+                           style="border-radius: 20px;
+                        	   		width: 2.5rem;
+                           			height: 2.5rem;
+                           			object-fit: cover;"/>
+                           
+        					</div>
+        					
+                           	<div>
+                           	<div class="profile">
+                            <!-- =이름 -->
+                            <p>${'${nickname}'}&middot </p>
+                            <!-- =버튼(>db) -->
+                            <button class="follow" id="follow_bt">
+                       	          팔로우</button>
+                            </div>
+                      		<!-- =한줄 소개 -->	
+                           	<h5>${'${lineIntroduction }'}</h5>
+                            </div>
+                         
+                          </div>
+                          <a href="${contextPath }/community/imageView?boardId=${'${boardId}'}">
           	                  <div class="home-section__img-wrap">
 									 <p>조회수 ${'${readCount}' }</p>
           	                    <img src="${contextPath}/communityDownload?boardId=${'${boardId}'}&fileName=${'${boardThumbnail}'}" >
           	                  </div>
+          	                  
+          	                <!-- =icon -->
+                            <div class="icon">
+         					    <i class="far fa-heart"></i>
+         					    <i class="far fa-bookmark"></i> 
+         					   <a href="${contextPath }/community/imageView?boardId=${item.boardId}"><i class="far fa-comment"></i></a>  
+                            </div>
         
-          	              	/* <!-- =글 제목  -->
-                          	<div class="home-section__item__details title">
-       					    	<h4 class="home-section__item__tit">${'${title}'}</h4>
-                          	</div> */
-                          	
                           	<!-- =댓글  -->
                           	<div class="home-section__item__details title">
        					    	<h4 class="home-section__item__tit">${'${description}'}</h4>
                           	</div>
-                          
+                          	
           	                </a>
           	              </article>
           	            </li>`;

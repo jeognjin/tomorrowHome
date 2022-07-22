@@ -47,6 +47,8 @@ public class HomeController {
 		List<ProductDTO> goodsList = productService.todayDealListGoods(map);
 		List<CommunityBoardDTO> boardList = boardService.listBoard();
 		List<MainCategoryDTO> mainCategoryList = mainCategoryService.listMain();
+		Map<String, List<ProductDTO>> goodsMap= productService.listGoods();
+		model.addAttribute("goodsMap", goodsMap);
 		model.addAttribute("goodsList", goodsList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("mainCategoryList", mainCategoryList);
@@ -87,6 +89,12 @@ public class HomeController {
 		
 		System.out.println("goodsList>>>"+goodsList);
 		return goodsList;
+	}
+	
+	@GetMapping("/store/chat")
+	public String chat(Model model) {
+		
+		return "store/chatbot";
 	}
 	
 	

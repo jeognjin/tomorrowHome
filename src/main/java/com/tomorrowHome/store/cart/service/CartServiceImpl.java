@@ -19,6 +19,15 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private CartMapper cartMapper;
 
+	
+	/* 장바구니 페이지 이동 */
+	@Override
+	public List<CartDTO> goodsCartList() {
+
+		return null;
+	}
+	
+	/* 장바구니 추가 */
 	@Override
 	public int addCart(CartDTO cart) throws Exception {
 		
@@ -31,7 +40,6 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.addCart(cart);
 	}
 	
-
 	@Override
 	public int guestAddCart(CartDTO cart) throws Exception {
 		
@@ -41,7 +49,8 @@ public class CartServiceImpl implements CartService {
 		}
 		return cartMapper.guestAddCart(cart);
 	}
-	
+
+	/* 장바구니 정보 리스트 */
 	@Override
 	public List<CartDTO> getCartList(String cookieValue) {
 
@@ -58,23 +67,42 @@ public class CartServiceImpl implements CartService {
 		return cart;
 	}
 
+	
+	/* 카트 삭제 */
+	/*
+	 * @Override public int deleteCart(int cartId) {
+	 * 
+	 * return cartMapper.deleteCart(cartId); }
+	 */
+	
 	@Override
-	public int modifyCount(CartDTO cart) {
-
-		return cartMapper.modifyCount(cart);
+	public int memberDeleteCart(int cartId) {
+		
+		return cartMapper.memberDeleteCart(cartId);
 	}
 
 	@Override
-	public int deleteCart(int cartId) {
+	public int guestDeleteCart(int cartId) {
+		
+		return cartMapper.guestDeleteCart(cartId);
+	}
+	
+	
 
-		return cartMapper.deleteCart(cartId);
+	/* 카트 수량 수정 */
+	
+	@Override
+	public int modifyGuestCartQuantity(CartDTO cart) {
+		
+		return cartMapper.updateGuestCartQuantity(cart);
 	}
 
 	@Override
-	public List<CartDTO> goodsCartList() {
-
-		return null;
+	public int modifyMemberCartQuantity(CartDTO cart) {
+		
+		return cartMapper.updateMemberCartQuantity(cart);
 	}
 
+	
 
 }

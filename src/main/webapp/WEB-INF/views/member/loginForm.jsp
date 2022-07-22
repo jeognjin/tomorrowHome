@@ -176,7 +176,7 @@ form{
 					<p>SNS계정으로 간편하게 로그인/회원가입</p>
 					<img class="social_register_icon" alt="facebook"
 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMagFWd712STKEMqqS4dxPUiuElED_XAXiUQ&usqp=CAU">
-					<a id="custom-login-btn" >
+					<a id="custom-login-btn" onclick="loginWithKakao();">
 					<img class="social_register_icon" alt="kakaotalk"
 						src="https://blog.kakaocdn.net/dn/Sq4OD/btqzlkr13eD/dYwFnscXEA6YIOHckdPDDk/img.jpg">
 					</a>
@@ -255,11 +255,6 @@ form{
 	
 
 
-	
-
-	
-	
-	
 		
 	
 

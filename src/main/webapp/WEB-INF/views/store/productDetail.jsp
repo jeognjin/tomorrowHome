@@ -2054,143 +2054,9 @@
               <div class="product-section-content">
                 <ol class="inquiry-list">
                   <!-- 공개문의, 미답변 -->
-                  <li class="inquiry-item">
-                    <article class="inquiry-card">
-                      <header class="inquiry-card-header">
-                        <h3 class="visually-hidden">지* 님이 남기신 문의</h3>
-                        <dl class="detail">
-                          <dt class="visually-hidden">구매여부</dt>
-                          <dd>구매</dd>
-                          <dt class="visually-hidden">문의유형</dt>
-                          <dd>상품</dd>
-                          <dt class="visually-hidden">답변여부</dt>
-                          <dd>미답변</dd>
-                        </dl>
-                        <div class="misc">
-                          <strong>지*</strong>
-                          <time datetime="2021-01-21 16:40">
-                            2021년 1월 21일 16시 40분
-                          </time>
-                        </div>
-                      </header>
-                      <div class="inquiry-card-body">
-                        <div class="inquiry-content">
-                          <span aria-label="문의내용"> Q </span>
-                          <p>
-                            상품받았는데 사용하면서 보니까 불들어오는곳 옆에
-                            하얀 부분이 갈색으로 얼룩져있는데 불량인가요...?
-                            위험하지는 않겠죠? 다른분들 후기사진에는 다 깨끗한
-                            것 같아서요! 사진첨부가없어서 텍스트로 설명하려 하니
-                            애매하네요ㅠㅠ
-                          </p>
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-
-                  <!-- 비밀문의 -->
-                  <li class="inquiry-item">
-                    <article class="inquiry-card">
-                      <header class="inquiry-card-header">
-                        <h3 class="visually-hidden">홍시* 님이 남기신 문의</h3>
-                        <dl class="detail">
-                          <dt class="visually-hidden">구매여부</dt>
-                          <dd>비구매</dd>
-                          <dt class="visually-hidden">문의유형</dt>
-                          <dd>상품</dd>
-                          <dt class="visually-hidden">답변여부</dt>
-                          <dd>미답변</dd>
-                        </dl>
-                        <div class="misc">
-                          <strong>홍시*</strong>
-                          <time datetime="2021-01-21 16:40">
-                            2021년 1월 21일 16시 40분
-                          </time>
-                        </div>
-                      </header>
-
-                      <div class="inquiry-card-body">
-                        <div class="inquiry-content">
-                          <span aria-label="문의내용"> Q </span>
-                          <p>
-                            <i class="ic-lock" aria-hidden></i>
-                            비밀글입니다.
-                          </p>
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-
-                  <!-- 공개문의, 답변완료 -->
-                  <li class="inquiry-item">
-                    <article class="inquiry-card">
-                      <header class="inquiry-card-header">
-                        <h3 class="visually-hidden">샤* 님이 남기신 문의</h3>
-                        <dl class="detail">
-                          <dt class="visually-hidden">구매여부</dt>
-                          <dd>비구매</dd>
-                          <dt class="visually-hidden">문의유형</dt>
-                          <dd>배송</dd>
-                          <dt class="visually-hidden">답변여부</dt>
-                          <dd class="is-answered">답변완료</dd>
-                        </dl>
-                        <div class="misc">
-                          <strong>샤*</strong>
-                          <time datetime="2021-01-21 16:40">
-                            2021년 1월 21일 16시 40분
-                          </time>
-                        </div>
-                      </header>
-                      <div class="inquiry-card-body">
-                        <div class="inquiry-content">
-                          <span aria-label="문의내용"> Q </span>
-                          <p>
-                            화이트 재입고 날짜 알려 주세요 그리고 4평 남짓 방에
-                            두려고 하는데 너무 가까울까요
-                          </p>
-                        </div>
-
-                        <div class="inquiry-content">
-                          <span aria-label="답변내용"> A </span>
-                          <div class="seller">
-                            <strong>OA</strong>
-                            <time datetime="2021-01-21 16:40">
-                              2021년 1월 21일 16시 40분
-                            </time>
-                          </div>
-
-                          <p>
-                            안녕하세요 고객님, 보아르입니다:) 현재 고객님의 주문
-                            정보가 확인되지 않아 바로 안내드리지 못하는 점 양해
-                            부탁드립니다. 문의하신 제품의 경우 현재 주문폭주로
-                            인한 예약 판매중으로 순차 발송 진행되고 있습니다.
-                            주문 시 최대한 빠른 발송 진행될 수 있도록
-                            노력하겠습니다. 감사합니다.
-                          </p>
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-                </ol>
-
-                <div class="pagination">
-                  <ol class="page-list">
-                    <li class="page-item is-active"><a href="#">1</a></li>
-                    <li class="page-item"><a href="#">2</a></li>
-                    <li class="page-item"><a href="#">3</a></li>
-                    <li class="page-item"><a href="#">4</a></li>
-                    <li class="page-item"><a href="#">5</a></li>
-                  </ol>
-                  <button class="page-control page-next" type="button">
-                    <i class="ic-chevron fa-solid fa-angle-right"></i>
-                  </button>
-                </div>
-              </div>
-            </section>
-            <div class="product-section-divider sm-only" aria-hidden></div>
-
+              
             <!-- 문의가 없는 경우 -->
-            <!-- <section
+            <section
               class="product-section product-inquiry is-open"
               id="product-inquiry"
               role="tabpanel"
@@ -2205,7 +2071,7 @@
                 <p class="inquiry-empty">문의 내역이 없습니다.</p>
               </div>
             </section>
-            <div class="product-section-divider sm-only" aria-hidden></div> -->
+            <div class="product-section-divider sm-only" aria-hidden></div>
 
             <div class="product-shipment" id="product-shipment" role="tabpanel">
               <header class="product-section-header sm-only">
@@ -2484,7 +2350,7 @@
         <button class="css-1q4ibmb close-area" type="button">
           쇼핑 계속하기
         </button>
-        <button class="css-tq0z8c" type="submit" onclick="location.href='${contextPath }/cart/${authUser.memberId}'">
+        <button class="css-tq0z8c" type="submit" onclick="location.href='${contextPath }/cart'">
           장바구니 가기
         </button>
       </div>
@@ -2627,7 +2493,7 @@ function review_modal_open(){
 	        })
 	        .show()
 	        // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-	        .find('.close-area')
+	        .find('.btn-default')
 	        .on('click', function() {
 	            bg.remove();
 	            modal.hide();

@@ -274,7 +274,7 @@ width: 100%;
 						<div class="inner">
 
 							<div class="header-upper__inner">
-								<div class="header-upper__logo"><a href="${contextPath }/">내일의 집</a></div>
+								<div class="header-upper__logo">내일의 집</div>
 							</div>
 
 							<div class="header-upper__service">

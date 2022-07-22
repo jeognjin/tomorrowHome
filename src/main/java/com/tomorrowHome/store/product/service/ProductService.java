@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.tomorrowHome.store.order.dto.OrderDTO;
 import com.tomorrowHome.store.product.dto.ProductDTO;
 import com.tomorrowHome.store.product.dto.ProductReviewDTO;
 
@@ -21,9 +20,8 @@ public interface ProductService {
 	List<ProductDTO> goodsListByCategory(int category);
 
 	ProductDTO listGoodsByGoodsId(int goodsId);
-
+	
 	void addReview(ProductReviewDTO review) throws SQLException;
-
 
 	
 }

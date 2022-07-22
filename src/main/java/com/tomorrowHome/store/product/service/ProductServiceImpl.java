@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tomorrowHome.mapper.ProductMapper;
-import com.tomorrowHome.store.order.dto.OrderDTO;
 import com.tomorrowHome.store.product.dto.ProductDTO;
 import com.tomorrowHome.store.product.dto.ProductImageDTO;
 import com.tomorrowHome.store.product.dto.ProductReviewDTO;
@@ -68,12 +67,10 @@ public class ProductServiceImpl implements ProductService{
 		
 		return productMapper.selectlistGoodsByGoodsId(goodsId);
 	}
-
+	
 	@Override
 	public void addReview(ProductReviewDTO review) throws SQLException {
 		productMapper.insertReview(review);
 		
 	}
-
-
 }

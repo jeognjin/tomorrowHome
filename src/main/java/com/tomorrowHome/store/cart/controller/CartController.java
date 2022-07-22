@@ -1,6 +1,7 @@
 package com.tomorrowHome.store.cart.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
@@ -36,28 +38,29 @@ public class CartController {
 	private CartService cartService;
 
 	/* 장바구니 페이지 이동 */
-	@GetMapping("/cart/{memberId}")
-	public String cartPageGET(@PathVariable(required = false) String memberId, Model model, 
-			HttpServletRequest request) {
-		
-		if(memberId == null) {
+	@GetMapping("/cart")
+	public String cartPageGET(Model model, HttpServletRequest request, HttpSession session) {
+		List<CartDTO> cartList = new ArrayList<CartDTO>();
+		AuthUserDTO userDTO = (AuthUserDTO) session.getAttribute("authUser");
+
+		if (userDTO == null) {
 			Cookie cookie = WebUtils.getCookie(request, "cartCookie");
-			if(cookie == null) {
-				model.addAttribute("cart", null);
-			}else {
+			if (cookie == null) { // 비회원, 장바구니 이용 안 했을 때
+				model.addAttribute("cartList", null);
+			} else { // 비회원, 장바구니 이용
 				String cookieValue = cookie.getValue();
-				List<CartDTO> cartDTOs = cartService.getCartList(cookieValue);
-				System.out.println("cartDTOs >>>>>> "+ cartDTOs);
+				cartList = cartService.getCartList(cookieValue);
+				System.out.println("cartList >>>>>> " + cartList);
+
 			}
+		} else {
+			int memberId = userDTO.getMemberId();
+			cartList = cartService.getCartList(memberId);
+			System.out.println("cartList >>>>>> " + cartList);
 		}
-		
-	
-		//장바구니에 상품이 있는지 확인
-		//int count = cartService.cartGoodsQty(ProductDTO.getcartGoodsQty);
-//		if(count == 0) {//장바구니 상품이 없으면
-//			return "store/cartEmpty";
-//		}
-		
+
+		model.addAttribute("cartList", cartList);
+
 		return "store/cartList";
 	}
 
@@ -65,7 +68,7 @@ public class CartController {
 	@ResponseBody
 	public String addCartPOST(@RequestBody CartDTO cart, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
-		System.out.println("cart >>>>>>>> " + cart);
+		System.out.println("cart1 >>>>>>>> " + cart);
 		String message = "";
 		AuthUserDTO userDTO = (AuthUserDTO) session.getAttribute("authUser");
 		Cookie cookie = WebUtils.getCookie(request, "cartCookie");
@@ -81,17 +84,16 @@ public class CartController {
 				cart.setCookieValue(cookieValue);
 
 				int result = cartService.guestAddCart(cart);
-				
+
 				message = "success";
-				
-				
+
 				// 비회원 장바구니 쿠키생성 후 상품추가
 			} else if (cookie != null && userDTO == null) {
 
 				String cookieValue = cookie.getValue();
 				cart.setCookieValue(cookieValue);
 				int result = cartService.guestAddCart(cart);
-				
+
 				if (result == 2) {
 					message = "already_registered";
 				} else {
@@ -104,6 +106,7 @@ public class CartController {
 				// 회원 장바구니 상품추가
 			} else {
 				cart.setMemberId(userDTO.getMemberId());
+				System.out.println("cart2 >>>>>>>> " + cart);
 				int result = cartService.addCart(cart);
 				if (result == 2) {
 					message = "already_registered";
@@ -112,7 +115,7 @@ public class CartController {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return message;
@@ -120,21 +123,49 @@ public class CartController {
 
 	/* 장바구니 수량 수정 */
 	@PostMapping("/cart/update")
-	public String updateCartPOST(CartDTO cart) {
+	@ResponseBody
+	public String updateCartPOST(@RequestBody CartDTO cart, Model model, HttpServletRequest request,
+			HttpSession session) {
 
-		cartService.modifyCount(cart);
-
-		return "redirect:/cart/" + cart.getMemberId();
+		String message = "";
+		System.out.println("cart >>>>>>>>>>>>>>> " + cart);
+		AuthUserDTO userDTO = (AuthUserDTO) session.getAttribute("authUser");
+		int result = 0;
+		if (userDTO == null) { // 로그아웃 상태
+			result = cartService.modifyGuestCartQuantity(cart);
+		} else {
+			result = cartService.modifyMemberCartQuantity(cart);
+		}
+		System.out.println("result >>>>>> " + result);
+		if (result > 0) {
+			message = "modify_success";
+		} else {
+			message = "modify_failed";
+		}
+		return message;
 
 	}
 
 	/* 장바구니 수량 삭제 */
-	@PostMapping("/cart/delete")
-	public String deleteCartPOST(CartDTO cart) {
+	@GetMapping("/cart/delete")
+	public String deleteCartPOST(@RequestParam("cartId") int cartId, Model model, HttpServletRequest request,
+			HttpSession session) {
 
-		cartService.deleteCart(cart.getCartId());
+		String message = "";
+		AuthUserDTO userDTO = (AuthUserDTO) session.getAttribute("authUser");
+		int result = 0;
+		if (userDTO != null) { // 로그인 상태
+			result = cartService.memberDeleteCart(cartId);
+			System.out.println("result >>>>>> " + result);
+			int memberId = userDTO.getMemberId();
+			System.out.println("delete >>> memberId >>>>>>>>>>>>>>> " + memberId);
+		
+		} else {
+			result = cartService.guestDeleteCart(cartId);
+			System.out.println("result >>>>>> " + result);
+		}
 
-		return "redirect:/cart/" + cart.getMemberId();
+		return "redirect:/cart";
 
 	}
 

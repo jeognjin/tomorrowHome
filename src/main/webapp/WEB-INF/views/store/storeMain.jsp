@@ -11,6 +11,22 @@
 <title>쇼핑은 쉽게, 스타일링은 즐겁게! 내일의집 스토어</title>
 <!-- css -->
 <link rel="stylesheet" href="${contextPath }/resources/css/style.css">
+<style>
+.chatbot_cont {
+    position: fixed;
+    right: 50px;
+    width: 50px;
+    height: 50px;
+    
+}  
+.chatbot_tag{
+	cursor: pointer;
+}     
+.chat{
+width: 50px;
+    height: 50px;
+}
+</style>
 
 </head>
 <body style="margin: 0; overflow-x: hidden">
@@ -146,7 +162,7 @@
       </ul>
     </div>
   </section>
-
+  
   <!-- 스토어 메인 페이지 오늘의 딜 영역 -->
       <section class="container home-section" >
         <div class="home-section__wrap">
@@ -276,7 +292,7 @@
 						console.log(goodsPrice);
           				let li = `<li class="home-section__item">
           	              <article>
-          	                <a href="">
+          	                <a href="${contextPath }/productDetail/${'${goodsId}'}">
           	                  <div class="home-section__img-wrap">
           	                    <img src="${contextPath}/productDownload?goodsId=${'${goodsId}'}&fileName=${'${productThumbnail}'}" alt="${'${goodsName}'}">
           	                  </div>

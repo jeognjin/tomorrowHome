@@ -181,6 +181,48 @@ text-align: center;
   color: rgba(255,255,255, 0.9);
  
 }
+.home-section__img-wrap img{
+border-radius: 10px;
+width:100%;
+height: 100%;
+}
+
+.profile__img-wrap{
+width: 2rem;
+height: 2rem;
+display: flex;
+color: #757575;
+font-size:0.9rem;
+font-weight: 900;
+}
+
+.profile_image{
+border-radius: 20px;
+width:100%;
+height: 100%;
+object-fit: cover;
+margin: 0.5rem;
+}
+
+.profile{
+display: flex;
+
+}
+.profile p{
+color: #757575;
+font-size:0.9rem;
+font-weight: 900;
+}
+
+.profile_first{
+margin:0.9rem auto;
+display: inline-block;
+}
+
+.home-section__details{
+margin:0.2rem;
+text-align: center;
+}
 </style>
 
       <!-- 커뮤니티 사진 메인 -->
@@ -337,11 +379,12 @@ text-align: center;
           
             <li class="home-section__item">
               <article>
-                <a href="">
+           
                   <!-- =사진  -->
-                  <div class="home-section__img-wrap">  
+                  <div class="home-section__img-wrap"> 
+                    <a href="${contextPath }/community/imageView?boardId=${item.boardId}"> 
                     <i class="fas fa-bookmark"></i> 
-                    <img src="${contextPath}/communityDownload?boardId=${item.boardId}&fileName=${item.boardThumbnail}" alt="${item.title}">
+                    <img src="${contextPath}/communityDownload?boardId=${item.boardId}&fileName=${item.boardThumbnail}" alt="집들이  이미지">
                   </div>
                   
                   <!-- =글 제목  -->
@@ -349,23 +392,38 @@ text-align: center;
 					    <h4 class="home-section__item__tit">${item.title}</h4>
                    </div>
                   
-                  <%-- 				<!-- 프로필 -->
+                  <!-- 프로필 -->
                   <div class="home-section__details"> 
                    
                     <!-- =프로필 사진  -->
-                    <div class="home-section__img-wrap">  
-                    <img src="${contextPath}/communityDownload?boardId=${item.boardId}&fileName=${item.boardThumbnail}" alt="${item.title}">
-                   	</div>
-                    <!-- =이름 -->
-                    <h4>${boardList[i].title }</h4>
-                    <!-- =버튼(>db) -->
-                    <h4>팔로우</h4>
-              		<!-- =한줄 소개 -->	
-                    <h4>${boardList[i].title }</h4>
-                    
-                  </div>  --%>
+                   	<!-- board=boardId 에 있는 memberId -->
+                   
+                   <div class="profile__img-wrap">  
 
-                </a>
+                   	<c:choose>
+				       <c:when test="${not empty item.memberDTO.profileImage}">
+							<img class="profile_image" alt="profile"
+							src="${contextPath}/profileDownload?memberId=${item.memberDTO.memberId}&fileName=${item.memberDTO.profileImage}">
+						</c:when>
+						<c:otherwise>
+							<img class="profile_image" alt="profile_image"
+							src="https://ifh.cc/g/BVmFxg.jpg">
+						</c:otherwise>
+					</c:choose>
+					<!-- =이름 -->
+                    <p>${item.memberDTO.nickname}</p>
+					</div>
+					
+                   <div class="profile_first"> 
+                   
+                   	<div class="profile">
+                    <p>조회수 ${item.readCount}&nbsp&middot&nbsp</p> 
+               	     </div> 
+                    </div> 
+                        
+                  </div>
+
+              
               </article>
           
             </li>
@@ -399,14 +457,26 @@ text-align: center;
           			$.each(data, function (index, item) {
           				let boardId = item.boardId; 
           				let boardThumbnail = item.boardThumbnail;
+          				let readCount = item.readCount;
           				let title = item.title;
+          				let description = item.description;
+          				let memberId = item.memberDTO.memberId;
+          				let profileImage = item.memberDTO.profileImage;
+          				let nickname = item.memberDTO.nickname;
+          				let lineIntroduction = item.memberDTO.lineIntroduction; 
+          				let src = "";
+          				if ( profileImage == null ) {
+	    						src="https://ifh.cc/g/BVmFxg.jpg";
+	                   		} else {
+	                   			src="${contextPath}/profileDownload?memberId="+ memberId +"&fileName=" +profileImage;
+	                   		}
 
           				console
           				let li = `<li class="home-section__item">
           	              <article>
-          	                <a href="">
-
+          	               
           	                  <div class="home-section__img-wrap">
+          	                  <a href="${contextPath }/community/imageView?boardId=${'${boardId}'}">
           	                    <i class="fas fa-bookmark"></i> 
           	                    <img src="${contextPath}/communityDownload?boardId=${'${boardId}'}&fileName=${'${boardThumbnail}'}" >
           	                  </div>
@@ -416,7 +486,27 @@ text-align: center;
        					    	<h4 class="home-section__item__tit">${'${title}'}</h4>
                           	</div>
                           
-          	                </a>
+                          	<div class="profile__img-wrap"> 
+                            
+                            <img class="profile_scroll" src= ${'${src}'} alt = ""  
+                            style="border-radius: 20px;
+                            width: 2rem;
+                            height: 2rem;
+                            display: flex;
+                            color: #757575;
+                            font-size:0.9rem;
+                            font-weight: 900;"/>
+                            			<!-- =이름 -->
+                            <p>${'${nickname}'}</p>
+         					</div>
+         					
+         					<div class="profile_first"> 
+                           	
+                           	<div class="profile">
+                            <p>조회수 ${'${readCount}'}&nbsp&middot&nbsp</p> 
+                       	     </div> 
+                            </div>
+          	                
           	              </article>
           	            </li>`;
           			

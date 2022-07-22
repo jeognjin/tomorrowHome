@@ -24,7 +24,7 @@
           <c:forEach var="item" items="${goodsList}" >
             <li class="home-section__item">
               <article>
-                <a href="">
+                <a href="${contextPath }/productDetail/${item.goodsId}">
                   <div class="home-section__img-wrap">
                     <img src="${contextPath}/productDownload?goodsId=${item.goodsId}&fileName=${item.productThumbnail}" alt="${item.goodsName}">
                   </div>
@@ -86,7 +86,7 @@
 						console.log(goodsPrice);
           				let li = `<li class="home-section__item">
           	              <article>
-          	                <a href="">
+          	                <a href="${contextPath }/productDetail/${'${goodsId}'}">
           	                  <div class="home-section__img-wrap">
           	                    <img src="${contextPath}/productDownload?goodsId=${'${goodsId}'}&fileName=${'${productThumbnail}'}" alt="${'${goodsName}'}">
           	                  </div>

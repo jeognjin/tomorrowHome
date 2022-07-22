@@ -15,16 +15,27 @@ public interface CartService {
 	
 	/* 장바구니 정보 리스트 */
 	public List<CartDTO> getCartList(String cookieValue);	
-	public List<CartDTO> getCartList(int  memberId);	
+	public List<CartDTO> getCartList(int memberId);	
 	
-	/* 카트 수량 수정 */
-	public int modifyCount(CartDTO cart);		
+	/* 카트 수량 수정 */	
+	public int modifyGuestCartQuantity(CartDTO cart);
+	public int modifyMemberCartQuantity(CartDTO cart);
 	
 	/* 카트 삭제 */
-	public int deleteCart(int cartId);
+	/* public int deleteCart(int cartId); */
+	public int memberDeleteCart(int cartId);
+	public int guestDeleteCart(int cartId);
 
 	/* 장바구니 페이지 이동 */
 	public List<CartDTO> goodsCartList();
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 

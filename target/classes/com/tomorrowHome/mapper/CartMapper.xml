@@ -16,10 +16,13 @@
              <result property="goodsId"  column="goods_id" />
              <result property="goodsName"  column="goods_name" />
              <result property="goodsPrice"  column="goods_price" />
+             <result property="goodsBrand"  column="goods_brand" />
+             <result property="discountRate"  column="discount_rate" />
              <result property="productThumbnail"  column="product_thumbnail" />
         </association>
 	</resultMap>
-	
+
+
 	<!-- 카트 추가 -->
 	<insert id="addCart">
 		insert into shopping_cart(CART_ID, member_id, goods_id, cart_goods_qty)
@@ -34,7 +37,7 @@
 	
 	
 	<!-- 카트 삭제 -->
-	<delete id="deleteCart">
+	<delete id="memberDeleteCart">
 	
 		delete from shopping_cart where cart_id = #{cartId}
 	
@@ -47,13 +50,13 @@
 	</delete>
 	
 	<!-- 카트 수량 수정 -->
-	<update id="modifyCount">
+	<update id="updateMemberCartQuantity">
 	
 		update shopping_cart set cart_goods_qty=#{cartGoodsQty} where cart_id = #{cartId}
 	
 	</update>
 	
-	<update id="guestModifyCount">
+	<update id="updateGuestCartQuantity">
 	
 		update guest_shopping_cart set cart_goods_qty=#{cartGoodsQty} where cart_id = #{cartId}
 	
@@ -61,17 +64,17 @@
 	
 	
 	<!-- 카트 목록 -->
- <!-- <select id="selectMemberCartList" resultType="cartResult">
-		select a.cart_id, a.member_id, a.goods_id, a.cart_goods_qty, b.goods_name, b.goods_price, b.product_thumbnail
+<select id="selectMemberCartList" resultMap="cartResult">
+		select a.cart_id, a.member_id, a.goods_id, a.cart_goods_qty, b.goods_name, b.goods_price, b.goods_brand, b.discount_rate , b.product_thumbnail
 		from shopping_cart a left outer join product b on a.goods_id = b.goods_id
 		where member_id = #{memberId}	
 	</select>
 	
-	<select id="selectGuestCartList" resultType="cartResult">
-		select a.cart_id, a.cookieValue, a.goods_id, a.cart_goods_qty, b.goods_name, b.goods_price, b.product_thumbnail
+	<select id="selectGuestCartList" resultMap="cartResult">
+		select a.cart_id, a.cookieValue, a.goods_id, a.cart_goods_qty, b.goods_name, b.goods_price,b.goods_brand, b.discount_rate, b.product_thumbnail
 		from guest_shopping_cart a left outer join product b on a.goods_id = b.goods_id
 		where cookieValue = #{cookieValue}	
-	</select>  -->
+	</select>
 	
 	
 	<!-- 카트 확인 -->

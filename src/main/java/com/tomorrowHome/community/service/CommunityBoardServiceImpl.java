@@ -1,5 +1,6 @@
 package com.tomorrowHome.community.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tomorrowHome.community.dto.CommunityBoardDTO;
 import com.tomorrowHome.community.dto.CommunityBoardImageDTO;
 import com.tomorrowHome.mapper.CommunityBoardMapper;
+import com.tomorrowHome.mapper.MemberMapper;
+import com.tomorrowHome.member.dto.MemberDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -44,24 +47,46 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 		return boardMapper.selectTotalOfCategoryIdHousewarming();
 	}
 
-	
-	/* 이미지 상세 페이지 > mapper.java */
-	 
-	 @Override public List<CommunityBoardDTO> imageViewBoard() {
-	 
-	 return boardMapper.selectImageView(); 
-	 }
 
 	@Override
 	public int addNewBoard(Map newBoardMap) {
 		
 		return boardMapper.insertNewBoard(newBoardMap);
 	}
+	
+	@Override
+	public int insertNewhouseBoard(Map newBoardMap) {
+		
+		return boardMapper.insertNewhouseBoard(newBoardMap);
+	}
 
 	@Override
 	public void addBoardImages(List<CommunityBoardImageDTO> boardImageDTOs) {
 		boardMapper.insertNewBoardImages(boardImageDTOs);
 	}
+
+	@Override
+	public CommunityBoardDTO imageView(int boardId) {
+		return boardMapper.selectImageView(boardId);
+	}
+
+	@Override
+	public void readCount(int boardId) {
+		boardMapper.updateReadCount(boardId);
+		
+	}
+
+	@Override
+	public List<CommunityBoardDTO> listFollwingBoard(int memberId) {
+
+		return boardMapper.selectFollwingBoard(memberId);
+	}
+
+	@Override
+	public List<CommunityBoardDTO> listfollowBoard() {
+		return boardMapper.selectFollowBoard();
+	}
+
 
 
 }

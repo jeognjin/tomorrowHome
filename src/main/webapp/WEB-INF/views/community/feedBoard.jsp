@@ -3,6 +3,7 @@
 	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <%@include file="../common/header.jsp"%>
 
 <c:set var="boardList" value="${boardList }"/>
@@ -11,9 +12,31 @@
 <script src="https://kit.fontawesome.com/b31a3eeb45.js" crossorigin="anonymous"></script>
 
 <style>
-/* 팔로잉 피드 - x */
+.first_main{
+}
+.home-section{
+
+width: 38%;
+margin:auto;
+}
+
+.icon{
+margin: 1rem;
+display:flex;
+justify-content: space-around;
+padding: 1rem;
+display:flex;
+border-bottom: 2px solid #f0f0f0;
+}
+
+.icon i{
+font-size: 30px;
+color: #757575;
+font-weight: 100;
+}
+
 .feed_first {
-    width: 70%;
+    width:100%;
     height: 8rem;
     color: #757575;
     padding: 50px 0 10px;
@@ -30,7 +53,7 @@
   }
   
   .feed_second {
-    width: 70%;
+    width: 100%;
     height: 8rem;
     color: black;
     padding: 50px 0 10px;
@@ -78,120 +101,146 @@ padding: 5px;
 
 .home-section__img-wrap {
   position: relative;
+   border-radius: none;
+}
+.profile_image{
+border-radius: 20px;
+width: 2.8rem;
+height: 2.8rem;
+object-fit: cover;
+margin: 0.8rem;
+}
+.home-section__img-wrap img{
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
 }
 
+.profile {
+color:#524F4E;
+font-size: 15px;
+font-weight:500;
+}
 
+.profile p{
+padding-top:1rem;
+text-align: center;
+}
+.title{
+padding: 2rem 0;
+}
+
+.title h4{
+color:#524F4E;
+font-size: 15px;
+font-weight:900;
+text-align: center;
+}
+.profile__img-wrap{
+display: flex;
+}
+
+.home-section__details{
+background: white;
+padding: 0 0.5rem;
+
+}
 
 </style>
 
       <!-- 커뮤니티 사진 메인 -->
-      <section class="container home-section">
+      <section class="first_main">
       
-      <article>
-         
-         <div class="feed_first">팔로잉 피드가 비어있어요.</div>
+      <article class="container home-section">
+				 <!-- 로그인 (o/x) -->
+				<c:if test="${authUser != null}">
+				<!-- (팔로우 x) -->
+				<c:if test="${followDTO == null}">
+					<c:if test="${boardList == null}">
+					 	<div class="feed_first">팔로잉 피드가 비어있어요.</div>
+						<div class="feed_second">
+				              <div>${authUser.nickname }님을 위한 추천 유저</div>
+				              <div>유저를 팔로우하고 새 소식을 확인하세요!</div>                               
+	         			</div>
+         			</c:if>		
+          			</c:if>
+         			<!-- (팔로우 o) -->
+        			 <c:if test="${boardList != null}">
+         				<c:forEach var="item" items="${boardList}" >
 
-         <div class="feed_second">
-              <div>내일의 집 유저를 팔로우 해보세요!</div>
-              <div>유저의 최신 소식을 한 눈에 모아볼 수 있습니다.</div>                               
-         </div>
-         
-        <%--  <div class="feed_second">
-              <div> ${boardList[i].boardId}님을 위한 추천 유저</div>
-              <div>  유저를 팔로우하고 새 소식을 확인하세요!</div>                               
-         </div>
- --%>
+			              <article>
+			                  <!-- 프로필 -->
+			                  <div class="home-section__details"> 
+			                   
+			                    <!-- =프로필 사진  -->
+			                   	<!-- board=boardId 에 있는 memberId -->
+			                   
+			                   <div class="profile__img-wrap">  
+			                    <%-- <img class="profile_image" alt="profile"
+									src="${contextPath}/profileDownload?memberId=${item.memberDTO.memberId}&fileName=${item.memberDTO.profileImage}"> --%>
+			            
+			                   	<c:choose>
+							       <c:when test="${not empty item.memberDTO.profileImage}">
+										<img class="profile_image" alt="profile"
+										src="${contextPath}/profileDownload?memberId=${item.memberDTO.memberId}&fileName=${item.memberDTO.profileImage}">
+									</c:when>
+									<c:otherwise>
+										<img class="profile_image" alt="profile_image"
+										src="https://ifh.cc/g/BVmFxg.jpg">
+									</c:otherwise>
+								</c:choose>
+								<div class="profile">
+			                    <!-- =이름 -->
+			                    <p>${item.memberDTO.nickname} </p>
+			                    <!-- =작성일-->
+			                    <p><fmt:formatDate pattern = "yyyy-MM-dd" value="${item.registDate}"/></p>     
+			                    </div>
+								</div>
+		
+			                   
+			                    <a href="${contextPath }/community/imageView?boardId=${item.boardId}">
+			                  <!-- =사진  -->
+			                  <div class="home-section__img-wrap">
+			                   
+			                 <!-- /community/imageview?n=[상품번호] : 주소 > 상품번호를 이용해 상품들을 중복없이 구분 -->    
+			                    <img src="${contextPath}/communityDownload?boardId=${item.boardId}&fileName=${item.boardThumbnail}" alt="${item.title}">
+			                    
+			                    </a> 
+			                  </div>
+	                
+			                   <!-- =댓글 -->
+			                   <div class="home-section__item__details title">
+								    <h4 class="home-section__item__tit">${item.description}</h4>
+			                   </div>
+			                   
+			                    <!-- =icon -->
+			                   <div class="icon">
+								    <i class="far fa-heart"></i>
+								    <i class="far fa-bookmark"></i> 
+								 <a href="${contextPath }/community/imageView?boardId=${item.boardId}"> <i class="far fa-comment"></i></a> 
+			                   </div>
+			
+			                </a>
+			                 </div> 
+			              </article>
+
+            			</c:forEach>
+        			 </c:if>
+				</c:if>
+			
+				
+				<c:if test="${authUser == null}">
+				<div class="feed_first">팔로잉 피드가 비어있어요.</div>
+				<div class="feed_second">
+			              <div>오늘의 집 유저를 팔로우 해보세요!</div>
+			              <div>유저의 최신 소식을 한 눈에 모아볼 수 있습니다.</div>                               
+         			</div>
+			
+				</c:if>
+
       </article>
-      <!-- 커뮤니티 _ 사진  _ 무한 스크롤-->
-      <article>
-         <div class="home-section__wrap main">
-          <ul class="home-section__container pop" style="overflow-x: hidden; flex-flow:row wrap">
-          
-          <c:forEach var="item" items="${boardList}" >
-          
-            <li class="home-section__item">
-              <article>
 
-                  <!-- =사진  -->
-                 <%--  <div class="home-section__img-wrap"> 
-                 <!-- member 페이지로 이동 -->
-                    <a href="${contextPath }/community/imageView?n=${item.boardId}"><c:out value="${item.title}"/>
-                    <img src="${contextPath}/communityDownload?boardId=${item.boardId}&fileName=${item.boardThumbnail}" fileName=${item.boardThumbnail}">
-                    </a> 
-                  </div> --%>
-
-              </article>
-          
-            </li>
-            </c:forEach>
-           
-          </ul>
-         </div> 
-        </article>
-        <script>
         
-       /*  $(window).scroll(function() {
-        	 console.log($(window).scrollTop());
-        	console.log($(document).height() - $(window).height());
-            console.log('--------------------------------------------------------------');
-            
-            if ($(window).scrollTop()+1 >= $(document).height() - $(window).height()) {
-              /* console.log($(window).scrollTop());
-              console.log($(document).height());
-              console.log($(window).height()); */
-              
-              let li_num = $(".pop li").length;
-              console.log("li>>>>>>>>>>", li_num);
-              $.ajax({
-          		url :'${contextPath }/community/imageScroll',
-          		type : 'get',
-          		dataType : 'json',
-          		data : {
-          			begin : li_num + 1,
-          		},
-          		success: function(data){
-          			console.log("data", data);
-          			$.each(data, function (index, item) {
-          				let boardId = item.boardId; 
-          				let boardThumbnail = item.boardThumbnail;
-          				let readCount = item.readCount;
-          				let title = item.title;
-
-          				console
-          				let li = `<li class="home-section__item">
-          	              <article>
-          	                <a href="">
-
-          	                  <div class="home-section__img-wrap">
-									 <p>조회수 ${'${readCount}' }</p>
-          	                    <img src="${contextPath}/communityDownload?boardId=${'${boardId}'}&fileName=${'${boardThumbnail}'}" >
-          	                  </div>
-        
-          	              	<!-- =글 제목  -->
-                          	<div class="home-section__item__details title">
-       					    	<h4 class="home-section__item__tit">${'${title}'}</h4>
-                          	</div>
-                          	
-                          	<!-- =댓글  -->
-                          	<div class="home-section__item__details title">
-       					    	<h4 class="home-section__item__tit">${'${title}'}</h4>
-                          	</div>
-                          
-          	                </a>
-          	              </article>
-          	            </li>`;
-          			
-						$(".pop").append(li);
-					});
-          		}
-          	});
-              
-              
-              
-              
-            }
-        }); */
-        </script>
       </section>
-
+ 
 <%@include file="../common/footer.jsp"%>
